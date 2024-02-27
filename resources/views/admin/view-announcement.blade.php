@@ -66,6 +66,33 @@
     </style>
 </head>
 <body>
+    @include('component.admin.sidenav')
+    <div class="main-content">
+        <div class="container">
+            <h1 class="ann-header"><a href="/admin/Announcement" style="color: rgba(100, 100, 100, 0.700); text-decoration: none;">Announcements ></a> </h1>
+            <h1 class="ann-title" style="margin-left: 0.3em;">Post</h1>
+            <div class="ann-container">
+
+                <?php
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="header-container">';
+                    echo '<h2 id=container-title>' . $row['title'] . '</h2>';
+                    echo '<h3 id=container-subject>' . $row['subject'] . '</h3>';
+                    echo '</div>';
+                    echo '<div class="poster-info">';
+                    echo '<i class="fas fa-user-circle"></i>';
+                    echo '<h3 style="margin-left: 1em;">' . $row['sender'] . '</h3>';
+                    echo '<h4 style="margin-left: 72em; font-weight: 400;">' . $row['created_at'] . '</h4>';
+                    echo '</div>';
+                    echo '<textarea cols="30" rows="30" readonly>' . $row['content'] . '</textarea>';
+                }
+                ?>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Front End Visualization
         @include('component.admin.sidenav')
         <div class="main-content">
             <div class="container">
@@ -106,7 +133,7 @@
                 </div>
             </div>
         </div>
-    
+    -->
         <script src="/JS/navevent.js"></script>
 
 </body>

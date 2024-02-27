@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employees;
+use App\Models\AAnnouncements;
+
 
 use App\Models\Students;
 
@@ -88,7 +90,8 @@ class Pages extends Controller
         return view("admin.dashboard");
     }
     public function a_announcement(){
-        return view("admin.announcement");
+        $announcements = AAnnouncements::all(); 
+        return view('admin.announcements', ['announcements' => $announcements]);
     }
     public function a_view_announcement () {
         return view("admin.view-announcement");
