@@ -47,6 +47,11 @@ Route::get('/admin/Time_Record/DepEd',[Pages::class,'a_tr_deped']);
 
 Route::post('/add-student', [StudentMasterlistController::class, 'addStudent']);
 Route::post('/add-employee',[EmployeeMasterListController::class,'create']);
+Route::post('/retrieve-employee',[EmployeeMasterListController::class,'show']);
+Route::post('/update-employee',[EmployeeMasterListController::class,'update']);
+Route::post('/status_update-employee',[EmployeeMasterListController::class,'status']);
+Route::post('/role_update-employee',[EmployeeMasterListController::class,'role']);
+Route::post('/delete-employee',[EmployeeMasterListController::class,'delete']);
     
 
 Route::get('/reset', [Pages::class,'resetpassword']);
