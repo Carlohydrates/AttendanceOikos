@@ -28,4 +28,9 @@ class AAnnouncementsController extends Controller
 
         return view('admin.announcement')->with('announcements', $announcements);
     }
+
+    public function a_view_announcement() {
+        $announcements = AAnnouncements::all();
+        return view('admin.view-announcement', ['announcements' => $announcements]);
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +13,7 @@ class AAnnouncements extends Model
         'title',
         'subject',
         'content',
+        'viewpagesender', 
     ];
 
     protected $table = 'a_announcements';
