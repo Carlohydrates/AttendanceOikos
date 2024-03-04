@@ -1,0 +1,15 @@
+<?php
+use App\Models\AAnnouncementsView;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class AAnnouncementsViewController extends Controller
+{
+    // ... other methods
+
+    public function a_view_announcement() {
+        $announcementsview = AAnnouncementsView::all();
+        return view('admin.view-announcements', ['announcementsview' => $announcementsview]);
+    }
+}

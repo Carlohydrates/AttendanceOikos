@@ -1,0 +1,16 @@
+<?php
+use App\Models\AAnnouncementsView;
+
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+
+class AAnnouncementsViewController extends Controller
+{
+    // ... other methods
+
+    public function a_view_announcement() {
+        $announcements = AAnnouncements::all();
+        return view('admin.announcements', ['announcements' => $announcements]);
+    }
+}

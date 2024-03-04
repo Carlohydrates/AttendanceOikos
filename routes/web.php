@@ -1,11 +1,18 @@
 <?php
 
 use App\Http\Controllers\ForgotPassword;
+use App\Http\Controllers\GradeLevelandSectionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudentMasterlistController;
 use App\Http\Controllers\EmployeeMasterListController;
+
+use App\Http\Controllers\AAnnouncementsController;
+use App\Http\Controllers\CalendarController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +39,8 @@ Route::post('/submit-code',[ForgotPassword::class,'verifyCode']);
 
 //Routes for admins
 Route::get('/admin/Dashboard',[Pages::class,'a_dashboard']);
-Route::get('/admin/Announcement',[Pages::class,'a_announcement']);
-Route::get('/admin/Announcement/View', [Pages::class,'a_view_announcement']);
+Route::get('/admin/Announcement',[AAnnouncementsController::class,'a_announcement']);
+Route::get('/admin/Announcement/View/', [AAnnouncementsController::class, 'a_view_announcement']);
 Route::get('/admin/Document_Request',[Pages::class,'a_Document_Request']);
 Route::get('/admin/Calendar',[Pages::class,'a_calendar']);
 Route::get('/admin/Time_Record',[Pages::class,'a_time_record']);
@@ -46,8 +53,31 @@ Route::get('/admin/Time_Record/Employee',[Pages::class,'a_tr_employee']);
 Route::get('/admin/Time_Record/DepEd',[Pages::class,'a_tr_deped']);
 
 Route::post('/add-student', [StudentMasterlistController::class, 'addStudent']);
+Route::get('/retrieve-student/{student_id}', [StudentMasterlistController::class, 'retrieveData']);
+Route::post('/update-student', [StudentMasterlistController::class, 'updateStudent']);
+Route::post('/status-update-student', [StudentMasterlistController::class, 'updateStatus']);
+Route::post('/grade-update-student', [StudentMasterlistController::class, 'updateGradeAndSection']);
+Route::post('/delete-student', [StudentMasterlistController::class, 'deleteStudent']);
+Route::post('/add-grade-section', [GradeLevelandSectionController::class, 'addGradeAndSection']);
+Route::get('/get-grade-levels', [GradeLevelandSectionController::class, 'getGradeLevels']);
+Route::get('/get-sections/{gradeLevel}', [GradeLevelandSectionController::class, 'getSections']);
+Route::post('/remove-grade-section', [GradeLevelandSectionController::class, 'removeGradeSection']);
 Route::post('/add-employee',[EmployeeMasterListController::class,'create']);
-    
+
+Route::post('/admin/Announcement/Add', [AAnnouncementsController::class, 'addAnnouncement']);
+
+
+Route::post('/retrieve-employee',[EmployeeMasterListController::class,'show']);
+Route::post('/update-employee',[EmployeeMasterListController::class,'update']);
+Route::post('/status_update-employee',[EmployeeMasterListController::class,'status']);
+Route::post('/role_update-employee',[EmployeeMasterListController::class,'role']);
+Route::post('/delete-employee',[EmployeeMasterListController::class,'delete']);
+
+Route::post('/add-event',[CalendarController::class,'create']);
+Route::post('/delete-event',[CalendarController::class,'delete']);
+Route::post('/update-event',[CalendarController::class,'update']);
+Route::get('/retrieve-calendar-date/{date}',[CalendarController::class,'retrieve']);
+
 
 Route::get('/reset', [Pages::class,'resetpassword']);
 

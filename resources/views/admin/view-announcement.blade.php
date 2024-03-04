@@ -66,6 +66,32 @@
     </style>
 </head>
 <body>
+    @include('component.admin.sidenav')
+    <div class="main-content">
+        <div class="container">
+            <h1 class="ann-header">
+                <a href="/admin/Announcement" style="color: rgba(100, 100, 100, 0.700); text-decoration: none;">Announcements ></a>
+            </h1>
+            <h1 class="ann-title" style="margin-left: 0.3em;">Post</h1>
+            <div class="ann-container">
+                @foreach ($announcements as $announcement)
+                    <div class="header-container">
+                        <h2 id="container-title">{{ $announcement->title }}</h2>
+                        <h3 id="container-subject">{{ $announcement->subject }}</h3>
+                    </div>
+                    <div class="poster-info">
+                        <i class="fas fa-user-circle"></i>
+                        <h3 style="margin-left: 1em;">{{ $announcement->viewpagesender }}</h3>
+                        <h4 style="margin-left: 72em; font-weight: 400;">{{ $announcement->created_at }}</h4>
+                    </div>
+                    <textarea cols="30" rows="30" readonly>{{ $announcement->content }}</textarea>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Front End Visualization
         @include('component.admin.sidenav')
         <div class="main-content">
             <div class="container">
@@ -106,7 +132,7 @@
                 </div>
             </div>
         </div>
-    
+    -->
         <script src="/JS/navevent.js"></script>
 
 </body>
