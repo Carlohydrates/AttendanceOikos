@@ -9,6 +9,8 @@ class Students extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'student_id',
+        'qr',
         'fname',
         'lname',
         'mname',
@@ -18,6 +20,8 @@ class Students extends Model
         'section',
         'enroll_status',
         'bday',
+        'age',
+        'date_enrolled',
         'address',
         'city',
         'region',

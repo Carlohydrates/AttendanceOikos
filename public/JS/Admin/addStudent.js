@@ -13,6 +13,7 @@ function addStudent (event) {
         'fetcher':document.getElementById('fetch').value,
         'enrollStatus':document.getElementById('enroll-status').value,
         'birthday':document.getElementById('birthday').value,
+        'age':document.getElementById('age').value,
         'address':document.getElementById('address').value,
         'city':document.getElementById('city').value,
         'region':document.getElementById('region').value,
