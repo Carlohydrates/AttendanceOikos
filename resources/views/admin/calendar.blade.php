@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel = "icon" href = "/assets/Oikos Logo.png">
     <link rel="stylesheet" href = "/CSS/admin.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- implemented sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -18,222 +18,155 @@
         body {
             background-color: #f6f6f6;
         }
-
-        .select_cover{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            float: left;
-            margin-top: 3em;
-            margin-left: 3em;
-            border-radius: 50px;
-            height: 45rem;
-            width: 60rem;
-            background-color: white;
-            padding: auto;
-            text-align: center;
+        .main-content{
+            display:flex;
+            flex-direction:row;
+            gap:2rem;
         }
-
-        .delete_cover{
-            padding-top:10rem;
-            justify-content: center;
-            align-items: center;
-            float: left;
-            margin-top: 3em;
-            margin-left: 3em;
-            border-radius: 50px;
-            height: 45rem;
-            width: 60rem;
-            background-color: white;
-            padding: auto;
-            text-align: center;
-            
-        }
-        .delete_cover button{
-            height:5.5rem;
-            width:11rem;
-            font-size:2.5rem;
-            border-radius:20px;
-            margin:2.5rem;
-        }
-
-        .delete_cover .yes{
-            background-color:green;
-            color:white;
-            transition-duration: .5s;
-        }
-
-        .delete_cover .yes:hover{
-            
-            height:5.8rem;
-            width:11.2rem;
-            background-color:white;
-            color:green ;
-            transition-duration: .5s;
-        }
-
-        .delete_cover .no{
-            background-color:red;
-            color:white;
-            transition-duration: .5s;
-        }
-
-        .delete_cover .no:hover{
-            
-            height:5.8rem;
-            width:11.2rem;
-            background-color:white;
-            color:red ;
-            transition-duration: .5s;
-        }
-
-        .c_container {
-            float: right;
-            height: 52rem;
-            width: 35%;
-            margin-top:-5rem;
-            margin-right: 0rem;
-            background: white;
-            border-radius: 20px;
-            
-        }
-
-        #calendar {
-            height: 28.5em;
-            width: auto;
-            margin: 2rem;
-            background-color: white;
-        }
-
-        .events_summ {
-            padding: 2rem;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .circle {
-            height: 1rem;
-            width: 1rem;
-            background-color: red;
-            border-radius: 100%;
-            white-space: nowrap;
-        }
-
-        h3 {
-            margin: 0%;
-        }
-        .button_cont{
-            width:auto;
-           
-        }
-        .option{
-            font-size: 1em;
-            font: sans-serif;
-            padding: 10px;
-            background-color: #323468;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 7px;
-        }
-        .option:hover{
-            background-color:white;
-            color:#23255D;
-        }
-        
-        .chosen{
-            float: left;
-            margin-top:3em;
-            margin-left:3em;
-            border-radius:50px;
-            height: 30rem;
-            width: 60%;
-            background-color: white;
-            text-align: center;
-        }
-
-        .chosen h1{
-            margin-top:1rem;
-
-        }  
-    
-        .chosen h2 {
-            margin-top: 1rem; /* Adjust margin as needed */
-            padding-top:1rem;
-            white-space: normal;
-        }
-        
-        .content{
-            margin-left:2rem;
-           
-            text-align:left;
-            white-space: normal;
-            
-            
-        }
-        
-        .content2{
-            margin-left:2rem;
-           
-            text-align:left;
-            white-space: normal;
-            
-            
-        }
-        .content2 input{
-            
-            border-radius:5px;
-            height:1.5rem;
-            font-size:20px;
-            border: 1px solid #DDDDDD;
-            color:black;
-        }
-
-        .content2 button{
-            float:right;
-            margin-top:0.5rem;
-            margin-right:5rem;
-            height:3rem;
-            width:6rem;
+        .left-side{
+            display:flex;
+            flex-direction:column;
+            width:50%;
+            gap:1rem;
             border-radius:10px;
-            background-color:green;
+        }
+        .left-side .button_cont{
+            display:flex;
+            gap:1.3rem;
+        }
+        .button_cont .option{
+            border-radius:5px;
+            padding:.7rem 1.5rem .7rem;
             color:white;
-            border-style: 1px solid #DDDDDD ;
+            font-size:1rem;
+            border:none;
+            background-color: #323468;
+            opacity:100%;
+            transition:opacity 125ms ease-in-out;
+        }
+        .button_cont .option:hover{
+            opacity:75%;
             cursor:pointer;
-            transition-duration: .7s;
-            
-        }
-        .content2 button:hover{
-            transition-duration: .7s;
-            color:green;
+        } 
+        .left-side .chosen{
             background-color:white;
+            height:100%;
+            border-radius:10px;
+            display:flex;
+            justify-content:center;
+            align-items: center;
+            border-radius:10px;
         }
-        
-        .content span{
-            font-weight:lighter;
-            border-bottom: 1px solid; 
-            width: 52.4rem; /* Set width to auto to extend up to the very right */
-            padding-bottom: 2px;
-            display:inline-block
+        .left-side .chosen-add,.left-side .chosen-edit{
+            padding:1rem;
+            background-color:white;
+            height:100%;
+            display:flex;
+            flex-direction:column;
+        }
+        .left-side .chosen p{
+            font-size:2rem;
+            color:#858282;
+        }
+        .right-side{
+            padding:1.3rem;
+            background-color:white;
+            display:flex;
+            flex-direction:column;
+            width:50%;
+            gap:1.3rem;
+            border-radius:10px;
+        }
+        .hidden{
+            position:absolute;
+            top:0;
+            left:0;
+            visibility: hidden;
+        }
+        .show{
+            position:relative;
+            visibility:visible;
+        }
 
+        .calendar{
+            height: 60%;
         }
-        .message{
-            height:14rem;
-            width:54rem;
-            background-color:#f2f2f2;
-            overflow:auto;
-            border-radius:20px ;
+        .fc .fc-daygrid-day-events{
+            padding:0;
+            margin-top:.8rem;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content: center;
         }
-        
-        .flex-container {
-        display: flex;
+        .fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start{
+            width:12px;
+            height: 12px;
+            border-radius:50%;
         }
-
-        .main-content h1 {
-            font-size: 2em;
+        #add-event{
+            margin-top:2rem;
+            display:flex;
+            flex-direction:column;
+            padding:1.3rem;
+            gap:2.4rem;
         }
-        
+        .input-group,.special{
+            display:flex;
+        }
+        .special input{
+            width:50%;
+        }
+        .text-area{
+            display:flex;
+            flex-direction:column;
+        }
+        .input-group input{
+            font-size:1.3rem;
+            padding-left:.5rem;
+            width:100%;
+            border:none;
+            border-bottom:2px solid #e2e1e1;
+        }
+        .input-group input:focus{
+            outline:none;
+        }
+        .input-group label{
+            font-size:1.3rem;
+        }
+        textarea{
+            font-size:1.1rem;
+            padding:1rem;
+            border:2px solid #e2e1e1;
+        }
+        #submit{
+            font-size:1rem;
+            width:10rem;
+            padding:.7rem 1.5rem .7rem;
+            color:white;
+            background-color:#323468;
+            border:none;
+            align-self:center;
+            border-radius: 5px;
+            opacity:100%;
+            transition:opacity 150ms ease-in-out;
+        }
+        #submit:hover{
+            cursor:pointer;
+            opacity:75%;
+        }
+        .events{
+            display:flex;
+            flex-direction:column;
+            gap:1rem;
+        }
+        .events ul{
+            display:flex;
+            flex-direction:column;
+            padding-left:1.5rem;
+        }
+        input:read-only,textarea:read-only{
+            color:gray;
+        }
     </style>
 
 </head>
@@ -241,92 +174,94 @@
     
     @include('component.admin.sidenav')
     <div class="main-content">
-        <h1>Calendar</h1>
-        <div class="button_cont">
-        <button class="option"style="margin-right: 1em; font-size:100%;"> Add Event </button>
-        <button class="option"style="margin-right: 1em; font-size:100%;"> Delete Event </button>
-        <button class="option"style="margin-right: 1em; font-size:100%;"> Edit Event </button>
-        </div>
-
-        <!--cover-->
-        <div class="select_cover" style="display:none;" >
-            <h1 style="font-size:10rem; color:#d9d9d9;">SELECT DATE</h1>
-            
-        </div>
-
-        <div class="delete_cover"style="display:none;" >
-            <h1 style="font-size:3rem;">ARE YOU SURE TO DELETE?</h1>
-            <br>
-            <h1 style="font-size:2.9rem;">TITLE</h1><br>
-            <h2 style="font-size:2.5rem; font-weight: lighter;">(DATE)</h2>
-            <button class="yes">YES</button>
-            <button class="no"> NO</button>
-
-
-        </div>
-
-        <div class="chosen" >
-
-        <h1> Day of the Week</h1>
-        <h2>01/01/2001</h2>
-
-            <!--This is Viewiing-->
-        <div class="content" style="display:none;" >
-        <h2> Title: <span>This is the Sample of a title</span></h2>
-        <h2> Subject: <span style = "width: 50rem;">This is the Sample of a Subject</span></h2>
-            <div class="flex-container">
-                <h2 > Duration:<span style="width: 22.1rem; margin-bottom:0em"> Thiasdasdasd</span> </h2>
-                <h2> Venue:  <span style="width: 22.1rem;">This</span></h2>
-            </div>
-        <h2> Theme: <span style = "width: 50.5rem;">Galaga</span></h2>
-        <h2> Message:</h2>
-        <div class="message">
-
-            
-        </div> 
-        </div>
-
-        <div class="content2" id="edit"style="display:none;" >
-            <form>
-            <h2> Title: <input type="text" id="title" name="title" style="width:50rem;" ></h2>
-            <h2> Subject: <input type="text" id="subject" name="subject"  style="width:47.7rem;"></h2>
-                <div class="flex-container">
-                    <h2 > Duration:<input type="text" id="duration" name="duration" style="width:20rem;"></h2>
-                    <h2 style="margin-left:1.8rem;"> Venue:  <input type="text" id="venue" name="venue" style="width:20.2rem;"></h2>
-                </div>
-            <h2> Theme: <input type="text" id="theme" name="theme" style="width:48.2rem;"></h2>
-            <h2> Message:</h2>
-            <div class="message" style=" background-color:white;">
-                <textarea id="w3review" name="w3review" rows="10" cols="76" style="font-size:20px; border-radius:20px;max-height:12.5rem;border: 1px solid #DDDDDD; color:black; "></textarea>
-            </div>
-
-            <button>POST</button>
-            </form>
-        </div>
-
-    </div>
-    
-        <div class="c_container">
-            <div id='calendar'></div>
-            <h2 style="padding-left:2rem; color:#9f9f9f;">Upcoming events</h2>
-            <div class="events_summ">
-                <div class="circle"></div>
-                <h3>Sample Event title </h3>
+        <div class="left-side">
+            <h1>Calendar</h1>
+            <div class="chosen show">
                 <p>Select a date</p>
-                
-                
+            </div>
+            <div class="chosen-add hidden">
+                <h1 style="align-self:center"></h1>
+                <h2 style="align-self:center"></h2>
+                <form id="add-event">
+                    <div class="input-group">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="subject" required>
+                    </div>
+                    <div class="input-group special">
+                        <label for="duration">Duration:</label>
+                        <input type="text" id="duration" required>
+                        <label for="venue">Venue:</label>
+                        <input type="text" id="venue" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="theme">Theme:</label>
+                        <input type="text" id="theme" required>
+                    </div>
+                    <div class="input-group text-area">
+                        <label for="message">Message:</label>
+                        <textarea id="message" cols="30" rows="15" style="resize:none; border-color:#eeeeee" required></textarea>
+                    </div>
+                    <button id="submit" onclick="addEvent(event)">Submit</button>
+                </form>
+            </div>
+            <div class="chosen-edit hidden">
+                <h1 style="align-self:center"></h1>
+                <h2 style="align-self:center"></h2>
+                <form id="add-event">
+                    <div class="input-group">
+                        <label for="title">Title:</label>
+                        <input type="text" id="edit-title" required readonly>
+                    </div>
+                    <div class="input-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="edit-subject" required readonly>
+                    </div>
+                    <div class="input-group special">
+                        <label for="duration">Duration:</label>
+                        <input type="text" id="edit-duration" required readonly>
+                        <label for="venue">Venue:</label>
+                        <input type="text" id="edit-venue" required readonly>
+                    </div>
+                    <div class="input-group">
+                        <label for="theme">Theme:</label>
+                        <input type="text" id="edit-theme" required readonly>
+                    </div>
+                    <div class="input-group text-area">
+                        <label for="message">Message:</label>
+                        <textarea id="edit-message" cols="30" rows="15" style="resize:none; border-color:#eeeeee" required readonly></textarea>
+                    </div>
+                    <div id="edit-content" class="input-group" style="gap:1rem;align-self:center">
+                        <button id="submit" class="edit-btn" onclick="editEvent(event)">Edit</button>
+                        <button id="submit" class="delete-btn" onclick="deleteEvent(event)">Delete</button>
+                        <button id="submit" class="update-btn hidden" onclick="updateEvent(event)">Update</button>
+                        <button id="submit" class="cancel-btn hidden" onclick="cancelEvent(event)">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="calendar"></div>
+            <div class="events">
+                <h3>Upcoming Events</h3>
+                <ul>
+                    @foreach($schedules as $schedule)
+                        <li style="color:{{$schedule->color}}; font-size:1.4rem;">
+                            <small style="color:black; font-size:1.1rem;">{{$schedule->calendar_created}}</small>
+                            <small style="color:black; font-size:1.1rem; margin-left:4rem;">{{$schedule->title}}</small>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth'
-            });
-            calendar.render();
-        });
+        var dates=@json($schedules);
     </script>
+    <script src="/JS/adminCalendar.js"></script>
     <script src="/JS/navevent.js"></script>
 
 </body>

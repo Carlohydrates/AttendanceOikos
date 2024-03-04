@@ -280,6 +280,7 @@ Change Gender to Sex (done)
             const employee={
                 firstName:document.getElementById('firstName').value,
                 middleName:document.getElementById('middleName').value,
+                email:document.getElementById('email').value,
                 lastName:document.getElementById('lastName').value,
                 extendName:document.getElementById('extendName').value,
                 address:document.getElementById('address').value,

@@ -1,0 +1,13 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class AAnnouncementsview extends Model
+{
+    use HasFactory;
+
+    // Add any necessary configurations for the AAnnouncementsview model
+}

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" href="/assets/Oikos Logo.png">
     <link rel="stylesheet" href="/CSS/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
@@ -172,39 +173,62 @@
     </div>
 
     <script>
-        let overlay = document.getElementById('overlay');
-        let customPopup = document.getElementById('custom-popup');
-        let closePopupBtn = document.getElementById('close-popup');
-        let confirmAddAnnouncementBtn = document.getElementById('confirm-add-announcement');
-        let btnAddAnnouncement = document.querySelector('#add-announcement-btn');
-
-        btnAddAnnouncement.onclick = function () {
-            overlay.style.display = 'block';
-            customPopup.style.display = 'block';
-            customPopup.classList.add('fade-in');
-        }
-
-        closePopupBtn.onclick = function () {
-            overlay.style.display = 'none';
-            customPopup.style.display = 'none';
-        }
-
-        confirmAddAnnouncementBtn.onclick = function () {
-            const title = document.getElementById('announcement-title').value;
-            const subject = document.getElementById('announcement-subject').value;
-            const body = document.getElementById('announcement-body').value;
-
-            if (!title || !subject || !body) {
-                alert('Please fill in all fields');
-                return;
-            }
-
-            console.log('Announcement added:', { title, subject, body });
-
-            overlay.style.display = 'none';
-            customPopup.style.display = 'none';
-        }
-    </script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let overlay = document.getElementById('overlay');
+            let customPopup = document.getElementById('custom-popup');
+            let closePopupBtn = document.getElementById('close-popup');
+            let confirmAddAnnouncementBtn = document.getElementById('confirm-add-announcement');
+            let btnAddAnnouncement = document.querySelector('#add-announcement-btn');
+        
+            btnAddAnnouncement.addEventListener('click', function () {
+                overlay.style.display = 'block';
+                customPopup.style.display = 'block';
+                customPopup.classList.add('fade-in');
+            });
+        
+            closePopupBtn.addEventListener('click', function () {
+                overlay.style.display = 'none';
+                customPopup.style.display = 'none';
+            });
+        
+            confirmAddAnnouncementBtn.addEventListener('click', function () {
+                const title = document.getElementById('announcement-title').value;
+                const subject = document.getElementById('announcement-subject').value;
+                const body = document.getElementById('announcement-body').value;
+        
+                if (!title || !subject || !body) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+        
+                fetch('/admin/Announcement/Add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    },
+                    body: JSON.stringify({
+                        title: title,
+                        subject: subject,
+                        body: body,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response as needed
+                    console.log('Announcement added:', data);
+        
+                    // Close the popup
+                    overlay.style.display = 'none';
+                    customPopup.style.display = 'none';
+        
+                     window.location.reload();
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+        </script>
+        
     <script src="/JS/navevent.js"></script>
 </body>
 </html>
