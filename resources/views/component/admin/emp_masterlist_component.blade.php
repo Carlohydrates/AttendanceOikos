@@ -34,7 +34,7 @@
                                 @endif
                                 <td>{{$employee->bday}}</td>
                                 <td style="color:{{$employee->status=="Inactive"?'red':'green'}}">{{($employee ->status)}}</td>
-                                <td><button class="action-btn"><i class="fa-solid fa-pencil"></i></button></td>
+                                <td><button onclick="retrieve_data({{$employee -> employee_id}})"><i class="fa-solid fa-pencil"></i></button></td>
                             </tr>
                             @endforEach
                         </tbody>
@@ -49,7 +49,7 @@
                         <img src="../assets/testpic.png" alt="emp icon" class="emp-img">
                     </div>
                     <div class="emp-name">
-                        Django Freeman<br><i>Teacher</i>
+                       
                     </div>
                     <div class="emp-status">
                         <button class="status-btn">
@@ -61,7 +61,42 @@
                             Role
                         </button>
                     </div>
+                    <div class="emp-info">
+                        <button class="info-btn">
+                            Info
+                        </button>
+                        
+                    </div>
+                    
+                    <template id="my-template">
+                        <swal-title>
+                          Are you sure you want to Delete this Employee?
+                        </swal-title>
+                        <swal-icon type="warning" color="red"></swal-icon>
+                        <swal-button type="confirm" color="red">
+                          DELETE
+                        </swal-button>
+                        <swal-button type="cancel">
+                          Cancel
+                        </swal-button>
+                        <swal-param name="allowEscapeKey" value="false" />
+                        <swal-param
+                          name="customClass"
+                          value='{ "popup": "my-popup" }' />
+                        <swal-function-param
+                          name="didOpen"
+                          value="popup => console.log(popup)" />
+                      </template>
+                      
+                      <div class="emp-action">
+                        <button onclick="openSweetAlert()" class="delete"><i class="fa-solid fa-trash"></i><br>Delete</button>
+                          
+                      </div>
+                    
                 </div>
+                
+
+
                 <div class="eml-selection">
                     <h2>Edit Status</h2>
                     <label for="select-status">Status</label>
@@ -81,7 +116,35 @@
             </div>
         </div>
 
+
         <script>
+
+function openSweetAlert() {
+        Swal.fire({
+            template: "#my-template"
+            
+        }).then((result) => {
+        if (result.isConfirmed) {
+            fetch('/delete-employee',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'X-CSRF-Token':csrf.content,
+                },
+                body:JSON.stringify({id:employee_id})
+                })
+                .then(response=>response.json())
+                .then(data=>{
+                    if(data.success){
+                        location.reload();
+                    }
+                })
+                .catch(error=>{
+                    console.log("Error deleting events ",error);
+                })
+            }
+    });
+    }
             function applyFilter() {
     var searchValue = document.getElementById('search-bar').value.toLowerCase();
     var tableBody = document.getElementById('emp-masterlist-body');
@@ -108,52 +171,260 @@
     }
 }
 
-        let toggleModals = document.querySelectorAll('.action-btn');
+      
         let showModal = document.querySelector('.eml-modal-mask');
         let closeModal = document.querySelector('.far');
         let select = document.querySelector('select');
-        for (let i=0; i<toggleModals.length; i++){
-            toggleModals[i].onclick=()=>{ showModal.classList.remove('hidden') }
-        }
+        var employee_id = 0;
+        
+        
         closeModal.onclick=()=>{
             showModal.classList.toggle('hidden');
         }
 
-        let roleButton = document.querySelector('.role-btn');
-        let emlSelection = document.querySelector('.eml-selection');
-
-        roleButton.addEventListener('click', function() {
-            emlSelection.innerHTML = `
-                <h2>Edit Role</h2>
-                <label for="select-role">Role</label>
-                <select id="select-role" class="selection">
-                    <option value="Teacher">Teacher</option>
-                    <option value="IT">IT</option>
-                    <option value="Admin">Admin</option>
-                </select>
-                <button class="btn-save">Save Role</button>
-            `;})
-
-        let statusButton = document.querySelector('.status-btn');
-        statusButton.addEventListener('click', function() {
-            emlSelection.innerHTML = `
-                <h2>Edit Status</h2>
-                <label for="select-status">Status</label>
-                <select id="select-status" class="selection">
-                    <option value="Active">
-                        Active
-                    </option>
-                    <option value="Inactive">
-                        Inactive
-                    </option>
-                </select>
-                <button class="btn-save">Save Status</button>
-            `;})
+        
         
         let newCloseModal = document.querySelector('.far');
         newCloseModal.addEventListener('click', function() {
             showModal.classList.add('hidden');
         });
+
+        function retrieve_data(id){
+            employee_id = id;
+            console.log("hello world");
+            fetch("/retrieve-employee",{
+                method: 'POST',
+                headers:{'Content-Type':'application/json','X-CSRF-Token': csrf.content},
+                body:JSON.stringify({user_id:id})
+            })
+            .then(response=>response.json())
+            .then(data =>{
+                if(data.success){
+                    var user_instance = data.user_data;
+                    showModal.classList.remove('hidden')
+                    console.log(user_instance[0].employee_id);
+                    let roleButton = document.querySelector('.role-btn');
+                    let emlSelection = document.querySelector('.eml-selection');
+                    
+
+                    let statusButton = document.querySelector('.status-btn');
+                    statusButton.addEventListener('click', function() {
+                        emlSelection.innerHTML = `
+                            <h2>Edit Status</h2>
+                            <label for="select-status" >Status</label>
+                            <select id="select-status" class="selection">
+                                
+                                <option value="Inactive" ${user_instance[0].status === 'Inactive' ? 'selected' : ''}> Inactive </option>
+                                <option value="Active" ${user_instance[0].status === 'Active' ? 'selected' : ''}> Active </option>
+                            </select>
+                            <button class="btn-save" onclick="updatestatus(event,${user_instance[0].employee_id})">Save Status</button>
+                        `;})
+
+                        roleButton.addEventListener('click', function() {
+                        emlSelection.innerHTML = `
+                            <h2>Edit Role</h2>
+                            <label for="select-role">Role</label>
+                            <select id="select-role" class="selection">
+                                <option value="none" selected disabled hidden>Select an Option</option> 
+                                <option value="T" ${user_instance[0].position === 'T' ? 'selected' : ''}>Teacher</option>
+                                <option value="IT" ${user_instance[0].position === 'IT' ? 'selected' : ''}>IT</option>
+                                <option value="A" ${user_instance[0].position === 'A' ? 'selected' : ''}>Admin</option>
+                            </select>
+                            <button class="btn-save" onclick="updaterole(event,${user_instance[0].employee_id})">Save Role</button>
+                        `;})
+
+                        let infoButton = document.querySelector('.info-btn');
+                    infoButton.addEventListener('click', function() {
+                        emlSelection.innerHTML = `
+                        <form>
+                            <h2>Edit Information</h2>
+                            <div class="input-row">
+                                <div class="input-column">
+                                    <div class="input-group">
+                                        <label for="firstName">First Name</label>
+                                        <input type="text" id="firstName" name="firstName" value="${user_instance[0].fname}" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="middleName">Middle Name</label>
+                                        <input type="text" id="middleName" name="middleName" value="${user_instance[0].minitial}">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="lastName">Last Name</label>
+                                        <input type="text" id="lastName" name="lastName" value="${user_instance[0].lname}" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="extendName">Extension</label>
+                                        <input type="text" id="extendName" name="extendName" value="${user_instance[0].extension}" required>
+                                    </div>
+                                    </div>
+
+                                    <div class="input-column">
+                                    <div class="input-group">
+                                        <label for="age">Age</label>
+                                        <input type="number" id="age" name="age" value="${user_instance[0].age}" required min="0">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="sex">Sex</label>
+                                        <select id="sex" name="Sex" required>
+                                            <option value="male" ${user_instance[0].sex === 'male' ? 'selected' : ''}>Male</option>
+                                            <option value="female" ${user_instance[0].sex === 'female' ? 'selected' : ''}>Female</option>
+                                            <option value="other" ${user_instance[0].sex === 'other' ? 'selected' : ''}>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="TelNumber">Telephone Number</label>
+                                        <input type="text" id="TelNumber" name="TelNumber" value="${user_instance[0].telephone_number}" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="phoneNumber">Phone Number</label>
+                                        <input type="text" id="phoneNumber" name="phoneNumber" value="${user_instance[0].phone_number}" required>
+                                    </div>
+                                </div>
+                                <div class="input-column">
+                                    <div class="input-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" id="email" name="email"value="${user_instance[0].email}"required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" id="address" name="address" value="${user_instance[0].address} "required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="City">City</label>
+                                        <input type="text" id="cityName" name="CityName" value="${user_instance[0].city}" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="postalNumber">Postal Code</label>
+                                        <input type="text" id="postalNumber" name="postalNumber" value="${user_instance[0].postal_code}" required>
+                                    </div>
+                                    </div>
+                                    <div class="input-column">
+                                    <div class="input-group">
+                                        <label for="Region">Region</label>
+                                        <input type="text" id="regionName" name="RegionName" value="${user_instance[0].region}" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="countryName">Country</label>
+                                        <input type="text" id="countryName" name="countryName" value="${user_instance[0].country}" required>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="nationality">Nationality</label>
+                                        <input type="text" id="nationality" name="nationality" value="${user_instance[0].nationality}" required>
+                                    </div>
+                                    <div class="input-column">
+                                        <div class="input-group">
+                                            <label for="Birthday">Birthdate</label>
+                                            <input type="date" id="birthday" name="birthday" value="${user_instance[0].bday}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-save" onclick="updateemployee(event,${user_instance[0].employee_id})">Save Edit</button>
+                        </form>
+
+                        
+                
+            `;})
+                }
+            })
+            .catch(error =>{
+                console.log('Error! Employee data did not submit.',error);
+            })
+        }
+
+        
+        
+        function updateemployee(event,employee_id){
+            event.preventDefault();
+            const employee={
+                id:employee_id,
+                firstName:document.getElementById('firstName').value,
+                middleName:document.getElementById('middleName').value,
+                lastName:document.getElementById('lastName').value,
+                extendName:document.getElementById('extendName').value,
+                age:document.getElementById('age').value,
+                sex:document.getElementById('sex').value,
+                TelNumber:document.getElementById('TelNumber').value,
+                phoneNumber:document.getElementById('phoneNumber').value,
+                email:document.getElementById('email').value,
+                address:document.getElementById('address').value,
+                cityName:document.getElementById('cityName').value,
+                postalNumber:document.getElementById('postalNumber').value,
+                regionName:document.getElementById('regionName').value,
+                countryName:document.getElementById('countryName').value,
+                nationality:document.getElementById('nationality').value,
+                birthday:document.getElementById('birthday').value
+            };
+                fetch("/update-employee",{
+                    method: 'POST',
+                    headers:{'Content-Type':'application/json','X-CSRF-Token': csrf.content},
+                    body:JSON.stringify(employee)
+                })
+                .then(response=>response.json())
+                .then(data =>{
+                    if(data.success){
+                        location.reload();
+                    }
+                })
+                .catch(error =>{
+                    console.log('Error! Employee data did not update.',error);
+                })
+            }
+            
+            function updatestatus(event, employee_id) {
+            event.preventDefault();
+            const employee = {
+                id: employee_id,
+                'select-status': document.getElementById('select-status').value
+            };
+            fetch("/status_update-employee", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': csrf.content
+                    },
+                    body: JSON.stringify(employee)
+
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.log('Error! Status did not update', error);
+                })
+        }
+
+       
+        function updaterole(event, employee_id){
+            event.preventDefault();
+            const employee = {
+                id: employee_id,
+                'select-role': document.getElementById('select-role').value
+            };
+            fetch("/role_update-employee",{
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                    'X-CSRF-Token':csrf.content
+                },
+                body: JSON.stringify(employee)
+            })
+            .then(response=> response.json())
+            .then(data =>{
+                if (data.success){
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.log('Error! Role did not update', error);
+            })
+        }
+
+
+        
         
             let sortDirectionID = 1;
             let sortDirectionName = 1;
