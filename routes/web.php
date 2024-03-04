@@ -4,6 +4,7 @@ use App\Http\Controllers\ForgotPassword;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudentMasterlistController;
 use App\Http\Controllers\EmployeeMasterListController;
+use App\Http\Controllers\CalendarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages;
 
@@ -47,11 +48,18 @@ Route::get('/admin/Time_Record/DepEd',[Pages::class,'a_tr_deped']);
 
 Route::post('/add-student', [StudentMasterlistController::class, 'addStudent']);
 Route::post('/add-employee',[EmployeeMasterListController::class,'create']);
+
 Route::post('/retrieve-employee',[EmployeeMasterListController::class,'show']);
 Route::post('/update-employee',[EmployeeMasterListController::class,'update']);
 Route::post('/status_update-employee',[EmployeeMasterListController::class,'status']);
 Route::post('/role_update-employee',[EmployeeMasterListController::class,'role']);
 Route::post('/delete-employee',[EmployeeMasterListController::class,'delete']);
+
+Route::post('/add-event',[CalendarController::class,'create']);
+Route::post('/delete-event',[CalendarController::class,'delete']);
+Route::post('/update-event',[CalendarController::class,'update']);
+Route::get('/retrieve-calendar-date/{date}',[CalendarController::class,'retrieve']);
+
     
 
 Route::get('/reset', [Pages::class,'resetpassword']);
