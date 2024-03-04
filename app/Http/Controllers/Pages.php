@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Employees;
 use App\Models\AAnnouncements;
-
-
 use App\Models\Students;
+use App\Models\Calendar;
 
 class Pages extends Controller
 {
@@ -97,7 +97,9 @@ class Pages extends Controller
         return view("admin.view-announcement");
     }
     public function a_calendar(){
-        return view("admin.calendar");
+        $user_email=Auth::guard('users')->user()->email;
+        $calendar=Calendar::where('email',$user_email)->get();
+        return view("admin.calendar",['schedules'=>$calendar]);
     }
 
     public function a_time_record(){

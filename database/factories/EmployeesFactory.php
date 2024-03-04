@@ -24,6 +24,7 @@ class EmployeesFactory extends Factory
             //
             'qr'=>'T'.rand(1000,9999),
             'fname'=>"employee firstname",
+            'email'=>"email@yahoo.com",
             'lname'=>"employee lastname",
             'minitial'=>"employee middleinitial",
             'extension'=>"number name",

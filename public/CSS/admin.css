@@ -456,10 +456,29 @@ body {
     position: relative;
     background-color:white;
     border-radius:5px;
-    width:50em;
-    height: 25em;
+    width:70em;
+    height: 30em;
     display:flex;
     flex-direction: row;
+}
+
+
+
+
+.emp-action {
+    margin-top: auto; /* Pushes the element to the bottom */
+    margin-bottom:2vh;
+    
+}
+.delete{
+    background-color: #ffff;
+    border-style: none;
+    cursor: pointer;
+    transition-duration:.5s;
+}
+.delete:hover{
+    font-size: 15px;
+
 }
 
 .eml-details {
@@ -491,7 +510,7 @@ body {
     width: 100%;
 }
 
-.emp-status .status-btn{
+.emp-status .status-btn ,.emp-info .info-btn{
     border: none;
     text-align: center;
     width: 100%;
@@ -499,7 +518,9 @@ body {
     background-color: #fff;
 }
 
-.emp-role {
+
+
+.emp-role, .emp-info {
     width: 100%;
 }
 
@@ -512,6 +533,11 @@ body {
 }
 
 .emp-status .status-btn:hover {
+    color: #fff;
+    background-color: #8C52FF;
+    cursor: pointer;
+}
+.emp-info .info-btn:hover {
     color: #fff;
     background-color: #8C52FF;
     cursor: pointer;

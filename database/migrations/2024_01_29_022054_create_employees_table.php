@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('employee_id');
             $table->string('qr');
             $table->string('fname');
+            $table->string('email');
             $table->string('lname');
             $table->string('minitial')->nullable();
             $table->string('extension')->nullable();
