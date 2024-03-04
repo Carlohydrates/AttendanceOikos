@@ -375,13 +375,12 @@ body {
     border-radius: 5px;
     padding: 3px;
     border: 1px solid;
-    padding-right: 30px;
     margin-bottom: 15px;
-    display: block;
+    margin-right: 1em;
+    display: flex;
     justify-content: space-between; 
-    margin-bottom: 15px;
     float: right;
-    padding: 3px;
+
 }
 .header-std-list h2{
     padding: 3px;
@@ -518,7 +517,17 @@ body {
     background-color: #fff;
 }
 
+.emp-info {
+    width: 100%;
+}
 
+.emp-info .info-btn{
+    border: none;
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+}
 
 .emp-role, .emp-info {
     width: 100%;
@@ -611,6 +620,7 @@ body {
     cursor: pointer;
     opacity: 100%;
 }
+
 
 
 

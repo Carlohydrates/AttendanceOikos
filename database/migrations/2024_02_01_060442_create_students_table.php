@@ -12,16 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('student_id');
+            $table->string('qr');
             $table->string('fname');
             $table->string('lname');
-            $table->string('mname');
+            $table->string('mname')->nullable();
             $table->string('extension')->nullable();
             $table->string('fetcher');
             $table->integer('level');
             $table->string('section');
             $table->string('enroll_status');
             $table->string('bday');
+            $table->integer('age');
+            $table->string('date_enrolled');
             $table->string('address');
             $table->string('city');
             $table->string('region');
@@ -31,7 +34,6 @@ return new class extends Migration
             $table->string('sex');
             $table->string('telephone_number');
             $table->string('mobile_number');
-
         });
     }
 

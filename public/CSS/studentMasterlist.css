@@ -1,0 +1,310 @@
+.std-attendance-type th button {
+    background: none;
+    border: none;
+    padding: 0;
+    transition: color 0.3s ease;
+    color: gray;
+    margin-right: 2%;
+    cursor: pointer;
+}
+
+.std-attendance-type th button:hover {
+    color:white; 
+}
+
+.add-student-btn {
+    font-size: 1em;
+    font: sans-serif;
+    padding: 10px;
+    background-color: #323468;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.add-grade-level-btn {
+    font-size: 1em;
+    font: sans-serif;
+    padding: 10px;
+    background-color: #323468;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.add-section-btn {
+    font-size: 1em;
+    font: sans-serif;
+    padding: 10px;
+    background-color: #323468;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.rem-btn {
+    font-size: 1em;
+    font: sans-serif;
+    padding: 10px;
+    background-color: #323468;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+.far{
+    transform:translateX(1em);
+}
+.modal-mask{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100vh;
+    width:100%;
+    z-index:100;
+    background-color:rgba(0, 0, 0, 0.534);
+    opacity:1;
+    transition:opacity 200ms ease-in-out;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.form-container{
+    background-color:white;
+    border-radius:5px;
+    width:65%;
+    display:flex;
+    flex-direction:column;
+    padding:2em;
+}
+.form-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+#form-content {
+    display:flex;
+    flex-direction:column;
+    margin-top:1em;
+}
+.form-group{
+    display: flex;
+    gap: 1rem;
+    margin-top: 1em;
+}
+.form-group-select{
+    display: flex;
+    flex-direction: column;
+}
+.select-input{
+    height:2em;
+    font-size:1rem;
+    border:1px solid #dedede;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.btn-submit,.btn-cancel,.btn-import,.btn-submit-grade{
+    margin-left:2em;
+    width:28%;
+}
+.btn-submit{
+    padding:1em;
+    background-color:#13c36b;
+    font-size:.8rem;
+    font-weight:bold;
+    color:white;
+    border:none;
+    border-radius: 15px;
+    
+    transition:opacity 150ms ease-in-out;
+}
+.btn-submit:hover{
+    cursor: pointer;
+    opacity:75%;
+}
+.btn-import{
+    padding:1em;
+    background-color:#2832c2;
+    font-size:.8rem;
+    font-weight:bold;
+    color:white;
+    border:none;
+    border-radius: 15px;
+    
+    transition:opacity 150ms ease-in-out;
+}
+.btn-import:hover{
+    cursor: pointer;
+    opacity:75%;
+}
+.btn-cancel{
+    padding:1em;
+    background-color:#DE3A3B;
+    font-size:.8rem;
+    font-weight:bold;
+    color:white;
+    border:none;
+    border-radius: 15px;
+    
+    transition:opacity 150ms ease-in-out;
+}
+.btn-cancel:hover{
+    cursor: pointer;
+    opacity:75%;
+}
+.btn-submit-grade {
+    padding:1em;
+    background-color:#13c36b;
+    font-size:.8rem;
+    font-weight:bold;
+    color:white;
+    border:none;
+    border-radius: 15px;
+    
+    transition:opacity 150ms ease-in-out;
+}
+.btn-submit-grade:hover{
+    cursor: pointer;
+    opacity:75%;
+}
+.submit-group{
+    display: flex;
+    justify-content: center;
+    
+}
+.hidden{
+    visibility:hidden;
+    opacity:0;
+}
+.input-group{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+}
+.input-group-special{
+    display: flex;
+    flex-direction: column;
+}
+.input-group-special input,
+.input-group-special select {
+    padding: 0.5rem;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: .5rem;
+    width: 100%;
+}
+.input-field{
+    border:none; 
+    height:2em;
+    font-size:1rem;
+    border: 1px solid #dedede;
+}
+
+.form-import {
+position: absolute;
+display: none;
+justify-content: center;
+align-items: center;
+height: 70vh;
+width: 70vh;
+background-color: #F2F3F5;
+margin: auto;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+}       
+.close{
+    border-radius:100%;
+    width:1.2rem;
+    height:1.2rem;
+}
+.import-area{
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+height: 67vh;
+width: 67vh;
+background-color: white;
+margin:2.5%;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+border:1px solid black;
+}
+.import-area h1{
+    opacity:0.2;
+    letter-spacing: 0.5em
+}
+.input-row {
+    display: flex;
+    width: 100%;
+}
+
+.input-column {
+    flex: 1;
+    margin-right: 1rem;
+}
+.form-container-add {
+    text-align: center;
+    background-color:white;
+    border-radius:5px;
+    width:30%;
+    padding:2em;
+}
+
+.form-group-add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4%;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+.button-container button {
+    margin: 0 5px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-container #confirm-remove-btn {
+    background-color: #5f0a0a;
+    color: white;
+}
+
+.button-container .cancel {
+    background-color: #ccc;
+}
+
+.emp-action {
+    margin-top: auto;
+    margin-bottom:2vh;
+}
+
+.delete{
+    background-color: #ffff;
+    border-style: none;
+    cursor: pointer;
+    transition-duration:.1s;
+}
+.delete:hover{
+    font-size: 15px;
+
+}
