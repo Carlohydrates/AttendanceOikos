@@ -91,6 +91,11 @@ class EmployeeMasterListController extends Controller
                 return response()->json(["success"=>true]);
             }
 
+            public function retrieveData($employee_id){
+                $employee = Employees::where('employee_id',$employee_id) -> get();
+                return response()-> json(["success"=> true,'user_data'=>$employee]);
+            }
+
 
 }
 

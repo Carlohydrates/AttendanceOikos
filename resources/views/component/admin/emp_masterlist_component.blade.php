@@ -48,7 +48,9 @@
                     <div class="emp-icon">
                         <img src="../assets/testpic.png" alt="emp icon" class="emp-img">
                     </div>
-                    <div class="emp-name">
+                    <div class="emp-name" id="employeeName">
+                        <br>
+                    <i>Employee</i>
                        
                     </div>
                     <div class="emp-status">
@@ -189,6 +191,25 @@ function openSweetAlert() {
             showModal.classList.add('hidden');
         });
 
+        function fetchEmployeeName(employeeId){
+            fetch(`/retrieve-employeename/${employeeId}`,{
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json',
+                    'X-CSRF-Token':csrf.content
+                }
+            })
+            .then(response => response.json())
+            .then(data =>{
+                if (data.success) {
+                    const employee = data.user_data[0];
+                    const fullName = `${employee.fname} ${employee.minitial} ${employee.lname}`;
+                    document.getElementById('employeeName').textContent = fullName;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
         function retrieve_data(id){
             employee_id = id;
             console.log("hello world");
@@ -205,6 +226,7 @@ function openSweetAlert() {
                     console.log(user_instance[0].employee_id);
                     let roleButton = document.querySelector('.role-btn');
                     let emlSelection = document.querySelector('.eml-selection');
+                    fetchEmployeeName(employee_id);
                     
 
                     let statusButton = document.querySelector('.status-btn');

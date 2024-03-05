@@ -68,6 +68,7 @@ Route::post('/admin/Announcement/Add', [AAnnouncementsController::class, 'addAnn
 
 
 Route::post('/retrieve-employee',[EmployeeMasterListController::class,'show']);
+Route::get('/retrieve-employeename/{employee_id}',[EmployeeMasterlistController::class,'retrieveData']);
 Route::post('/update-employee',[EmployeeMasterListController::class,'update']);
 Route::post('/status_update-employee',[EmployeeMasterListController::class,'status']);
 Route::post('/role_update-employee',[EmployeeMasterListController::class,'role']);
