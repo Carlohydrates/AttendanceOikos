@@ -87,7 +87,16 @@ class Pages extends Controller
 
     //Admin Navigation
     public function a_dashboard(){
-        return view("admin.dashboard");
+        $employee_count=Employees::all();
+        $student_count=Students::all();
+        $pending_students=Students::where('enroll_status','Pending')->get();
+        $calendar=Calendar::all();
+        return view("admin.dashboard",[
+            "employee"=>count($employee_count),
+            "students"=>count($student_count),
+            "pending_students"=>count($pending_students),
+            "calendar"=>$calendar
+        ]);
     }
     public function a_announcement(){
         $announcements = AAnnouncements::all(); 
