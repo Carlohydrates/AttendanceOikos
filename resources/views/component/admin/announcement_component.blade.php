@@ -1,6 +1,6 @@
 <ul id="announcement-list">
     @foreach ($announcements as $announcement)
-        <a href="/admin/Announcement/View">
+        <a href="/admin/Announcement/View/{{ $announcement->id }}">
             <li class="announcement">
                 <div class="sender-icon">
                     <img src="{{ $announcement->icon_url }}" alt="user icon" class="sender-img">
@@ -15,7 +15,6 @@
         </a>
     @endforeach
 </ul>
-
 <!-- Front End Visualization
 <div class="container">
     <div class="announcement-logs">
