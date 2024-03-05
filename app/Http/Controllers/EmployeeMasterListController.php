@@ -11,10 +11,14 @@ class EmployeeMasterListController extends Controller
     public function create(Request $request){
         date_default_timezone_set('Asia/Manila');
         $date_employed=date('m/d/Y');
+        $year=date('Y');
+        $employee_id = $year . rand(1000, 9999);
+        $email = $employee_id . "@employee.oikostech.ph";
         Employees::create([
             "qr"=>$request->input('position').rand(1000,9999),
+            "employee_id"=>$employee_id,
             "fname" =>$request->input('firstName'),
-            "email" =>$request-> input('email'),
+            "email" =>$email,
             "lname" =>$request->input('lastName'),
             "minitial" =>$request->input('middleName'),
             "bday"=>$request->input('birthday'),

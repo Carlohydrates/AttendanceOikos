@@ -12,9 +12,12 @@ class StudentMasterlistController extends Controller
         date_default_timezone_set('Asia/Manila');
         $date_enrolled=date('m/d/Y');
         $year=date('Y');
+        $student_id = $year . rand(1000, 9999);
+        $email = $student_id . "@oikostech.edu.ph";
         Students::create([
             'qr'=>$request->input('position').rand(1000,9999),
-            'student_id'=>$year.rand(1000,9999),
+            'student_id'=>$student_id,
+            'email'=>$email,
             'fname'=> $request->input('firstName'),
             'mname'=> $request->input('middleName'),
             'lname'=> $request->input('lastName'),
