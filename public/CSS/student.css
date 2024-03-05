@@ -283,3 +283,284 @@ body {
     font-size:1.3rem;
     color:white;
 }
+
+.card{
+    display:flex;
+    background-color:white;
+    width:100%;
+    height:80vh;
+    border-radius:10px;
+    margin-top: 2em;
+} 
+.card .card-sidenav{
+    width:20%;
+    height:100%;
+    border-right:1px solid #dddddd;
+    display:flex;
+    flex-direction:column;
+}
+.card .card-content{
+    width:80%;
+}
+.student-info,.parent-info{
+    padding:1.3em;
+    display:flex;
+    flex-direction:column;
+    visibility:visible;
+}
+.student-info .field-group,.parent-info .field-group{
+    display:flex;
+    margin-top:1em;
+}
+.student-info .field-group .input-group,.parent-info .field-group .input-group{
+    width:45%;
+    display:flex;
+    flex-direction:column;
+}
+.field-group .input-group input{
+    width:95%;
+    display:flex;
+    flex-direction:column;
+    padding-left:.5em;
+    height:2.3em;
+    font-size:1.1rem;
+    color:gray;
+    border:1px solid #dddddd;
+    border-radius:10px;
+}
+.field-group .input-group label{
+    font-size:1.2rem;
+}
+.card-sidenav .avatar-container{
+    display:flex;
+    flex-direction:column;
+    padding:1.3em;
+    height:50%;
+    align-items: center;
+}
+.avatar-container img{
+    width:70%;
+    height:70%;
+    border-radius:50%;
+}
+.avatar-container p{
+    font-size:1.2rem;
+}
+.link-student-container,.link-parent-container{
+    font-size:1.2rem;
+    text-align: center;
+    padding:1.3em;
+    cursor:pointer
+}
+.selected{
+    background-color:#51558f;
+    color:white;
+}
+.hide{
+    visibility:hidden;
+    position:absolute;
+}
+@media(max-width:1024px){
+    .card .card-sidenav{
+        width:30%;
+        height:100%;
+        border-right:1px solid #dddddd;
+        display:flex;
+        flex-direction:column;
+    }
+}
+
+.log-body{
+    background-color: #f2f2f2;
+    margin: 1em;
+    padding: 0;
+    display: flex;
+
+}
+.log-container {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-container {
+    background-color: #323468;
+    color: #fff;
+    padding: 15px;
+    text-align: left;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.filter-container label {
+    margin-right: 10px;
+}
+
+.filter-container input[type="date"] {
+    margin-right: 10px;
+}
+
+.filter-container button {
+    border-radius: 5px;
+    padding: 3px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.attendance-type {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.attendance-type th,
+.attendance-type td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.attendance-type th {
+    background-color: #323468;
+    color: #fff;
+}
+
+.attendance-type tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.attendance-type tr:hover {
+    background-color: #f1f1f1;
+}
+
+.container{
+    padding-top: 2em;
+    margin-top:1em;
+    display: block;
+    margin: 1em;
+}
+.fa-chevron-right{
+    opacity:0;
+}
+.fa-chevron-right.show-arrow{
+    opacity:1;
+}
+.selector{
+    color:#323468;
+    padding:1.2em;
+    display:flex;
+    justify-content: space-evenly;
+    border-bottom:1px solid #c4c4c4;
+}
+.selector:hover{
+    border-left:5px solid #323468;
+    cursor:pointer;
+}
+.selector.active-div{
+    border-left:5px solid #323468;
+}
+.employee-container {
+    width: 100%;
+    padding:1em;
+    background-color:white;
+    opacity:1;
+    border-radius:5px;
+    transition: opacity 400ms ease-in-out;
+}
+.field-group{
+    margin-top:2em;
+    display:flex;
+}
+#container-title{
+    font-weight: 400;
+    border-bottom:1px solid #dedede;
+    color:#323468;
+}
+.input-group{
+    padding:.8em;
+    width:25%;
+    display:flex;
+    flex-direction:column;
+}
+.input-group-special{
+    padding:.8em;
+    width:50%;
+    display:flex;
+    flex-direction:column;
+}
+.input-group-single{
+    padding:.8em;
+    width:75%;
+    display:flex;
+    flex-direction:column;
+}
+.input-group .input-field,.input-group-special .input-field,.input-group-single .input-field{
+    border:none; 
+    font-size:1rem;
+    border-bottom:1px solid #dedede;
+}
+.hidden{
+    position:absolute;
+    opacity: 0;
+    visibility:hidden;
+}
+label{
+    margin-top:.5em;
+    color:#c4c4c4;
+}
+
+.ann-header,
+.ann-title {
+    display: inline;
+}
+.header-container{
+    background-color: #323468;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+}
+.ann-container{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 25px;
+    background-color: white;
+}
+.ann-container i{
+    font-size: 3em;
+}
+#container-title{
+    width: 90%;
+    align-self: center;
+}
+#container-subject{
+    font-weight: 400;
+    width: 90%;
+    align-self: center;
+    margin-top: 0.5em;
+}
+.poster-info{
+    display: flex;
+    background-color: white;
+    margin: 1em;
+    margin-top: 1em;
+    align-items: center;
+    padding: 1em;
+}
+textarea{
+    resize:none;
+    background-color: white;
+    font-family:sans-serif;
+    font-size:1rem;
+    padding:.5rem;
+    border: none;
+    width: 90%;
+    align-self: center;
+    text-align: justify;
+    white-space: pre-line;
+}
