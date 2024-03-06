@@ -564,3 +564,163 @@ textarea{
     text-align: justify;
     white-space: pre-line;
 }
+body {
+    background-color: #f6f6f6;
+}
+
+.select_cover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin-top: 3em;
+    margin-left: 3em;
+    border-radius: 50px;
+    height: 45rem;
+    width: 60rem;
+    background-color: white;
+    padding: auto;
+    text-align: center;
+}
+
+.c_container {
+    float: right;
+    height: 52rem;
+    width: 35%;
+    margin-top:-5rem;
+    margin-right: 0rem;
+    background: white;
+    border-radius: 20px;
+    
+}
+
+#calendar {
+    height: 28.5em;
+    width: auto;
+    margin: 2rem;
+    background-color: white;
+}
+
+.events_summ {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.circle {
+    height: 1rem;
+    width: 1rem;
+    background-color: red;
+    border-radius: 100%;
+    white-space: nowrap;
+}
+
+h3 {
+    margin: 0%;
+}
+.button_cont{
+    width:auto;
+   
+}
+.option{
+    font-size: 1em;
+    font: sans-serif;
+    padding: 10px;
+    background-color: #323468;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 7px;
+}
+.option:hover{
+    background-color:white;
+    color:#23255D;
+}
+
+.chosen{
+    float: left;
+    margin-top: 1em;
+    margin-left: 1em;
+    border-radius: 20px;
+    height: 40rem;
+    width: 62%;
+    background-color: white;
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+}
+
+.chosen h2 {
+    font-size: 2rem; /* Increase font size */
+    margin: 0; /* Remove default margin */
+    color: lightgrey;
+}
+
+.content{
+    margin-left:2rem;
+   
+    text-align:left;
+    white-space: normal;
+    
+    
+}
+
+.content2{
+    margin-left:2rem;
+    text-align:left;
+    white-space: normal;
+    
+}
+.content2 input{   
+    border-radius:5px;
+    height:1.5rem;
+    font-size:20px;
+    border: 1px solid #DDDDDD;
+    color:black;
+}
+
+.content2 button{
+    float:right;
+    margin-top:0.5rem;
+    margin-right:5rem;
+    height:3rem;
+    width:6rem;
+    border-radius:10px;
+    background-color:green;
+    color:white;
+    border-style: 1px solid #DDDDDD ;
+    cursor:pointer;
+    transition-duration: .7s;
+    
+}
+.content2 button:hover{
+    transition-duration: .7s;
+    color:green;
+    background-color:white;
+}
+
+.content span{
+    font-weight:lighter;
+    border-bottom: 1px solid; 
+    width: 52.4rem; /* Set width to auto to extend up to the very right */
+    padding-bottom: 2px;
+    display:inline-block
+
+}
+.message{
+    height:14rem;
+    width:54rem;
+    background-color:#f2f2f2;
+    overflow:auto;
+    border-radius:20px ;
+}
+
+.flex-container {
+display: flex;
+}
+
+.main-content h1 {
+    font-size: 2em;
+}
+

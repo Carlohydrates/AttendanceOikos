@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocuRequestController;
 use App\Http\Controllers\ForgotPassword;
 use App\Http\Controllers\GradeLevelandSectionController;
 use App\Http\Controllers\LoginController;
@@ -68,6 +69,7 @@ Route::post('/admin/Announcement/Add', [AAnnouncementsController::class, 'addAnn
 
 
 Route::post('/retrieve-employee',[EmployeeMasterListController::class,'show']);
+Route::get('/retrieve-employeename/{employee_id}',[EmployeeMasterlistController::class,'retrieveData']);
 Route::post('/update-employee',[EmployeeMasterListController::class,'update']);
 Route::post('/status_update-employee',[EmployeeMasterListController::class,'status']);
 Route::post('/role_update-employee',[EmployeeMasterListController::class,'role']);
@@ -95,10 +97,11 @@ Route::get('/employees/User-Info',[Pages::class,'e_userInfo']);
 Route::get('/employees/Announcement',[Pages::class,'e_announcement']);
 Route::get('/employees/Calendar',[Pages::class,'e_calendar']);
 Route::get('/employees/Document-Request',[Pages::class,'e_document_request']);
-Route::get('/employees/Document-Request/Approval',[Pages::class,'e_approvalpage']);
+Route::get('/employees/Document-Request/Approval/{id}',[Pages::class,'e_approvalpage']);
+
+Route::post('/add-document-request', [DocuRequestController::class, 'addDocuRequest']);
 Route::get('/employees/Time-Record',[Pages::class,'e_time_record']);
 Route::get('/employees/Home',[Pages::class,'e_home']);
-Route::get('/employees/Document-Request/Approval',[Pages::class,'e_approval']);
 Route::get('/employees/Announcement/View', [Pages::class,'e_view_announcement']);
 Route::get('/employees/logout',[LoginController::class,'logoutEmployee']);
 
