@@ -184,18 +184,12 @@ Change Gender to Sex (done)
                             <label for="phoneNumber">Phone Number</label>
                             <input type="text" id="phoneNumber" name="phoneNumber" required>
                         </div>
-                        <div class="input-column">
-                            <div class="input-group">
-                                <label for="Birthday">Birthdate</label>
-                                <input type="date" id="birthday" name="birthday" required>
-                            </div>
+                        <div class="input-group">
+                            <label for="Birthday">Birthdate</label>
+                            <input type="date" id="birthday" name="birthday" required>
                         </div>
                     </div>
                     <div class="input-column">
-                        <div class="input-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
                         <div class="input-group">
                             <label for="address">Address</label>
                             <input type="text" id="address" name="address" required>
@@ -280,7 +274,6 @@ Change Gender to Sex (done)
             const employee={
                 firstName:document.getElementById('firstName').value,
                 middleName:document.getElementById('middleName').value,
-                email:document.getElementById('email').value,
                 lastName:document.getElementById('lastName').value,
                 extendName:document.getElementById('extendName').value,
                 address:document.getElementById('address').value,

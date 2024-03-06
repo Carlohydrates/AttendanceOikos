@@ -8,6 +8,7 @@ use App\Models\Employees;
 use App\Models\AAnnouncements;
 use App\Models\Students;
 use App\Models\Calendar;
+use App\Models\DocuRequest;
 
 class Pages extends Controller
 {
@@ -76,18 +77,23 @@ class Pages extends Controller
         return view("employees.document_request");
     }
 
-    public function e_approvalpage(){
-        return view("employees.approval");
+    public function e_approvalpage($id){
+        $document = DocuRequest::where('id', $id)
+        ->get();
+        return view("employees.approval", ['document'=>$document]);
     }
-
-    public function e_approval(){
-        return view("employees.approval");
-    }
-    
-
     //Admin Navigation
     public function a_dashboard(){
-        return view("admin.dashboard");
+        $employee_count=Employees::all();
+        $student_count=Students::all();
+        $pending_students=Students::where('enroll_status','Pending')->get();
+        $calendar=Calendar::all();
+        return view("admin.dashboard",[
+            "employee"=>count($employee_count),
+            "students"=>count($student_count),
+            "pending_students"=>count($pending_students),
+            "calendar"=>$calendar
+        ]);
     }
     public function a_announcement(){
         $announcements = AAnnouncements::all(); 
