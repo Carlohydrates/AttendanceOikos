@@ -32,7 +32,7 @@
                                 @else
                                     <td>Admin</td>
                                 @endif
-                                <td>{{$employee->bday}}</td>
+                                <td>{{$employee->date_employed}}</td>
                                 <td style="color:{{$employee->status=="Inactive"?'red':'green'}}">{{($employee ->status)}}</td>
                                 <td><button onclick="retrieve_data({{$employee -> employee_id}})"><i class="fa-solid fa-pencil"></i></button></td>
                             </tr>

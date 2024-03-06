@@ -12,8 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('docu_requests', function (Blueprint $table) {
-            $table->id('employee_id');
-            $table->timestamps();
+            $table->id();
+            $table->string('employee_id');
+            $table->string('requestor_name');
+            $table->string('request_code');
+            $table->string('request_type');
+            $table->string('date_requested');
+            $table->string('date_processed')->nullable();
+            $table->string('request_status');
+            $table->text('reason');
         });
     }
 
