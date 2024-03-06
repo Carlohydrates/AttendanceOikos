@@ -9,7 +9,7 @@
                     <h3>{{ $announcement->title }}</h3><br>{{ $announcement->subject }}
                 </div>
                 <div class="announcement-details">
-                    {{ $announcement->created_at }}<br>By: {{ $announcement->author }}
+                    {{ $announcement->created_at }}<br>By: Admin{{ $announcement->author }}
                 </div>
             </li>
         </a>

@@ -38,9 +38,4 @@ class AAnnouncementsController extends Controller
             return response()->json(['error' => 'Announcement not found'], 404);
         }
     }
-/*
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }*/
 }
