@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employees;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeeMasterListController extends Controller
@@ -11,10 +12,15 @@ class EmployeeMasterListController extends Controller
     public function create(Request $request){
         date_default_timezone_set('Asia/Manila');
         $date_employed=date('m/d/Y');
+        $year=date('Y');
+        $employee_id = $year . rand(100, 999);
+        $email = $employee_id . "@employee.oikostech.ph";
+        $password = $request->input('birthday');
         Employees::create([
             "qr"=>$request->input('position').rand(1000,9999),
+            "employee_id"=>$employee_id,
             "fname" =>$request->input('firstName'),
-            "email" =>$request-> input('email'),
+            "email" =>$email,
             "lname" =>$request->input('lastName'),
             "minitial" =>$request->input('middleName'),
             "bday"=>$request->input('birthday'),
@@ -32,6 +38,12 @@ class EmployeeMasterListController extends Controller
             "sex" => $request->input('sex'),
             "position"=>$request->input('position'),
             "status"=>"Inactive",
+        ]);
+        User::create([
+            'id'=>$employee_id,
+            'email'=>$email,
+            'password'=>bcrypt($password),
+            'role'=>2
         ]);
         return response()->json(["success"=>true]);
     }
@@ -88,6 +100,9 @@ class EmployeeMasterListController extends Controller
             public function delete(Request $request){
                 Employees::where('employee_id',$request->input('id'))
                 ->delete();
+                User::where('id', $request->input('id'))
+                ->delete();
+
                 return response()->json(["success"=>true]);
             }
 

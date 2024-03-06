@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Employee: Approval</title>
     <style>
-        .container{
+        .container-main{
             margin-top: 2em;
             width:100%;
             padding:1em;
@@ -152,32 +152,32 @@
             <h1 class="document-request"><a href = "/employees/Document-Request"  style = "color: rgba(100, 100, 100, 0.700); text-decoration: none;">Document Request ></a> </h1>
             <h1 class="approval" style = "margin-left: 0.3em;">Approval</h1>
         </div>
-        
-        <div class="container">
+    @foreach ($document as $documents)
+        <div class="container-main">
             <h3 id=container-title>REQUEST SUMMARY</h3>
             <div class="field-group">
                 <div class="input-group">
-                    <input type="text" class='input-field' id='requestor-name' value="WATSON, AMELIA" readonly>
+                    <input type="text" class='input-field' id='requestor-name' value="{{$documents->requestor_name}}" readonly>
                     <label for="requestor-name">Requestor Name</label>
                 </div>
                 <div class="input-group">
-                    <input type="text" class='input-field' id='request-code' value="CPE-2024- 01-00001" readonly>
+                    <input type="text" class='input-field' id='request-code' value="{{$documents->request_code}}" readonly>
                     <label for="request-code">Request Code</label>
                 </div>
                 <div class="input-group">
-                    <input type="text" class='input-field' id='request-type' value="Certificate of Good Moral Character" readonly>
+                    <input type="text" class='input-field' id='request-type' value="{{$documents->request_type}}" readonly>
                     <label for="request-type">Request Type</label>
                 </div>
                 <div class="input-group">
-                    <input type="text" class='input-field' id='date-requested' value="Jan 01, 2024" readonly>
+                    <input type="text" class='input-field' id='date-requested' value="{{$documents->date_requested}}" readonly>
                     <label for="date-requested">Date Requested</label>
                 </div>
                 <div class="input-group">
-                    <input type="text" class='input-field' id='date-processed' value="Pending" readonly>
+                    <input type="text" class='input-field' id='date-processed' value="{{$documents->date_processed??"Pending"}}" readonly>
                     <label for="date-processed">Date Processed</label>
                 </div>
                 <div class="input-group">
-                    <input type="text" class='input-field' id='request-status' value="Pending" readonly>
+                    <input type="text" class='input-field' id='request-status' value="{{$documents->request_status}}" readonly>
                     <label for="request-status">Request Status</label>
                 </div>
             </div>
@@ -188,27 +188,27 @@
                 <div class="field-group">
                     <div class="input-group">
                         <label for="request-code">Request Code</label>
-                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='request-code' value="CPE-2024- 01-00001" readonly>
+                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='request-code' value="{{$documents->request_code}}" readonly>
                     </div>
                     <div class="input-group">
                         <label for="requested-date">Requested Date</label>
-                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='requested-date' value="Jan 01, 2024" readonly>
+                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='requested-date' value="{{$documents->date_requested}}" readonly>
                     </div>
                     <div class="input-group">
                         <label for="status">Status</label>
-                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='status' value="Pending" readonly>
+                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='status' value="{{$documents->request_status}}" readonly>
                     </div>
                 </div>
                 <div class="field-group">
                     <div class="input-group-single">
                         <label for="certification">Certification</label>
-                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='certification' value="Certification of Good Moral Character" readonly>
+                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='certification' value="{{$documents->request_type}}" readonly>
                     </div>
                 </div>
                 <div class="field-group">
                     <div class="input-group-single">
                         <label for="remarks">Remarks</label>
-                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='remarks' value="Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah Blah blah" readonly>
+                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='remarks' value="{{$documents->reason}}" readonly>
                     </div>
                 </div>
                 <div class="field-group" style = "margin-bottom: -0.8em;">
@@ -232,7 +232,7 @@
             </div>
         </div>
     </div>
-
+    @endforeach
 
     <script>
         let btn = document.querySelector('#btn');
@@ -242,6 +242,7 @@
             sidebar.classList.toggle('active');
         }
     </script>
+    <script src = "/JS/Employee/DocuRequest.js"></script>
 
 
 </body>

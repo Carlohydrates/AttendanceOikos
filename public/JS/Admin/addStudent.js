@@ -38,4 +38,5 @@ function addStudent (event) {
     .catch(error => {
         console.log('Error adding student/s', error);
     });
+
 }

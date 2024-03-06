@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel = "icon" href = "/assets/Oikos Logo.png">
     <link rel="stylesheet" href = "/CSS/employee.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -205,37 +206,37 @@
                 <div class="form-group">
                     <label for="document-for">Document For</label>
                     <select id="document-for" class="select-input">
-                        <option value="Certificate of Good Moral Character">
+                        <option value="CGMC">
                             Certificate of Good Moral Character
                         </option>
-                        <option value="Certificate of No Leave Without Pay - GSIS">
+                        <option value="CNLWP">
                             Certificate of No Leave Without Pay - GSIS
                         </option>
-                        <option value="Certificate of One and the Same Person">
+                        <option value="COSP">
                             Certification of One and the Same Person
                         </option>
-                        <option value="Service Record">
+                        <option value="SR">
                             Service Record
                         </option>
-                        <option value="Service Record w/ No Leave Without Pay - GSIS">
+                        <option value="SRNLWP">
                             Service Record w/ No Leave Without Pay - GSIS
                         </option>
-                        <option value="Certificate of Contribution - Philhealth (Hospitalization)">
+                        <option value="COCP">
                             Certificate of Contribution - Philhealth (Hospitalized)
                         </option>
-                        <option value="Payslip with Signature">
+                        <option value="PS">
                             Payslip with Signature
                         </option>
-                        <option value="Certificate of Employment">
+                        <option value="COE">
                             Certificate of Employment
                         </option>
-                        <option value="Certificate of Employment with Compensation and Benefits">
+                        <option value="CECB">
                             Certificate of Employment with Compenstaion and Benefit
                         </option>
-                        <option value="Certificate of Employment with Duties and Responsibilities">
+                        <option value="CEDR">
                             Certificate of Employment With Duties and Responisibilities
                         </option>
-                        <option value="Leave">
+                        <option value="L">
                             Leave
                         </option>
                     </select>
@@ -246,7 +247,7 @@
                     <textarea id="reason" cols="30" rows="10"></textarea>
                 </div>
                 <br><br>
-                <button class="btn-submit">Save</button>
+                <button class="btn-submit" onclick = "addDocuRequest(event)">Save</button>
             </form>
         </div>
     </div>
@@ -262,20 +263,26 @@
         </thead>
     </table>
     <table class="transparent-table">
-        <tbody>
-            <tr>
-                <td>CPE-2024- 01-00001</td>
-                <td>Certificate of Good Moral Character</td>
-                <td>Jan 01, 2024</td>
-                <td>
-                    Pending
-                    <a href = "/employees/Document-Request/Approval">
-                        <i class="fa-solid fa-file-text"></i>
-                    </a>
+        <tbody>    
+            @php
+                $id = Auth::guard('users')->user()->id;
+                $docuRequests = \App\Models\DocuRequest::where('employee_id', $id)->get();
+            @endphp
+
+            @foreach ($docuRequests as $docuRequest)
+                <tr>
+                    <td>{{$docuRequest->request_code}}</td>
+                    <td>{{$docuRequest->request_type}}</td>
+                    <td>{{$docuRequest->date_requested}}</td>
+                    <td>
+                        {{$docuRequest->request_status}}
+                        <a href="/employees/Document-Request/Approval/{{$docuRequest->id}}">
+                            <i class="fa-solid fa-file-text" id = "approval-btn"></i>
+                        </a>
                         <i class="fa-solid fa-download"></i>
-                </td>
-            </tr>
-            
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
             <div class="entries-container" style = "font-size: 0.69em; ">
@@ -322,6 +329,7 @@
             textArea.value="";
         }
     </script>
+    <script src = "/JS/Employee/DocuRequest.js"></script>
 
 
 </body>
