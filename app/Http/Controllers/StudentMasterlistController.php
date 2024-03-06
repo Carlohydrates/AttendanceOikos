@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use App\Models\Students;
+use App\Models\User;
 
 class StudentMasterlistController extends Controller
 {
@@ -12,9 +13,13 @@ class StudentMasterlistController extends Controller
         date_default_timezone_set('Asia/Manila');
         $date_enrolled=date('m/d/Y');
         $year=date('Y');
+        $student_id = $year . rand(1000, 9999);
+        $email = $student_id . "@oikostech.edu.ph";
+        $password = $request->input('birthday');
         Students::create([
             'qr'=>$request->input('position').rand(1000,9999),
-            'student_id'=>$year.rand(1000,9999),
+            'student_id'=>$student_id,
+            'email'=>$email,
             'fname'=> $request->input('firstName'),
             'mname'=> $request->input('middleName'),
             'lname'=> $request->input('lastName'),
@@ -36,6 +41,13 @@ class StudentMasterlistController extends Controller
             'telephone_number'=> $request->input('telephoneNumber'),
             'mobile_number'=> $request->input('mobileNumber')
         ]);
+        User::create([
+            'id'=>$student_id,
+            'email'=>$email,
+            'password'=>bcrypt($password),
+            'role'=>3
+        ]);
+
     return response()->json(['success' => true, 'message' => 'Student added successfully']);
     }
 
@@ -101,6 +113,9 @@ class StudentMasterlistController extends Controller
     public function deleteStudent(Request $request){
         Students::where('student_id',$request->input('id'))
         ->delete();
+        User::where('id', $request->input('id'))
+        ->delete();
+
         return response()->json(["success"=>true]);
     }
 }

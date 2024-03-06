@@ -17,7 +17,7 @@ class AAnnouncementsController extends Controller
             ]);
 
             return response()->json(['success' => true], 201);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
             return response()->json(['error' => 'Internal Server Error'], 500);
         }

@@ -9,93 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Student: Home</title>
-    <style> 
-        .card{
-            display:flex;
-            background-color:white;
-            width:100%;
-            height:80vh;
-            border-radius:10px;
-            margin-top: 2em;
-        } 
-        .card .card-sidenav{
-            width:20%;
-            height:100%;
-            border-right:1px solid #dddddd;
-            display:flex;
-            flex-direction:column;
-        }
-        .card .card-content{
-            width:80%;
-        }
-        .student-info,.parent-info{
-            padding:1.3em;
-            display:flex;
-            flex-direction:column;
-            visibility:visible;
-        }
-        .student-info .field-group,.parent-info .field-group{
-            display:flex;
-            margin-top:1em;
-        }
-        .student-info .field-group .input-group,.parent-info .field-group .input-group{
-            width:45%;
-            display:flex;
-            flex-direction:column;
-        }
-        .field-group .input-group input{
-            width:95%;
-            display:flex;
-            flex-direction:column;
-            padding-left:.5em;
-            height:2.3em;
-            font-size:1.1rem;
-            color:gray;
-            border:1px solid #dddddd;
-            border-radius:10px;
-        }
-        .field-group .input-group label{
-            font-size:1.2rem;
-        }
-        .card-sidenav .avatar-container{
-            display:flex;
-            flex-direction:column;
-            padding:1.3em;
-            height:50%;
-            align-items: center;
-        }
-        .avatar-container img{
-            width:70%;
-            height:70%;
-            border-radius:50%;
-        }
-        .avatar-container p{
-            font-size:1.2rem;
-        }
-        .link-student-container,.link-parent-container{
-            font-size:1.2rem;
-            text-align: center;
-            padding:1.3em;
-            cursor:pointer
-        }
-        .selected{
-            background-color:#51558f;
-            color:white;
-        }
-        .hide{
-            visibility:hidden;
-            position:absolute;
-        }
-        @media(max-width:1024px){
-            .card .card-sidenav{
-                width:30%;
-                height:100%;
-                border-right:1px solid #dddddd;
-                display:flex;
-                flex-direction:column;
-            }
-        }
-    </style>
+
 </head>
 <body>
     @include('component.student.sidenav')
@@ -175,37 +89,7 @@
         </div>
     </div>
         <!--Student Information-->
-    <script>
-        // Logout
-        function logout() {
-            Swal.fire({
-                title: "Are you sure you want to logout??",
-                showCancelButton: true,
-                confirmButtonText: "Logout",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '/student/logout';
-                }
-            });
-        }
-
-        let btn = document.querySelector('#btn');
-        let sidebar = document.querySelector('.sidebar');
-
-        btn.onclick = function () {
-            sidebar.classList.toggle('active');
-        }
-        
-        function selectElement(classSelector,showClass){
-            let selectedElement=document.querySelector('.selected');
-            let infoClass=document.querySelector('.hide');
-            let hideClass=document.querySelector(showClass);
-            let targetElement=document.querySelector(classSelector);
-            selectedElement.classList.remove('selected');
-            targetElement.classList.toggle('selected');
-            infoClass.classList.remove('hide');
-            hideClass.classList.toggle('hide');
-        }
-    </script>
+    <script src= "/JS/Student/studentHome.js"> </script>
+    
 </body>
 </html>

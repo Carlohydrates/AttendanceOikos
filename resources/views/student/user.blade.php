@@ -4,88 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "icon" href = "/assets/Oikos Logo.png">
-    <link rel="stylesheet" href = "/CSS/employee.css">
+    <link rel="stylesheet" href = "/CSS/student.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Student: User Info</title>
-    <style>
-        .container{
-            padding-top: 2em;
-            margin-top:1em;
-            display: block;
-            margin: 1em;
-        }
-        .fa-chevron-right{
-            opacity:0;
-        }
-        .fa-chevron-right.show-arrow{
-            opacity:1;
-        }
-        .selector{
-            color:#323468;
-            padding:1.2em;
-            display:flex;
-            justify-content: space-evenly;
-            border-bottom:1px solid #c4c4c4;
-        }
-        .selector:hover{
-            border-left:5px solid #323468;
-            cursor:pointer;
-        }
-        .selector.active-div{
-            border-left:5px solid #323468;
-        }
-        .employee-container {
-            width: 100%;
-            padding:1em;
-            background-color:white;
-            opacity:1;
-            border-radius:5px;
-            transition: opacity 400ms ease-in-out;
-        }
-        .field-group{
-            margin-top:2em;
-            display:flex;
-        }
-        #container-title{
-            font-weight: 400;
-            border-bottom:1px solid #dedede;
-            color:#323468;
-        }
-        .input-group{
-            padding:.8em;
-            width:25%;
-            display:flex;
-            flex-direction:column;
-        }
-        .input-group-special{
-            padding:.8em;
-            width:50%;
-            display:flex;
-            flex-direction:column;
-        }
-        .input-group-single{
-            padding:.8em;
-            width:75%;
-            display:flex;
-            flex-direction:column;
-        }
-        .input-group .input-field,.input-group-special .input-field,.input-group-single .input-field{
-            border:none; 
-            font-size:1rem;
-            border-bottom:1px solid #dedede;
-        }
-        .hidden{
-            position:absolute;
-            opacity: 0;
-            visibility:hidden;
-        }
-        label{
-            margin-top:.5em;
-            color:#c4c4c4;
-        }
-    </style>
+
 </head>
 <body>
     @include('component.student.sidenav')   
@@ -170,15 +94,7 @@
             </div>
 
 
-    <script>
-        let btn = document.querySelector('#btn');
-        let sidebar = document.querySelector('.sidebar');
-
-        btn.onclick = function () {
-            sidebar.classList.toggle('active');
-        }        
-    </script>
-
+    <script src="/JS/Student/studentUser.js"> </script>
 
 </body>
 </html>

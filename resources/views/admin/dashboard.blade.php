@@ -12,6 +12,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Admin: Dashboard</title>
     <style>
+        .fc .fc-daygrid-day-events{
+            padding:0;
+            margin-top:1rem;
+            display:flex;
+            flex-wrap:wrap;
+            justify-content: center;
+        }
+        .fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start{
+            width:12px;
+            height: 12px;
+            border-radius:50%;
+        }
         .container {
             margin-top:1em;
             display: flex;
@@ -178,7 +190,7 @@
                     <div class="left-hand">
                         <i class="fa-solid fa-users" style="background-color:#8c52ff; font-size:1.2rem; padding:1rem; color:white;border-radius:50%"></i>
                         <div class="labels">
-                            10 Employees
+                            {{$employee}} Employees
                             <a href="/admin/Employee_Masterlist">View Details</a>
                         </div>
                     </div>
@@ -187,12 +199,14 @@
                     <div class="left-hand">
                         <i class="fa-solid fa-user" style="background-color:#32ba6b; font-size:1.3rem; padding:1rem; color:white;border-radius:50%"></i>
                         <div class="labels">
-                            20 Students
+                            {{$students}} Students
                             <a href="/admin/Student_Masterlist">View Details</a>
                         </div>
                     </div>
                     <div class="right-hand">
-                        <p id="count">5</p>
+                        @if($pending_students>0)
+                            <p id="count">{{$pending_students}}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="card">
@@ -275,21 +289,13 @@
                         <h2>Upcoming Events</h2>
                     </div>
                     <div class="list">
-                        <div class="data">
-                            <p class="point" style="background-color:#32ba6b"></p>
-                            <p class="date"><b>1/20/24</b></p>
-                            <p class="event">Time Meeting</p>
-                        </div>
-                        <div class="data">
-                            <p class="point" style="background-color:#8c52ff"></p>
-                            <p class="date"><b>2/05/24</b></p>
-                            <p class="event">New Hiring</p>
-                        </div>
-                        <div class="data">
-                            <p class="point" style="background-color:#ff3131"></p>
-                            <p class="date"><b>2/10/24</b></p>
-                            <p class="event">New Managers</p>
-                        </div>
+                        @foreach($calendar as $event)
+                            <div class="data">
+                                <p class="point" style="background-color:{{$event->color}}"></p>
+                                <p class="date"><b>{{$event->calendar_created}}</b></p>
+                                <p class="event">{{$event->title}}</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -300,12 +306,23 @@
     <script>
         var datePicked="";
         var dateCellSelector="";
-        
+        let dates=@json($calendar);
+        let dateMarks=[];
+        dates.forEach(date=>{
+            let markData={
+                start:'',
+                color:''
+            };
+            markData.start=date.calendar_created;
+            markData.color=date.color;
+            dateMarks.push(markData);
+        })
         const calendar = document.querySelector('.calendar');
         let fullCalendar= new FullCalendar.Calendar(calendar,{
             timeZone:'local',
             intialView:'timeGridWeek',
             selectable:true,
+            events:dateMarks,
             dateClick:function (info){
                 console.log(info.date);
             }

@@ -10,72 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <style>
-        .log-body{
-            background-color: #f2f2f2;
-            margin: 1em;
-            padding: 0;
-            display: flex;
-
-        }
-        .log-container {
-            width: 100%;
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .filter-container {
-            background-color: #323468;
-            color: #fff;
-            padding: 15px;
-            text-align: left;
-            display: flex;
-            flex-direction: row-reverse;
-        }
-
-        .filter-container label {
-            margin-right: 10px;
-        }
-
-        .filter-container input[type="date"] {
-            margin-right: 10px;
-        }
-
-        .filter-container button {
-            border-radius: 5px;
-            padding: 3px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        .attendance-type {
-            background-color: #f2f2f2;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .attendance-type th,
-        .attendance-type td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .attendance-type th {
-            background-color: #323468;
-            color: #fff;
-        }
-
-        .attendance-type tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .attendance-type tr:hover {
-            background-color: #f1f1f1;
-        }
-    </style>
+   
     <title>Oikos Student: Time Record</title>
 </head>
 <body>
@@ -128,62 +63,7 @@
             </div>
         </div>
 
-    <script>
-        let btn = document.querySelector('#btn');
-        let sidebar = document.querySelector('.sidebar');
-
-        btn.onclick = function () {
-            sidebar.classList.toggle('active');
-        }
-        function applyFilter() {
-        // Get start and end dates from the input fields
-        var startDate = document.getElementById('startDate').value;
-        var endDate = document.getElementById('endDate').value;
-
-        // Get the table body
-        var tableBody = document.getElementById('logTableBody');
-
-        // Get all rows in the table
-        var rows = tableBody.getElementsByTagName('tr');
-
-        // Loop through each row and hide/show based on the date range
-        for (var i = 0; i < rows.length; i++) {
-            var dateCell = rows[i].getElementsByTagName('td')[2]; // Assuming date is in the third column
-
-            if (dateCell) {
-                var currentDate = dateCell.textContent || dateCell.innerText;
-
-                // Check if the date is within the specified range
-                if (currentDate >= startDate && currentDate <= endDate) {
-                    rows[i].style.display = ''; // Show the row
-                } else {
-                    rows[i].style.display = 'none'; // Hide the row
-                }
-            }
-        }
-    }
-    function clearFilter() {
-        // Get the start and end date input fields
-        var startDateInput = document.getElementById('startDate');
-        var endDateInput = document.getElementById('endDate');
-
-        // Set their values to empty strings to clear the filter
-        startDateInput.value = '';
-        endDateInput.value = '';
-
-        // Get the table body
-        var tableBody = document.getElementById('logTableBody');
-
-        // Get all rows in the table
-        var rows = tableBody.getElementsByTagName('tr');
-
-        // Loop through each row and show it
-        for (var i = 0; i < rows.length; i++) {
-            rows[i].style.display = '';
-        }
-    }
-    </script>
-
+    <script src="/JS/Student/studentTime_record.js"> </script>
 
 </body>
 </html>
