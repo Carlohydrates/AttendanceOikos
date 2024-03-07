@@ -30,9 +30,9 @@ class Calendar extends Model
             'blue',
             'indigo',
             'violet',
-            'peach',
             'pink',
-            'brown'
+            'brown',
+            'gray'
         ];
         $random_num=rand(0,count($colors)-1);
         return $colors[$random_num];

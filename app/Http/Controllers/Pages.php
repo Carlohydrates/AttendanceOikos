@@ -9,6 +9,7 @@ use App\Models\AAnnouncements;
 use App\Models\Students;
 use App\Models\Calendar;
 use App\Models\DocuRequest;
+use App\Models\EmployeeLogs;
 
 class Pages extends Controller
 {
@@ -84,14 +85,17 @@ class Pages extends Controller
     }
     //Admin Navigation
     public function a_dashboard(){
+        date_default_timezone_set('Asia/Manila');
+        $employee_logs=EmployeeLogs::where('date_created',date('Y-d-m'))->get();
         $employee_count=Employees::all();
         $student_count=Students::all();
         $pending_students=Students::where('enroll_status','Pending')->get();
-        $calendar=Calendar::all();
+        $calendar=Calendar::where('email',Auth::guard('users')->user()->email)->get();
         return view("admin.dashboard",[
             "employee"=>count($employee_count),
             "students"=>count($student_count),
             "pending_students"=>count($pending_students),
+            "employee_logs"=>$employee_logs,
             "calendar"=>$calendar
         ]);
     }
