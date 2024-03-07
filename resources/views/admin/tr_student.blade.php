@@ -62,7 +62,7 @@
 		display: flex;
 		justify-items: center;
 		align-items: center;
-
+        margin-left: auto;
         }
 
         .custom-select {
@@ -110,10 +110,13 @@
             background-color:#5C5EB3;
             font-size:1em;
 			font-weight:600;
-            margin-right:20px;
+            width: 5rem;
             color:white;
             border:none;
+        }
 
+        .filter:hover {
+            cursor: pointer;
         }
 	}
 
@@ -228,6 +231,13 @@
             margin-left:5em;
             color:#606360;
         }
+        #applyFilterBtn {
+            margin-right: 1rem;
+        }
+        #applyFilterBtn:hover , #clearFilterBtn:hover {
+            background-color: #ffffff;
+            color: #5C5EB3;
+        }
 
     </style>
 </head>
@@ -249,49 +259,54 @@
 
                         <div class="app-list-options">
 
-                        <div class="custom-select" style="padding:14px;">
-                       
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            <div class="custom-select" style="padding:14px;">
 
-                        <select style="margin-left:5px;" id="gradeFilter">
-                        <option value="">Filter by Grade</option>
-                        <option value="Grade 8">Grade 8</option>
-                        <option value="Grade 9">Grade 9</option>
-                        <option value="Grade 10">Grade 10</option>
+                            <i class="fa fa-caret-down" aria-hidden="true"></i>
+
+                            <select style="margin-left:5px;" id="gradeFilter">
+                            <option value="" disabled selected hidden>Filter by Grade</option>
+                            <option value="Grade 8">Grade 8</option>
+                            <option value="Grade 9">Grade 9</option>
+                            <option value="Grade 10">Grade 10</option>
+                            
+                            
+                            </select>
+
                         
-                        
-                    </select>
+                            </div>
 
-                    
-                        </div>
+                            <div class="custom-select" style="padding:14px;">
 
-                        <div class="custom-select" style="padding:14px;">
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
 
-                        <i class="fa fa-caret-down" aria-hidden="true"></i>
-
-                        <select style="margin-left:5px;" id="sectionFilter">
-                            <option value="">Filter by Section</option>
-                            <option value="A">Section A</option>
-                            <option value="B">Section B</option>
-                            <option value="B">Section C</option>
-                        </select>
-                        </div>
+                                <select style="margin-left:5px;" id="sectionFilter">
+                                    <option value="" disabled selected hidden>Filter by Section</option>
+                                    <option value="A">Section A</option>
+                                    <option value="B">Section B</option>
+                                    <option value="B">Section C</option>
+                                </select>
+                            </div>
 
                         <div class="custom-select">
 
-                        <span style="margin-right:5px;"> Date <br> From </span> <input type="date">
+                            <span style="margin-right:5px;"> Date <br> From </span> <input type="date" id="dateFromFilter">
 
                         </div>
 
                         <div class="custom-select" style="margin-right:20px;">
 
-                        <span style="margin-right:5px;"> Date <br> To </span> <input type="date">
+                            <span style="margin-right:5px;"> Date <br> From </span> <input type="date" id="dateToFilter">
 
                         </div>
 
-                            <button onclick="applyFilter()" class="filter"> Apply Filter </button>
+                            <button onclick="applyFilter()" class="filter" id="applyFilterBtn"> Apply Filter </button>
 							
 						</div>
+
+                        <div>
+                            <button onclick="clearFilter()" class="filter" id="clearFilterBtn"> Clear Filter </button>
+                        </div>
+                    </div>
 
 					</header>
 
@@ -330,65 +345,47 @@
 
     </thead>
     <tbody>
-        <!-- Table rows will be dynamically generated -->
-        <tr>
+        @foreach ($Student_logs as $Student_log)
+            @php
+                $check_in_time = strtotime($Student_log->checked_in);
+                $check_out_time = strtotime($Student_log->checked_out);
 
-        <td>John Dwight</td>    
-        <td>Grade 9</td>    
-        <td>A</td>
-        <td>2024-01-30</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-            
-        </tr>
-        <tr>
+                $morning_check_in = '';
+                $morning_check_out = '';
+                $afternoon_check_in = '';
+                $afternoon_check_out = '';
+                $evening_check_in = '';
+                $evening_check_out = '';
 
-        <td>Jane Doe</td>
-        <td>Grade 9</td>
-        <td>B</td>
-        <td>2024-01-30</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-            
-        </tr>
-        <tr>
+                if ($check_in_time >= strtotime('06:00:00') && $check_in_time < strtotime('12:00:00')) {
+                    $morning_check_in = date('H:i:s', $check_in_time);
+                } elseif ($check_in_time >= strtotime('12:00:00') && $check_in_time < strtotime('18:00:00')) {
+                    $afternoon_check_in = date('H:i:s', $check_in_time);
+                } else {
+                    $evening_check_in = date('H:i:s', $check_in_time);
+                }
 
-        <td>Alice Wilde</td>
-        <td>Grade 10</td>
-        <td>A</td>
-        <td>2024-01-30</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-            
-        </tr>
-        <tr>
-
-        <td>Bob Newby</td>
-        <td>Grade 10</td>
-        <td>B</td>
-        <td>2024-01-30</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        
-            
-        </tr>
-        <!-- Add more rows as needed -->
+                if ($check_out_time >= strtotime('06:00:00') && $check_out_time < strtotime('12:00:00')) {
+                    $morning_check_out = date('H:i:s', $check_out_time);
+                } elseif ($check_out_time >= strtotime('12:00:00') && $check_out_time < strtotime('18:00:00')) {
+                    $afternoon_check_out = date('H:i:s', $check_out_time);
+                } else {
+                    $evening_check_out = date('H:i:s', $check_out_time);
+                }
+            @endphp
+            <tr>
+                <td>{{$Student_log->name}}</td>
+                <td>{{$Student_log->grade}}</td>
+                <td>{{$Student_log->section}}</td>
+                <td>{{$Student_log->date_created}}</td>
+                <td>{{$morning_check_in}}</td>
+                <td>{{$morning_check_out}}</td>
+                <td>{{$afternoon_check_in}}</td>
+                <td>{{$afternoon_check_out}}</td>
+                <td>{{$evening_check_in}}</td>
+                <td>{{$evening_check_out}}</td>
+            </tr>
+        @endforeach
     </tbody>
 </table>
 
@@ -450,6 +447,16 @@
                 row.style.display = "none";
             }
         }
+    }
+
+    function clearFilter() {
+        // Reset the filters to default values
+        document.getElementById("gradeFilter").selectedIndex = 0;
+        document.getElementById("sectionFilter").selectedIndex = 0;
+        document.getElementById("nameFilter").value = "";
+        document.getElementById("dateFromFilter").value = "";
+        document.getElementById("dateToFilter").value = "";
+        applyFilter();
     }
 </script>
 
