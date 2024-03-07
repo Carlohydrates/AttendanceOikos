@@ -254,15 +254,15 @@
                     <tbody>
                         @foreach($employee_logs as $logs)
                             <tr>
-                                <td>John Doe</td>
+                                <td>{{$logs->name}}</td>
                                 <td>{{$logs->role}}</td>
                                 <td>{{$logs->date_created}}</td>
                                 <td>{{((int)substr($logs->checked_in,0,2)<12)?$logs->checked_in." AM":''}}</td>
-                                <td>{{((int)substr($logs->checked_out,0,2)<12)?$logs->checked_out." AM":''}}</td>
-                                <td>{{((int)substr($logs->checked_in,0,2)>12)?$logs->checked_in." PM":''}}</td>
-                                <td>{{((int)substr($logs->checked_out,0,2)>12)?$logs->checked_out." PM":''}}</td>
-                                <td>{{((int)substr($logs->checked_in,0,2)>18)?$logs->checked_in." PM":''}}</td>
-                                <td>{{((int)substr($logs->checked_out,0,2)>18)?$logs->checked_out." PM":''}}</td>
+                                <td>{{((int)substr($logs->checked_out,0,2)<12&&$logs->checked_out!==null)?$logs->checked_out." AM":''}}</td>
+                                <td>{{((int)substr($logs->checked_in,0,2)>=12)?$logs->checked_in." PM":''}}</td>
+                                <td>{{((int)substr($logs->checked_out,0,2)>=12&&$logs->checked_out!==null)?$logs->checked_out." PM":''}}</td>
+                                <td>{{((int)substr($logs->checked_in,0,2)>=18)?$logs->checked_in." PM":''}}</td>
+                                <td>{{((int)substr($logs->checked_out,0,2)>=18&&$logs->checked_out!==null)?$logs->checked_out." PM":''}}</td>
                             </tr>
                         @endforeach
                     </tbody>

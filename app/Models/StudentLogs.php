@@ -10,10 +10,10 @@ class StudentLogs extends Model
     use HasFactory;
     protected $fillable=[
         'student_id',
+        'name',
         'grade',
         'section',
         'checked_in',
-        'checked_out',
         'date_created'
     ];
     public $timestamps=false;

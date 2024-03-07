@@ -24,7 +24,9 @@ class Pages extends Controller
         return view("reset_password");
     }
 
-
+    public function scanner(){
+        return view("qr");
+    }
     //Student navigation
 
     public function s_timerecord () {

@@ -10,10 +10,10 @@ class EmployeeLogs extends Model
     use HasFactory;
     protected $fillable=[
         'employee_id',
+        'name',
         'role',
         'checked_in',
-        'checked_out',
-        'date_created',
+        'date_created'
     ];
     public $timestamps=false;
 }
