@@ -621,7 +621,15 @@ body {
     opacity: 100%;
 }
 
+#docu-req-btn {
+    border: none;
+    opacity: 50%;
+}
 
+#docu-req-btn:hover {
+    cursor: pointer;
+    opacity: 100%;
+}
 
 
 

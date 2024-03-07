@@ -32,6 +32,6 @@ class DocuRequestController extends Controller
     public function retrieveDocuData ($docu_id) {
         $docudata = DocuRequest::where('id', $docu_id)
                             ->get();
-        return response()->json(["success"=>true,'user_data'=> $docu_id]);
+        return response()->json(["success"=>true,'user_data'=> $docudata]);
     }
 }
