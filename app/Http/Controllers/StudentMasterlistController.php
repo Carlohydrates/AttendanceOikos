@@ -83,7 +83,6 @@ class StudentMasterlistController extends Controller
     public function updateStatus(Request $request)
     {
         try {
-            $email = Auth::guard('users')->user()->email;
             Students::where("student_id", $request->input('id'))->update([
                 "enroll_status" => $request->input('enroll_status'),
             ]);
@@ -96,7 +95,6 @@ class StudentMasterlistController extends Controller
 
     public function updateGradeAndSection (Request $request) {
         try {
-            $email = Auth::guard('users')->user()->email;
             Students::where('student_id', $request->input('id'))->update([
                 'level' => $request->input('level'),
                 'section' => $request->input('section'),
