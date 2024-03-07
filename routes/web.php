@@ -41,7 +41,7 @@ Route::post('/submit-code',[ForgotPassword::class,'verifyCode']);
 //Routes for admins
 Route::get('/admin/Dashboard',[Pages::class,'a_dashboard']);
 Route::get('/admin/Announcement',[AAnnouncementsController::class,'a_announcement']);
-Route::get('/admin/Announcement/View/', [AAnnouncementsController::class, 'a_view_announcement']);
+Route::get('/admin/Announcement/View/{id}', [AAnnouncementsController::class, 'a_view_announcement']);
 Route::get('/admin/Document_Request',[Pages::class,'a_Document_Request']);
 Route::get('/admin/Calendar',[Pages::class,'a_calendar']);
 Route::get('/admin/Time_Record',[Pages::class,'a_time_record']);
