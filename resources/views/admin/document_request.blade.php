@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel = "icon" href = "/assets/Oikos Logo.png">
     <link rel="stylesheet" href = "/CSS/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -73,12 +74,6 @@
         }
         .document-type tr:hover {
             background-color: #e8e6e6;
-        }
-        .docreq-container i {
-            font-size: 1.2em;
-            float: right;
-            margin-right: 2em;
-            cursor: pointer;
         }
         .far{
             transform:translateX(1em);
@@ -198,51 +193,6 @@
     @include('component.admin.sidenav')
     <div class="modal-mask hidden">
         <div class="form-container">
-            <div class="form-header">
-                <h2>Requested Document</h2>
-                <i class="far fa-times-circle" style="font-size:1.3rem;cursor:pointer;"></i>
-            </div>
-            <form id="form-content" style = "margin-top: 10px;">
-                <div class="form-group" style = "flex-direction: row;">
-                    <div class="input-group">
-                        <input type="text" class='input-field' id='requestor-name' value="WATSON, AMELIA" readonly>
-                        <label for="requestor-name">Requestor Name</label>
-                    </div>
-                    <div class="input-group">
-                        <input type="text" class='input-field' id='request-code' value="CPE-2024- 01-00001" readonly>
-                        <label for="request-code">Request Code</label>
-                    </div>
-                    
-                    <div class="input-group">
-                        <input type="text" class='input-field' id='date-requested' value="Jan 01, 2024" readonly>
-                        <label for="date-requested">Date Requested</label>
-                    </div>
-                    
-                </div>
-                <div class="form-group">
-                    <div class="input-group-special">
-                        <input type="text" class='input-field' id='request-type' value="Certificate of Good Moral Character" readonly>
-                        <label for="request-type">Request Type</label>
-                    </div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="reason">Reason</label>
-                    <textarea id="reason" cols="30" rows="10" readonly></textarea>
-                </div>
-                <br>
-                <div class="form-group-file">
-                    <div class="input-group-file">
-                        <label for="attachment">Attachment</label>
-                        <input type="file" id="attachment" name="attachment">
-                    </div>
-                </div>
-                <br><br>
-                <div class="submit-group">
-                    <button class="btn-submit">Approve</button>
-                    <button class="btn-reject">Reject</button>
-                </div>
-            </form>
         </div>
     </div>
 
@@ -270,40 +220,32 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $docuRequests = \App\Models\DocuRequest::all();
+                        @endphp
+
+                        @foreach ($docuRequests as $docuRequest)
                         <tr>
-                            <td>CPE-2024- 01-00001</td>
-                            <td>Amelia Watson</td>
-                            <td>Jan 01, 2024</td>
-                            <td>Certificate of Good Moral Character</td>
-                            <td>Pending</td>
+                            <td>{{$docuRequest->request_code}}</td>
+                            <td>{{$docuRequest->requestor_name}}</td>
+                            <td>{{$docuRequest->date_requested}}</td>
+                            <td>{{$docuRequest->request_type}}</td>
+                            <td>{{$docuRequest->request_status}}</td>
                             <td>
-                                <i class="fas fa-edit"></i>
+                                <button class = "docu-req-btn" id = "docu-req-btn" onclick = "retrieveDocuData({{$docuRequest->id}})">
+                                    <i class="fas fa-edit"></i>
+                                </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-
-    <script>
-        let toggleModal=document.querySelector('.fas');
-        let showModal=document.querySelector('.modal-mask');
-        let closeModal=document.querySelector('.far');
-        
-        toggleModal.onclick=()=>{
-            showModal.classList.remove('hidden');
-        }
-        closeModal.onclick=()=>{
-            showModal.classList.toggle('hidden');
-        }
-        btn.onclick = function () {
-            sidebar.classList.toggle('active');
-        }
-
-    </script>
-    <script src="/JS/navevent.js"></script>      
+    <script src="/JS/navevent.js"></script>
+    <script src = "/JS/Employee/DocuRequest.js"></script>      
     
 </body>
 </html>

@@ -360,134 +360,151 @@
             .then(data=>{
                 if(data.success) {
                     var user_instance = data.user_data;
-                    showActionModal.classList.remove('hidden');
-                    console.log(user_instance[0]);
-                    let roleButton = document.querySelector('.role-btn');
-                    let infoButton = document.querySelector('.info-btn');
                     let emlSelection = document.querySelector('.eml-selection');
                     let statusButton = document.querySelector('.status-btn');
-                    fetchStudentName(student_id);
+                    console.log(user_instance[0]);
 
+                    showActionModal.classList.remove('hidden');
+                    showStudentData(user_instance[0]);
 
                     statusButton.addEventListener('click', function() {
                         emlSelection.innerHTML = `
                             <h2>Edit Status</h2>
                             <label for="select-status" >Status</label>
                             <select id="select-status" class="selection">
-                                
-                                <option value="Pending" ${user_instance[0].enroll_status === 'Pending' ? 'selected' : ''}> Pending </option>
-                                <option value="Enrolled" ${user_instance[0].enroll_status === 'Enrolled' ? 'selected' : ''}> Enrolled </option>
+                                <option value="Pending" ${user_instance.enroll_status === 'Pending' ? 'selected' : ''}> Pending </option>
+                                <option value="Enrolled" ${user_instance.enroll_status === 'Enrolled' ? 'selected' : ''}> Enrolled </option>
                             </select>
-                            <button class="btn-save" onclick= "updateStatus(event,${user_instance[0].student_id})">Save</button>
-                        `;})
-
-                        roleButton.addEventListener('click', function() {
-                            emlSelection.innerHTML = `
-                            <h2>Edit Grade Level & Section</h2>
-                            <label for="select-grade">Grade Level</label>
-                            <select id="select-grade" value = "${user_instance[0].level}" class="selection" onchange = "getSections('select-grade', 'select-section')">
-                                
-                            </select>
-            
-                            <label for="select-section">Section</label>
-                            <select id="select-section" class="selection">
-                                <option value = "${user_instance[0].section}">${user_instance[0].section}</option>
-                            </select>
-                            
-                            <button class="btn-save" onclick = "updateGradeAndSection(event,${user_instance[0].student_id})">Save</button>
-                        `;  getGradeLevels('select-grade', user_instance[0].level);
-                    })
-                        
-                        infoButton.addEventListener('click', function() {
-                            emlSelection.innerHTML = `
-                            <form>
-                                <h2>Edit Information</h2>
-                                <div class="input-row">
-                                    <div class="input-column">
-                                        <div class="input-group">
-                                            <label for="first-name">First Name</label>
-                                            <input type="text" class='input-field' id='firstName' value = "${user_instance[0].fname}" required>
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="middle-name">Middle Name</label>
-                                            <input type="text" class='input-field' id='middleName' value = "${user_instance[0].mname}" required>
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="last-name">Last Name</label>
-                                            <input type="text" class='input-field' id='lastName' value = "${user_instance[0].lname}" required>
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="extension">Suffix</label>
-                                            <input type="text" class='input-field' id='extendName' value = "${user_instance[0].extension}">
-                                        </div>
-                                    </div>
-                                    <div class="input-column">
-                                        <div class="input-group">
-                                            <label for="sex">Sex</label>
-                                            <select id="studSex" class="select-input" required>
-                                                <option value="male" ${user_instance[0].sex === 'male' ? 'selected' : ''}>Male</option>
-                                                <option value="female" ${user_instance[0].sex === 'female' ? 'selected' : ''}>Female</option>
-                                                <option value="other" ${user_instance[0].sex === 'other' ? 'selected' : ''}>Other</option>
-                                            </select>
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="telephone-number">Telephone Number</label>
-                                            <input type="text" class='input-field' id='telNumber' value = "${user_instance[0].telephone_number}" required>
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="mobile-number">Mobile Number</label>
-                                            <input type="text" class='input-field' id='mobNumber' value = "${user_instance[0].mobile_number}" required>
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="nationality">Nationality</label>
-                                            <input type="text" class='input-field' id='studNationality' value = "${user_instance[0].nationality}" required>
-                                        </div>
-                                    </div>
-                                    <div class="input-column">
-                                        <div class="input-group">
-                                            <label for="birthday">Birthdate</label>
-                                            <input type="date" id='studBirthday' value = "${user_instance[0].bday}" required>
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="age">Age</label>
-                                            <input type="number" id='studAge' name="age" value = "${user_instance[0].age}" required min = "0">
-                                        </div>
-                                        <div class="input-group">
-                                            <label for="fetcher">Fetcher</label>
-                                            <input type="text" class='input-field' id='studFetch' value = "${user_instance[0].fetcher}" required>
-                                        </div>
-                                            <div class="input-group">
-                                                <label for="address">Address</label>
-                                                <input type="text" class='input-field' id='studAddress' value = "${user_instance[0].address}" required>
-                                            </div>
-                                    </div>
-                                    <div class="input-column">
-                                            <div class="input-group">
-                                                <label for="city">City</label>
-                                                <input type="text" class='input-field' id='studCity' value = "${user_instance[0].city}" required>
-                                            </div>
-                                            <div class="input-group">
-                                                <label for="region">Region</label>
-                                                <input type="text" class='input-field' id='studRegion' value = "${user_instance[0].region}" required>
-                                            </div>
-                                            <div class="input-group">
-                                                <label for="postal-code">Postal Code</label>
-                                                <input type="text" class='input-field' id='postalCode' value = "${user_instance[0].postal_code}" required>
-                                            </div>
-                                            <div class="input-group">
-                                                <label for="country">Country</label>
-                                                <input type="text" class='input-field' id='studCountry' value = "${user_instance[0].country}" required>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <button class="btn-save" onclick="updateStudent(event,${user_instance[0].student_id})">Save Edit</button>
-                            </form>   
+                            <button class="btn-save" onclick= "updateStatus(event,${user_instance.student_id})">Save</button>
                         `;})
                     }
                 })
             .catch(error =>{
                 console.log('Error! Employee data did not submit.',error);
             })
+        }
+
+        function showStudentData (user_instance) {
+            let roleButton = document.querySelector('.role-btn');
+            let infoButton = document.querySelector('.info-btn');
+            let emlSelection = document.querySelector('.eml-selection');
+            let statusButton = document.querySelector('.status-btn');
+            fetchStudentName(student_id);
+
+            emlSelection.innerHTML = `
+                <h2>Edit Status</h2>
+                <label for="select-status" >Status</label>
+                <select id="select-status" class="selection">
+                    <option value="Pending" ${user_instance.enroll_status === 'Pending' ? 'selected' : ''}> Pending </option>
+                    <option value="Enrolled" ${user_instance.enroll_status === 'Enrolled' ? 'selected' : ''}> Enrolled </option>
+                </select>
+                <button class="btn-save" onclick= "updateStatus(event,${user_instance.student_id})">Save</button>`;
+
+                roleButton.addEventListener('click', function() {
+                    emlSelection.innerHTML = `
+                    <h2>Edit Grade Level & Section</h2>
+                    <label for="select-grade">Grade Level</label>
+                    <select id="select-grade" value = "${user_instance.level}" class="selection" onchange = "getSections('select-grade', 'select-section')">      
+                    </select>
+                    <label for="select-section">Section</label>
+                    <select id="select-section" class="selection">
+                        <option value = "${user_instance.section}">${user_instance.section}</option>
+                    </select>
+                            
+                    <button class="btn-save" onclick = "updateGradeAndSection(event,${user_instance.student_id})">Save</button>
+                `;  getGradeLevels('select-grade', user_instance.level);
+                })
+                        
+                infoButton.addEventListener('click', function() {
+                    emlSelection.innerHTML = `
+                    <form>
+                        <h2>Edit Information</h2>
+                        <div class="input-row">
+                            <div class="input-column">
+                                <div class="input-group">
+                                    <label for="first-name">First Name</label>
+                                    <input type="text" class='input-field' id='firstName' value = "${user_instance.fname}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="middle-name">Middle Name</label>
+                                    <input type="text" class='input-field' id='middleName' value = "${user_instance.mname}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="last-name">Last Name</label>
+                                    <input type="text" class='input-field' id='lastName' value = "${user_instance.lname}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="extension">Suffix</label>
+                                    <input type="text" class='input-field' id='extendName' value = "${user_instance.extension}">
+                                </div>
+                            </div>
+                            <div class="input-column">
+                                <div class="input-group">
+                                    <label for="sex">Sex</label>
+                                    <select id="studSex" class="select-input" required>
+                                        <option value="male" ${user_instance.sex === 'male' ? 'selected' : ''}>Male</option>
+                                        <option value="female" ${user_instance.sex === 'female' ? 'selected' : ''}>Female</option>
+                                        <option value="other" ${user_instance.sex === 'other' ? 'selected' : ''}>Other</option>
+                                    </select>
+                                </div>
+                                <div class="input-group">
+                                    <label for="telephone-number">Telephone Number</label>
+                                    <input type="text" class='input-field' id='telNumber' value = "${user_instance.telephone_number}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="mobile-number">Mobile Number</label>
+                                    <input type="text" class='input-field' id='mobNumber' value = "${user_instance.mobile_number}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="nationality">Nationality</label>
+                                    <input type="text" class='input-field' id='studNationality' value = "${user_instance.nationality}" required>
+                                </div>
+                            </div>
+                            <div class="input-column">
+                                <div class="input-group">
+                                    <label for="birthday">Birthdate</label>
+                                    <input type="date" id='studBirthday' value = "${user_instance.bday}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="age">Age</label>
+                                    <input type="number" id='studAge' name="age" value = "${user_instance.age}" required min = "0">
+                                </div>
+                                <div class="input-group">
+                                    <label for="fetcher">Fetcher</label>
+                                    <input type="text" class='input-field' id='studFetch' value = "${user_instance.fetcher}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class='input-field' id='studAddress' value = "${user_instance.address}" required>
+                                </div>
+                            </div>
+                            <div class="input-column">
+                                <div class="input-group">
+                                    <label for="city">City</label>
+                                    <input type="text" class='input-field' id='studCity' value = "${user_instance.city}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="region">Region</label>
+                                    <input type="text" class='input-field' id='studRegion' value = "${user_instance.region}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="postal-code">Postal Code</label>
+                                    <input type="text" class='input-field' id='postalCode' value = "${user_instance.postal_code}" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="country">Country</label>
+                                    <input type="text" class='input-field' id='studCountry' value = "${user_instance.country}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn-save" onclick="updateStudent(event,${user_instance.student_id})">Save Edit</button>
+                    </form>`;
+                    
+                    let newCloseModal = document.querySelector('.far');
+                    newCloseModal.addEventListener('click', function() {
+                        showModal.classList.add('hidden');
+                    });
+                })
         }
 
         function fetchStudentName(studentId) {

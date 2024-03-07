@@ -302,17 +302,7 @@
                   </div>
             </div>
             <div class="eml-selection">
-                <h2>Edit Status</h2>
-                <label for="select-status">Status</label>
-                <select id="select-status" class="selection">
-                    <option value="Enrolled">
-                        Enrolled
-                    </option>
-                    <option value="Pending">
-                        Pending
-                    </option>
-                </select>
-                <button class="btn-save">Save</button>
+                
             </div>
             
             <div class="eml-modal-close">
@@ -325,11 +315,5 @@
     <script src = "/JS/Admin/addStudent.js"></script>
     <script src="/JS/Admin/addGradeSection.js"></script>
     <script src="/JS/navevent.js"></script>
-    <script>
-        let newCloseModal = document.querySelector('.far');
-        newCloseModal.addEventListener('click', function() {
-            showModal.classList.add('hidden');
-        });
-    </script>
 </body>
 </html>
