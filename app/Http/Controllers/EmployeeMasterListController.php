@@ -51,13 +51,9 @@ class EmployeeMasterListController extends Controller
         $employee = Employees::where('employee_id',$request -> input('user_id'))
         -> get();
         return response()->json(["success"=>true,'user_data'=> $employee]);
-        
-        
-       
     }
 
     public function update(Request $request){
-        $email = Auth::guard('users')->user()->email;
         Employees::where("employee_id",$request->input('id')) ->update([ 
             "fname" =>$request->input('firstName'),
             "email" =>$request-> input('email'),
@@ -80,16 +76,13 @@ class EmployeeMasterListController extends Controller
         }   
 
         public function status(Request $request){
-            $email = Auth::guard('users')->user()->email;
             Employees::where("employee_id",$request->input('id')) ->update([ 
-                "status" =>$request->input('select-status'),
-               
+                "status" =>$request->input('select-status'), 
             ]);
             return response()->json(["success"=>true]);
-            }   
+            }
 
         public function role(Request $request){
-            $email = Auth::guard('users')->user()->email;
             Employees::where("employee_id",$request->input('id')) ->update([ 
                 "position" =>$request->input('select-role'),
                    
