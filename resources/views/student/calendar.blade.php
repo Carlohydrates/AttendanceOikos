@@ -172,7 +172,7 @@
 </head>
 <body>
     
-    @include('componentstudent.sidenav')
+    @include('component.student.sidenav')
     <div class="main-content">
         <div class="left-side">
             <h1>Calendar</h1>
