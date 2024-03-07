@@ -217,12 +217,10 @@
                 .then(data => {
                     // Handle the response as needed
                     console.log('Announcement added:', data);
-        
                     // Close the popup
                     overlay.style.display = 'none';
                     customPopup.style.display = 'none';
-        
-                     window.location.reload();
+                    window.location.reload();
                 })
                 .catch(error => console.error('Error:', error));
             });

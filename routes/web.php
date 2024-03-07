@@ -6,10 +6,9 @@ use App\Http\Controllers\GradeLevelandSectionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudentMasterlistController;
 use App\Http\Controllers\EmployeeMasterListController;
-
+use App\Http\Controllers\CheckInOutController;
 use App\Http\Controllers\AAnnouncementsController;
 use App\Http\Controllers\CalendarController;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages;
 
@@ -105,3 +104,5 @@ Route::get('/employees/Home',[Pages::class,'e_home']);
 Route::get('/employees/Announcement/View', [Pages::class,'e_view_announcement']);
 Route::get('/employees/logout',[LoginController::class,'logoutEmployee']);
 
+Route::get('/scanner',[Pages::class,'scanner']);
+Route::get('/check-in/{id}',[CheckInOutController::class,'checkIn']);

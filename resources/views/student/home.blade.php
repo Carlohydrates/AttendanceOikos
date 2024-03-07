@@ -20,8 +20,10 @@
                 <div class="card-sidenav">
                     <div class="avatar-container">
                         <img src="/assets/pfp.jpg" alt="Doog">
-                        <p>Beatrice Field</p>
-                        <p>202010106</p>
+                        @foreach($student_info as $info)
+                            <p>{{$info->fname." ".$info->lname}}</p>
+                            <p>{{$info->student_id}}</p>
+                        @endforeach
                     </div>
                     <div class="link-student-container selected" onclick="selectElement('.link-student-container','.parent-info')">
                         Student Information 
@@ -34,34 +36,36 @@
                     <!-- Student info content -->
                     <div class="student-info">
                         <h1>Student Information</h1>
-                        <div class="field-group">
-                            <div class="input-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" value="Beatrice Field" readonly>
+                        @foreach($student_info as $info)
+                            <div class="field-group">
+                                <div class="input-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" value="{{$info->fname." ".$info->lname}}" readonly>
+                                </div>
+                                <div class="input-group">
+                                    <label for="school-year">School Year</label>
+                                    <input type="text" id="school-year" value="{{$info->level}}" readonly>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <label for="school-year">School Year</label>
-                                <input type="text" id="school-year" value="1st year high" readonly>
+                            <br>
+                            <div class="field-group">
+                                <div class="input-group">
+                                    <label for="status">Enrollment Status</label>
+                                    <input type="text" id="status" value="{{$info->enroll_status}}" readonly>
+                                </div>
+                                <div class="input-group">
+                                    <label for="fetcher">Fetcher</label>
+                                    <input type="text" id="fetcher" value="{{$info->fetcher}}" readonly>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="field-group">
-                            <div class="input-group">
-                                <label for="status">Enrollment Status</label>
-                                <input type="text" id="status" value="Enrolled" readonly>
+                            <br>
+                            <div class="field-group">
+                                <div class="input-group">
+                                    <label for="status">Phone number</label>
+                                    <input type="text" id="status" value="{{$info->mobile_number}}" readonly>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <label for="fetcher">Fetcher</label>
-                                <input type="text" id="fetcher" value="School Bus" readonly>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="field-group">
-                            <div class="input-group">
-                                <label for="status">Phone number</label>
-                                <input type="text" id="status" value="09121234569" readonly>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <!-- Parent information content-->
                     <div class="parent-info hide">
