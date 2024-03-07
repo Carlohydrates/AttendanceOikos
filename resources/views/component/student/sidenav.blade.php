@@ -9,7 +9,7 @@
             <i class="fa-solid fa-user-secret"></i>
             <span>Oikos</span>
         </div>
-        <i class="fa-solid fa-bars" id = "btn"></i>
+        <i class="fa-solid fa-bars btn-nav" id = "btn"></i>
     </div>
     <div class="user">
         <img src ="" alt="secret-user" class = "user-img">

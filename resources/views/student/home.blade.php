@@ -9,93 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Student: Home</title>
-    <style> 
-        .card{
-            display:flex;
-            background-color:white;
-            width:100%;
-            height:80vh;
-            border-radius:10px;
-            margin-top: 2em;
-        } 
-        .card .card-sidenav{
-            width:20%;
-            height:100%;
-            border-right:1px solid #dddddd;
-            display:flex;
-            flex-direction:column;
-        }
-        .card .card-content{
-            width:80%;
-        }
-        .student-info,.parent-info{
-            padding:1.3em;
-            display:flex;
-            flex-direction:column;
-            visibility:visible;
-        }
-        .student-info .field-group,.parent-info .field-group{
-            display:flex;
-            margin-top:1em;
-        }
-        .student-info .field-group .input-group,.parent-info .field-group .input-group{
-            width:45%;
-            display:flex;
-            flex-direction:column;
-        }
-        .field-group .input-group input{
-            width:95%;
-            display:flex;
-            flex-direction:column;
-            padding-left:.5em;
-            height:2.3em;
-            font-size:1.1rem;
-            color:gray;
-            border:1px solid #dddddd;
-            border-radius:10px;
-        }
-        .field-group .input-group label{
-            font-size:1.2rem;
-        }
-        .card-sidenav .avatar-container{
-            display:flex;
-            flex-direction:column;
-            padding:1.3em;
-            height:50%;
-            align-items: center;
-        }
-        .avatar-container img{
-            width:70%;
-            height:70%;
-            border-radius:50%;
-        }
-        .avatar-container p{
-            font-size:1.2rem;
-        }
-        .link-student-container,.link-parent-container{
-            font-size:1.2rem;
-            text-align: center;
-            padding:1.3em;
-            cursor:pointer
-        }
-        .selected{
-            background-color:#51558f;
-            color:white;
-        }
-        .hide{
-            visibility:hidden;
-            position:absolute;
-        }
-        @media(max-width:1024px){
-            .card .card-sidenav{
-                width:30%;
-                height:100%;
-                border-right:1px solid #dddddd;
-                display:flex;
-                flex-direction:column;
-            }
-        }
-    </style>
+
 </head>
 <body>
     @include('component.student.sidenav')
@@ -106,8 +20,10 @@
                 <div class="card-sidenav">
                     <div class="avatar-container">
                         <img src="/assets/pfp.jpg" alt="Doog">
-                        <p>Beatrice Field</p>
-                        <p>202010106</p>
+                        @foreach($student_info as $info)
+                            <p>{{$info->fname." ".$info->lname}}</p>
+                            <p>{{$info->student_id}}</p>
+                        @endforeach
                     </div>
                     <div class="link-student-container selected" onclick="selectElement('.link-student-container','.parent-info')">
                         Student Information 
@@ -120,34 +36,36 @@
                     <!-- Student info content -->
                     <div class="student-info">
                         <h1>Student Information</h1>
-                        <div class="field-group">
-                            <div class="input-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" value="Beatrice Field" readonly>
+                        @foreach($student_info as $info)
+                            <div class="field-group">
+                                <div class="input-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" value="{{$info->fname." ".$info->lname}}" readonly>
+                                </div>
+                                <div class="input-group">
+                                    <label for="school-year">School Year</label>
+                                    <input type="text" id="school-year" value="{{$info->level}}" readonly>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <label for="school-year">School Year</label>
-                                <input type="text" id="school-year" value="1st year high" readonly>
+                            <br>
+                            <div class="field-group">
+                                <div class="input-group">
+                                    <label for="status">Enrollment Status</label>
+                                    <input type="text" id="status" value="{{$info->enroll_status}}" readonly>
+                                </div>
+                                <div class="input-group">
+                                    <label for="fetcher">Fetcher</label>
+                                    <input type="text" id="fetcher" value="{{$info->fetcher}}" readonly>
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="field-group">
-                            <div class="input-group">
-                                <label for="status">Enrollment Status</label>
-                                <input type="text" id="status" value="Enrolled" readonly>
+                            <br>
+                            <div class="field-group">
+                                <div class="input-group">
+                                    <label for="status">Phone number</label>
+                                    <input type="text" id="status" value="{{$info->mobile_number}}" readonly>
+                                </div>
                             </div>
-                            <div class="input-group">
-                                <label for="fetcher">Fetcher</label>
-                                <input type="text" id="fetcher" value="School Bus" readonly>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="field-group">
-                            <div class="input-group">
-                                <label for="status">Phone number</label>
-                                <input type="text" id="status" value="09121234569" readonly>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <!-- Parent information content-->
                     <div class="parent-info hide">
@@ -175,37 +93,7 @@
         </div>
     </div>
         <!--Student Information-->
-    <script>
-        // Logout
-        function logout() {
-            Swal.fire({
-                title: "Are you sure you want to logout??",
-                showCancelButton: true,
-                confirmButtonText: "Logout",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '/student/logout';
-                }
-            });
-        }
-
-        let btn = document.querySelector('#btn');
-        let sidebar = document.querySelector('.sidebar');
-
-        btn.onclick = function () {
-            sidebar.classList.toggle('active');
-        }
-        
-        function selectElement(classSelector,showClass){
-            let selectedElement=document.querySelector('.selected');
-            let infoClass=document.querySelector('.hide');
-            let hideClass=document.querySelector(showClass);
-            let targetElement=document.querySelector(classSelector);
-            selectedElement.classList.remove('selected');
-            targetElement.classList.toggle('selected');
-            infoClass.classList.remove('hide');
-            hideClass.classList.toggle('hide');
-        }
-    </script>
+    <script src= "/JS/Student/studentHome.js"> </script>
+    
 </body>
 </html>

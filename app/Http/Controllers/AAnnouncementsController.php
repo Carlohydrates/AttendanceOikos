@@ -17,7 +17,7 @@ class AAnnouncementsController extends Controller
             ]);
 
             return response()->json(['success' => true], 201);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
@@ -29,8 +29,13 @@ class AAnnouncementsController extends Controller
         return view('admin.announcement')->with('announcements', $announcements);
     }
 
-    public function a_view_announcement() {
-        $announcements = AAnnouncements::all();
-        return view('admin.view-announcement', ['announcements' => $announcements]);
+    public function a_view_announcement($id)
+    {
+        try {
+            $announcement = AAnnouncements::findOrFail($id);
+            return view('admin.view-announcement', compact('announcement'));
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Announcement not found'], 404);
+        }
     }
 }

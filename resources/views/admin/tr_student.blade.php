@@ -285,7 +285,7 @@
 
                         <div class="custom-select" style="margin-right:20px;">
 
-                        <span style="margin-right:5px;"> Date <br> From </span> <input type="date">
+                        <span style="margin-right:5px;"> Date <br> To </span> <input type="date">
 
                         </div>
 

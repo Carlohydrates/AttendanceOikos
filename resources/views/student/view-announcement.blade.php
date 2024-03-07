@@ -11,61 +11,7 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Student: Announcement</title>
-    <style>
-        .ann-header,
-        .ann-title {
-            display: inline;
-        }
-        .header-container{
-            background-color: #323468;
-            display: flex;
-            flex-direction: column;
-            color: white;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            padding: 10px;
-        }
-        .ann-container{
-            display: flex;
-            flex-direction: column;
-            width: 95%;
-            margin: 25px;
-            background-color: white;
-        }
-        .ann-container i{
-            font-size: 3em;
-        }
-        #container-title{
-            width: 90%;
-            align-self: center;
-        }
-        #container-subject{
-            font-weight: 400;
-            width: 90%;
-            align-self: center;
-            margin-top: 0.5em;
-        }
-        .poster-info{
-            display: flex;
-            background-color: white;
-            margin: 1em;
-            margin-top: 1em;
-            align-items: center;
-            padding: 1em;
-        }
-        textarea{
-            resize:none;
-            background-color: white;
-            font-family:sans-serif;
-            font-size:1rem;
-            padding:.5rem;
-            border: none;
-            width: 90%;
-            align-self: center;
-            text-align: justify;
-            white-space: pre-line;
-        }
-    </style>
+
 </head>
 <body>
         @include('component.student.sidenav')
@@ -106,17 +52,8 @@
                     </textarea>
             </div>
         </div>
-    
 
-    <script>
-        let btn = document.querySelector('#btn');
-        let sidebar = document.querySelector('.sidebar');
-
-        btn.onclick = function () {
-            sidebar.classList.toggle('active');
-        }
-    </script>
-
+    <script src="/JS/Student/studentAnnouncement.js"> </script>
 
 </body>
 </html>
