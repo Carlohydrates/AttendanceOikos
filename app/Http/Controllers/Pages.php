@@ -10,6 +10,7 @@ use App\Models\Student_logs;
 use App\Models\Calendar;
 use App\Models\DocuRequest;
 use App\Models\EmployeeLogs;
+use App\Models\User;
 
 class Pages extends Controller
 {
@@ -35,15 +36,21 @@ class Pages extends Controller
     }
 
     public function s_home () {
-        return view("student.home");
+        $email = Auth::guard('users')->user()->email;
+        $student_data = Students::where('email', $email)->get();
+        return view("student.home", ['student_info'=>$student_data]);
     }
 
     public function s_userInfo () {
-        return view("student.user");
+        $email = Auth::guard('users')->user()->email;
+        $student_data = Students::where('email', $email)->get();
+        return view("student.user", ['student_data'=>$student_data]);
     }
 
     public function s_calendar () {
-        return view("student.calendar");
+        $email = Auth::guard('users')->user()->email;
+        $schedules = Calendar::where('email', $email)->get();
+        return view("student.calendar", ['schedules'=>$schedules]);
     }
 
     public function s_announcement () {
