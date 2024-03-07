@@ -10,6 +10,7 @@ use App\Models\Student_logs;
 use App\Models\Calendar;
 use App\Models\DocuRequest;
 use App\Models\EmployeeLogs;
+use App\Models\Employee_Logs;
 
 class Pages extends Controller
 {
@@ -122,7 +123,8 @@ class Pages extends Controller
         return view("admin.tr_student", ["Student_logs"=> $Student_logs]);
     }
     public function a_tr_employee(){
-        return view("admin.tr_employee");
+        $Employee_logs = Employee_logs::get();
+        return view("admin.tr_employee", ["Employee_logs"=> $Employee_logs]);
     }
     public function a_tr_deped(){
         return view("admin.tr_deped");
