@@ -184,12 +184,12 @@ Change Gender to Sex (done)
                             <label for="phoneNumber">Phone Number</label>
                             <input type="text" id="phoneNumber" name="phoneNumber" required>
                         </div>
+                    </div>
+                    <div class="input-column">
                         <div class="input-group">
                             <label for="Birthday">Birthdate</label>
                             <input type="date" id="birthday" name="birthday" required>
                         </div>
-                    </div>
-                    <div class="input-column">
                         <div class="input-group">
                             <label for="address">Address</label>
                             <input type="text" id="address" name="address" required>
@@ -221,13 +221,6 @@ Change Gender to Sex (done)
                                 <option value="T">Teacher</option>
                                 <option value="A">Admin</option>
                                 <option value="IT">IT</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="select-status">Status</label>
-                            <select id="select-status" name="select-status" required>
-                                <option value="active">Active</option>
-                                <option value="inactive">Inactive</option>
                             </select>
                         </div>
                     </div>
