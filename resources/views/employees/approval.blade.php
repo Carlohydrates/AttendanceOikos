@@ -143,6 +143,14 @@
         .download-link-container i {
             margin-left: auto;
         }
+        textarea {
+            border: none;
+            font-size: 1em;
+            padding: 1em;
+            width: 40em;
+            margin-top: 0.5em;
+            border-bottom: 1px solid #dedede;
+        }
     </style>
 </head>
 <body>
@@ -207,8 +215,8 @@
                 </div>
                 <div class="field-group">
                     <div class="input-group-single">
-                        <label for="remarks">Remarks</label>
-                        <input type="text" class='input-field' style = "margin-top: 0.5em;"id='remarks' value="{{$documents->reason}}" readonly>
+                        <label for="reason">Reason</label>
+                        <textarea id="reason" cols="20" rows="5" readonly>{{$documents->reason}}</textarea>
                     </div>
                 </div>
                 <div class="field-group" style = "margin-bottom: -0.8em;">
@@ -219,16 +227,22 @@
                     <div class="certif-container">
                         <div class="input-group-nborder">
                             <div class="download-link-container">
-                                <input type="text" class='input-field-nborder' style = "color: #007bff; background-color:rgba(100, 100, 100, 0);" id='certification' style="background-color: rgba(255, 255, 255, 0); font-size: 1rem;" value="Certificate of Good Moral Character - Ms. Watson.pdf" readonly>
-                                <i class="fa-solid fa-download"></i>
+                                <input type="text" class='input-field-nborder' style = "color: #007bff; background-color:rgba(100, 100, 100, 0);" id='certification' style="background-color: rgba(255, 255, 255, 0); font-size: 1rem;" value="{{$documents->filename}}" readonly>
+                                <a href = "{{asset($documents->file_path)}}" download="{{$documents->filename}}">
+                                <i class="fa-solid fa-download" style = "display: {{$documents->request_status == 'Approved' ? 'block' : ($documents->request_status == 'Rejected' ? 'none' : 'none')}}"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="right-container">
-                <h3 id=container-title>STEPS</h3>
+                <h3 id=container-title>REMARKS</h3>
                 <div class="border-horizontal"></div>
+                <br>
+                <div class="input-group-single">
+                    <textarea id="remarks" cols="20" rows="5" readonly>{{$documents->remarks}}</textarea>
+                </div>
             </div>
         </div>
     </div>
