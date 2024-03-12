@@ -13,7 +13,7 @@
 <body>
 
     <div class="boxbg">
-        <img src="/assets/Oikos Logo.png" alt="Some image">
+<!--        <img src="/assets/Oikos Logo.png" alt="Some image">  Redundant Image -->
         <h1>Login</h1>
 			<label for="EI">Email:</label>
 				<input type="text" id="EI" class="input-group"/>
@@ -29,7 +29,7 @@
         <button onclick="handleForm()" class="button sbutton">SUBMIT</button>
     </div>
     <div class="bgbox">
-        <img src = "/assets/Oikos BG.png" alt = "Image">
+            <img src = "/assets/Oikos BG.png" alt = "Image">
     </div>
 
     <!-- Optional JavaScript -->
