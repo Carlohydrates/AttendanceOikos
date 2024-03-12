@@ -43,6 +43,8 @@ Route::get('/admin/Announcement',[AAnnouncementsController::class,'a_announcemen
 Route::get('/admin/Announcement/View/{id}', [AAnnouncementsController::class, 'a_view_announcement']);
 Route::get('/admin/Document_Request',[Pages::class,'a_Document_Request']);
 Route::get('/retrieve-docu-data/{id}', [DocuRequestController::class, 'retrieveDocuData']);
+Route::post('/upload-store/{id}', [DocuRequestController::class, 'store']);
+Route::post('/reject-docureq/{id}', [DocuRequestController::class, 'rejectDocuRequest']);
 Route::get('/admin/Calendar',[Pages::class,'a_calendar']);
 Route::get('/admin/Time_Record',[Pages::class,'a_time_record']);
 Route::get('/admin/Privileges',[Pages::class,'a_Privileges']);

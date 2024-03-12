@@ -105,9 +105,12 @@
             justify-content:space-between;
             align-items:center;
         }
-        #form-content .form-group{
+        #form-content .form-group-column{
             display:flex;
             flex-direction:column;
+        }
+        .form-group{
+            display: flex;
         }
         .input-group{
             padding:0.8em;
@@ -146,6 +149,7 @@
             font-family:sans-serif;
             font-size:1rem;
             padding:.5rem;
+            width: 100%;
         }
         .submit-group{
             display: flex;
@@ -230,7 +234,9 @@
                             <td>{{$docuRequest->requestor_name}}</td>
                             <td>{{$docuRequest->date_requested}}</td>
                             <td>{{$docuRequest->request_type}}</td>
-                            <td>{{$docuRequest->request_status}}</td>
+                            <td style = "color: {{$docuRequest->request_status == 'Approved' ? 'green' : ($docuRequest->request_status == 'Rejected' ? 'red' : '#CC5500')}}">
+                                {{$docuRequest->request_status}}
+                            </td>
                             <td>
                                 <button class = "docu-req-btn" id = "docu-req-btn" onclick = "retrieveDocuData({{$docuRequest->id}})">
                                     <i class="fas fa-edit"></i>

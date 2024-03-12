@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('date_processed')->nullable();
             $table->string('request_status');
             $table->text('reason');
+            $table->string('filename')->nullable();
+            $table->string('file_path')->nullable();
+            $table->text('remarks')->nullable();
         });
     }
 

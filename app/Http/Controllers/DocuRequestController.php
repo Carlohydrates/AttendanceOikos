@@ -6,6 +6,7 @@ use App\Models\DocuRequest;
 use App\Models\User;
 use App\Models\Employees;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
 class DocuRequestController extends Controller
@@ -33,5 +34,45 @@ class DocuRequestController extends Controller
         $docudata = DocuRequest::where('id', $docu_id)
                             ->get();
         return response()->json(["success"=>true,'user_data'=> $docudata]);
+    }
+
+    public function rejectDocuRequest(Request $request, $id) {
+        date_default_timezone_set('Asia/Manila');
+        $dateProcessed=date('m/d/Y');
+
+        DocuRequest::where('id', $id)->update([
+            'date_processed'=>$dateProcessed,
+            'request_status'=>'Rejected',
+            'remarks'=>$request->input('remarks'),
+        ]);
+        
+        return response()->json(['success' => True], 200);
+    }
+
+    public function store(Request $request, $id) {
+        
+        // Store the file in storage\app\public folder
+        date_default_timezone_set('Asia/Manila');
+
+        if ($request->hasFile('file')) {
+            $dateProcessed=date('m/d/Y');
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
+            $filePath = 'uploads/'.$fileName;
+            $file->move('uploads/', $fileName);
+        
+            // Store file information in the database
+            DocuRequest::where('id', $id)->update([
+                'filename'=>$fileName,
+                'file_path'=>$filePath,
+                'date_processed'=>$dateProcessed,
+                'request_status'=>'Approved',
+                'remarks'=>$request->input('remarks')
+            ]);
+
+            return response()->json(['success' => True], 200);
+        } 
+
+        return response()->json(['fail' => False], 500);
     }
 }
