@@ -10,7 +10,6 @@ class CalendarController extends Controller
 {
     public function create(Request $request){
         $user_email=Auth::guard('users')->user()->email;
-        $color=Calendar::randomColor();
         Calendar::create([
             "calendar_created"=>$request->input('date'),
             "email"=>$user_email,
@@ -20,7 +19,7 @@ class CalendarController extends Controller
             "venue"=>$request->input('venue'),
             "theme"=>$request->input('theme'),
             "message"=>$request->input('message'),
-            "color"=>$color
+            "color"=>$request->input('color'),
         ]);
         return response()->json(["success"=>true]);
     }
@@ -47,6 +46,7 @@ class CalendarController extends Controller
             "venue"=>$request->input('venue'),
             "theme"=>$request->input('theme'),
             "message"=>$request->input('message'),
+            "color"=>$request->input('color'),
         ]);
         return response()->json(["success"=>true]);
     }

@@ -14,6 +14,7 @@ class EmployeeLogs extends Model
         'role',
         'checked_in',
         'checked_out',
+        'time_cooldown',
         'date_created'
     ];
     public $timestamps=false;

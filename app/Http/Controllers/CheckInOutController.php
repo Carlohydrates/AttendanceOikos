@@ -36,6 +36,11 @@ class CheckInOutController extends Controller
     }
     private function handleStudentCheckEvent($s_i){
         date_default_timezone_set('Asia/Manila');
+        $time_cooldown=time()+5*60;
+        $student_log_cooldown=StudentLogs::select('time_cooldown')
+        ->where('student_id',$s_i->student_id)
+        ->where('date_created',('Y-d-m'))
+        ->first();
         $student_log=StudentLogs::where('student_id',$s_i->student_id)
         ->where('date_created',date('Y-d-m'))
         ->first();
@@ -47,6 +52,9 @@ class CheckInOutController extends Controller
             return "You have already clocked out";
         }
         if($student_log){
+            if(time()!=$student_log_cooldown){
+                return "Please wait for 5 mins to scan once again";
+            }
             StudentLogs::where('student_id',$s_i->student_id)
             ->update([
                 'checked_out'=>date('H:i')
@@ -59,23 +67,32 @@ class CheckInOutController extends Controller
             'grade'=>$s_i->level,
             'section'=>$s_i->section,
             'checked_in'=>date('H:i'),
+            'time_cooldown'=>date('H:i',$time_cooldown),
             'date_created'=>date('Y-d-m')
         ]);
         return ["Clocked-In On ".date('H:i'),"Welcome Home"];
     }
     private function handleEmployeeCheckEvent($e_i){
         date_default_timezone_set('Asia/Manila');
+        $time_cooldown=time()+5*60;
+        $employee_log_cooldown=EmployeeLogs::select('time_cooldown')
+        ->where('student_id',$e_i->employee_id)
+        ->where('date_created',('Y-d-m'))
+        ->first();
         $employee_log=EmployeeLogs::where('employee_id',$e_i->employee_id)
         ->where('date_created',date('Y-d-m'))
         ->first();
         $employee_log_out=EmployeeLogs::where('employee_id',$e_i->employee_id)
         ->where('date_created',date('Y-d-m'))
         ->whereNotNull('checked_out')
-        ->first();
+        ->first(); 
         if($employee_log_out){
             return "You have already clocked out";
         }
         if($employee_log){
+            if(time()!=$employee_log_cooldown){
+                return "Please wait for 5 mins to scan once again";
+            }
             EmployeeLogs::where('employee_id',$e_i->employee_id)
             ->update([
                 'checked_out'=>date('H:i')
@@ -87,6 +104,7 @@ class CheckInOutController extends Controller
             'name'=>$e_i->fname." ".$e_i->lname,
             'role'=>$e_i->position,
             'checked_in'=>date('H:i'),
+            'time_cooldown'=>date('H:i',$time_cooldown),
             'date_created'=>date('Y-d-m')
         ]);
         return ["Clocked-In On ".date('H:i'),"Welcome Home"];

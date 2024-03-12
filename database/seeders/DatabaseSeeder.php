@@ -27,6 +27,11 @@ class DatabaseSeeder extends Seeder
         EExperience::factory()->create();
         EEducation::factory()->create();
 
-        $this->call([UserSeeder::class]);
+        $this->call([
+            UserSeeder::class,
+            EmployeeSeeder::class,
+            StudentSeeder::class,
+            GradeLevelSeeder::class,
+        ]);
     }
 }

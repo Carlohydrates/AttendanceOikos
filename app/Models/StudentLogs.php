@@ -14,6 +14,7 @@ class StudentLogs extends Model
         'grade',
         'section',
         'checked_in',
+        'time_cooldown',
         'date_created'
     ];
     public $timestamps=false;
