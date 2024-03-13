@@ -121,28 +121,46 @@
                         </tr>
                     </thead>
                     <tbody id="logTableBody">
+                        @foreach ($employee_logs as $logs)
+                        @php
+                            $check_in_time = strtotime($logs->checked_in);
+                            $check_out_time = strtotime($logs->checked_out);
+
+                            $morning_check_in = '';
+                            $morning_check_out = '';
+                            $afternoon_check_in = '';
+                            $afternoon_check_out = '';
+                            $evening_check_in = '';
+                            $evening_check_out = '';
+
+                            if ($check_in_time >= strtotime('06:00:00') && $check_in_time < strtotime('12:00:00')) {
+                                $morning_check_in = date('H:i:s', $check_in_time);
+                            } elseif ($check_in_time >= strtotime('12:00:00') && $check_in_time < strtotime('18:00:00')) {
+                                $afternoon_check_in = date('H:i:s', $check_in_time);
+                            } else {
+                                $evening_check_in = date('H:i:s', $check_in_time);
+                            }
+
+                            if ($check_out_time >= strtotime('06:00:00') && $check_out_time < strtotime('12:00:00')) {
+                                $morning_check_out = date('H:i:s', $check_out_time);
+                            } elseif ($check_out_time >= strtotime('12:00:00') && $check_out_time < strtotime('18:00:00')) {
+                                $afternoon_check_out = date('H:i:s', $check_out_time);
+                            } else {
+                                $evening_check_out = date('H:i:s', $check_out_time);
+                            }
+                        @endphp
                         <tr>
-                            <td>John Doe</td>
-                            <td>Student</td>
-                            <td>2024-01-30</td>
-                            <td>09:00 AM</td>
-                            <td>11:00 AM</td>
-                            <td>12:00 NN</td>
-                            <td>05:00 PM</td>
-                            <td>06:00 PM</td>
-                            <td>08:00 PM</td>
+                            <td>{{$logs->name}}</td>
+                            <td>{{$logs->role == 'T' ? 'Teacher' : 'IT'}}</td>
+                            <td>{{$logs->date_created}}</td>
+                            <td>{{$morning_check_in}}</td>
+                            <td>{{$morning_check_out}}</td>
+                            <td>{{$afternoon_check_in}}</td>
+                            <td>{{$afternoon_check_out}}</td>
+                            <td>{{$evening_check_in}}</td>
+                            <td>{{$evening_check_out}}</td>
                         </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Student</td>
-                            <td>2023-12-31</td>
-                            <td>09:00 AM</td>
-                            <td>11:00 AM</td>
-                            <td>12:00 NN</td>
-                            <td>05:00 PM</td>
-                            <td>06:00 PM</td>
-                            <td>08:00 PM</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
