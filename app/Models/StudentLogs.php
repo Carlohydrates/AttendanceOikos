@@ -9,13 +9,15 @@ class StudentLogs extends Model
 {
     use HasFactory;
     protected $fillable=[
+        'log_no',
         'student_id',
         'name',
         'grade',
         'section',
         'checked_in',
         'time_cooldown',
-        'date_created'
+        'checked_out',
+        'date_created',
     ];
     public $timestamps=false;
 }
