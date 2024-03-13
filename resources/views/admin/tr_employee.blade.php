@@ -98,7 +98,7 @@ User
                                 @endphp
                                 <tr>
                                     <td>{{$Employee_log->name}}</td>
-                                    <td>{{$Employee_log->role}}</td>
+                                    <td>{{$Employee_log->role == "T" ? "Teacher" : "IT"}}</td>
                                     <td>{{$Employee_log->date_created}}</td>
                                     <td>{{$morning_check_in}}</td>
                                     <td>{{$morning_check_out}}</td>

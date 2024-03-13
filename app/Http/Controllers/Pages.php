@@ -132,11 +132,11 @@ class Pages extends Controller
         return view("admin.time_record");
     }
     public function a_tr_student(){
-        $Student_logs = Student_logs::get();
+        $Student_logs = StudentLogs::get();
         return view("admin.tr_student", ["Student_logs"=> $Student_logs]);
     }
     public function a_tr_employee(){
-        $Employee_logs = Employee_logs::get();
+        $Employee_logs = EmployeeLogs::get();
         return view("admin.tr_employee", ["Employee_logs"=> $Employee_logs]);
     }
     public function a_tr_deped(){

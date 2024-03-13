@@ -9,6 +9,7 @@ class EmployeeLogs extends Model
 {
     use HasFactory;
     protected $fillable=[
+        'log_no',
         'employee_id',
         'name',
         'role',
