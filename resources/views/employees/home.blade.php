@@ -101,12 +101,15 @@
     <div class="main-content">
         <h1>Home</h1>
         <div class="container">
+            @foreach ($employee_info as $info)
             <div class="card">
                 <div class="card-sidenav">
                     <div class="avatar-container">
                         <img src="/assets/pfp.jpg" alt="Doog">
-                        <p>Beatrice Field</p>
-                        <p>202010106</p>
+                        <br>
+                        <p>{{$info->fname." ".$info->lname}}</p>
+                        <br>
+                        <p>{{$info->employee_id}}</p>
                     </div>
                     <div class="link-employee-container selected" onclick="selectElement('.link-employee-container','.parent-info')">
                         Employee Information
@@ -120,26 +123,26 @@
                         <div class="field-group">
                             <div class="input-group">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" value="Beatrice Field" readonly>
+                                <input type="text" id="name" value="{{$info->fname." ".$info->minitial." ".$info->lname}}" readonly>
                             </div>
                             <div class="input-group">
                                 <label for="name">Extension</label>
-                                <input type="text" id="name" value="III" readonly>
+                                <input type="text" id="name" value="{{$info->extension == "" ? "N/A" : "$info->extension"}}" readonly>
                             </div>
                             <div class="input-group">
                                 <label for="role">Role</label>
-                                <input type="text" id="role" value="Teacher" readonly>
+                                <input type="text" id="role" value="{{$info->position}}" readonly>
                             </div>
                         </div>
                         <br>
                         <div class="field-group">
                             <div class="input-group">
                                 <label for="status">Employment Status</label>
-                                <input type="text" id="status" value="Employed" readonly>
+                                <input type="text" id="status" value="{{$info->status}}" readonly>
                             </div>
                             <div class="input-group">
                                 <label for="Employee ID">Employee ID</label>
-                                <input type="text" id="Employee ID" value="20202010421" readonly>
+                                <input type="text" id="Employee ID" value="{{$info->employee_id}}" readonly>
                             </div>
                         </div>
                         <br>
@@ -148,30 +151,28 @@
                         <div class="field-group">
                             <div class="input-group">
                                 <label for="email">Email</label>
-                                <input type="text" id="email" value="employee@gmail.com" readonly>
+                                <input type="text" id="email" value="{{$info->email}}" readonly>
                             </div>
                             <div class="input-group">
                                 <label for="Telephone Number">Telephone Number</label>
-                                <input type="text" id="Telephone Number" value="414-45-56" readonly>
+                                <input type="text" id="Telephone Number" value="{{$info->telephone_number}}" readonly>
                             </div>
                         </div>
                         <div class="field-group">
                             <div class="input-group">
                                 <label for="number">Phone number</label>
-                                <input type="text" id="number" value="09121234569" readonly>
+                                <input type="text" id="number" value="{{$info->phone_number}}" readonly>
                             </div>
                             <div class="input-group">
                                 <label for="Personal Information">Birthday</label>
-                                <input type="text" id="Birthdate" value ="06-09-2001" readonly>
+                                <input type="text" id="Birthdate" value ="{{$info->bday}}" readonly>
                             </div>
                         </div>
-                        
-
                     </div>
-                    
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
         
         

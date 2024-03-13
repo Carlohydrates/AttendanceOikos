@@ -227,7 +227,7 @@
                     <div class="certif-container">
                         <div class="input-group-nborder">
                             <div class="download-link-container">
-                                <input type="text" class='input-field-nborder' style = "color: #007bff; background-color:rgba(100, 100, 100, 0);" id='certification' style="background-color: rgba(255, 255, 255, 0); font-size: 1rem;" value="{{$documents->filename}}" readonly>
+                                <input type="text" class='input-field-nborder' style = "color: #007bff; background-color:rgba(100, 100, 100, 0);" id='certification' style="background-color: rgba(255, 255, 255, 0); font-size: 1rem;" value="{{$documents->request_status == 'Approved' ? $documents->filename : ""}}" readonly>
                                 <a href = "{{asset($documents->file_path)}}" download="{{$documents->filename}}">
                                 <i class="fa-solid fa-download" style = "display: {{$documents->request_status == 'Approved' ? 'block' : ($documents->request_status == 'Rejected' ? 'none' : 'none')}}"></i>
                                 </a>

@@ -61,10 +61,12 @@ class Pages extends Controller
         return view("student.view-announcement");
     }
 
-
+    
     //Employee navigation
     public function e_userInfo(){
-        return view("employees.userinfo");
+        $email = Auth::guard('users')->user()->email;
+        $employee_data = Employees::where('email', $email)->get();
+        return view("employees.userinfo", ['employee_data'=>$employee_data]);
     }
     
     public function e_announcement(){
@@ -77,10 +79,14 @@ class Pages extends Controller
         return view("employees.calendar");
     }
     public function e_home(){
-        return view("employees.home");
+        $email = Auth::guard('users')->user()->email;
+        $employee_data = Employees::where('email', $email)->get();
+        return view("employees.home", ['employee_info'=>$employee_data]);
     }
     public function e_time_record(){
-        return view("employees.time_record");
+        $employee_id = Auth::guard('users')->user()->id;
+        $employee_data = EmployeeLogs::where('employee_id', $employee_id)->get();
+        return view("employees.time_record", ['employee_logs'=>$employee_data]);
     }
 
     public function e_document_request(){
