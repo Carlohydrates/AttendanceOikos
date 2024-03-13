@@ -263,6 +263,7 @@
     </script>
     <script src="/JS/adminCalendar.js"></script>
     <script src="/JS/navevent.js"></script>
+    <script src="/JS/logout.js"></script>
 
 </body>
 </html>

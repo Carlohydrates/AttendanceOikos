@@ -95,6 +95,6 @@
                 @endforeach 
             </div>
     <script src="/JS/Student/studentUser.js"> </script>
-
+    <script src="/JS/logout.js"></script>
 </body>
 </html>

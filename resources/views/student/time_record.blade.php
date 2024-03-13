@@ -79,6 +79,6 @@
         </div>
 
     <script src="/JS/Student/studentTime_record.js"> </script>
-
+    <script src="/JS/logout.js"></script>
 </body>
 </html>

@@ -335,7 +335,6 @@
         }
     </script>
     <script src = "/JS/Employee/DocuRequest.js"></script>
-
-
+    <script src="/JS/logout.js"></script>
 </body>
 </html>

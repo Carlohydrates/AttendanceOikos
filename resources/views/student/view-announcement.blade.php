@@ -54,6 +54,6 @@
         </div>
 
     <script src="/JS/Student/studentAnnouncement.js"> </script>
-
+    <script src="/JS/logout.js"></script>
 </body>
 </html>
