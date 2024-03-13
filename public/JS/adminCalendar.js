@@ -79,7 +79,8 @@ function updateEvent(event){
         duration:document.getElementById('edit-duration').value,
         venue:document.getElementById('edit-venue').value,
         theme:document.getElementById('edit-theme').value,
-        message:document.getElementById('edit-message').value
+        message:document.getElementById('edit-message').value,
+        color:document.getElementById('edit-color').value
     };
     fetch('/update-event',{
         method:'POST',
@@ -115,6 +116,7 @@ function cancelEvent(event){
     document.getElementById('edit-venue').readOnly=true;
     document.getElementById('edit-theme').readOnly=true;
     document.getElementById('edit-message').readOnly=true;
+    document.getElementById('edit-color').disabled=true;
 }
 function deleteEvent(event){
     event.preventDefault();
@@ -182,6 +184,7 @@ function showEditContent(){
             document.getElementById('edit-venue').value=date_data.venue;
             document.getElementById('edit-theme').value=date_data.theme;
             document.getElementById('edit-message').textContent=date_data.message;
+            document.getElementById('edit-color').value=date_data.color;
         }
     })
     .catch(error=>{
@@ -207,6 +210,7 @@ function removeReadonly(){
     document.getElementById('edit-venue').readOnly=false;
     document.getElementById('edit-theme').readOnly=false;
     document.getElementById('edit-message').readOnly=false;
+    document.getElementById('edit-color').disabled=false;
 }
 function addEvent(event){
     if(!dateInput || dateInput.trim()===""){
@@ -221,6 +225,7 @@ function addEvent(event){
         duration:document.getElementById('duration').value,
         venue:document.getElementById('venue').value,
         theme:document.getElementById('theme').value,
+        color:document.getElementById('color').value,
         message:document.getElementById('message').value
     };
     event.preventDefault();

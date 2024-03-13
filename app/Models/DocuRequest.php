@@ -17,7 +17,10 @@ class DocuRequest extends Model
         'date_requested',
         'date_processed',
         'request_status',
-        'reason'
+        'reason',
+        'filename',
+        'file_path',
+        'remarks'
     ];
 
     public static function codeType ($request_code) {

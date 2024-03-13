@@ -181,6 +181,9 @@
             padding:.5rem;
             border:1px solid #dedede;
         }
+        td .fa-solid {
+            color: #323468;
+        }
         .hidden{
             visibility:hidden;
             opacity:0;
@@ -274,12 +277,14 @@
                     <td>{{$docuRequest->request_code}}</td>
                     <td>{{$docuRequest->request_type}}</td>
                     <td>{{$docuRequest->date_requested}}</td>
-                    <td>
+                    <td style = "color: {{$docuRequest->request_status == 'Approved' ? 'green' : ($docuRequest->request_status == 'Rejected' ? 'red' : '#CC5500')}}">
                         {{$docuRequest->request_status}}
                         <a href="/employees/Document-Request/Approval/{{$docuRequest->id}}">
                             <i class="fa-solid fa-file-text" id = "approval-btn"></i>
                         </a>
-                        <i class="fa-solid fa-download"></i>
+                        <a href = "{{asset($docuRequest->file_path)}}" download="{{$docuRequest->filename}}">
+                        <i class="fa-solid fa-download" style = "display: {{$docuRequest->request_status == 'Approved' ? 'block' : ($docuRequest->request_status == 'Rejected' ? 'none' : 'none')}}"></i>
+                        </a>
                     </td>
                 </tr>
             @endforeach

@@ -52,10 +52,15 @@
             .then(response=>response.json())
             .then(data=>{
                 if(data.success){
+                    if(data.message=="Please wait for 5 mins to scan once again"){
+                        alert('Please wait for 5 mins to scan once again')
+                        return;
+                    }
                     if(data.message==="You have already clocked out"){
                         alert('You have already clocked out');
                         return;
                     }
+                    console.log(data);
                     const reader=document.getElementById('reader');
                     const userInfo=data.content;
                     const userContent=document.querySelector('.user-content');

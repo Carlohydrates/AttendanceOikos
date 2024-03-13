@@ -130,6 +130,12 @@
         .input-group input:focus{
             outline:none;
         }
+        #color,#edit-color{
+            border:none;
+            background-color:#e2e1e1;
+            border-radius:5px;
+            padding:2px 4px;
+        }
         .input-group label{
             font-size:1.3rem;
         }
@@ -205,6 +211,10 @@
                         <label for="message">Message:</label>
                         <textarea id="message" cols="30" rows="15" style="resize:none; border-color:#eeeeee" required></textarea>
                     </div>
+                    <div class="input-group">
+                        <label for="color">Color:</label>
+                        <input type="color" id="color" required>
+                    </div>
                     <button id="submit" onclick="addEvent(event)">Submit</button>
                 </form>
             </div>
@@ -233,6 +243,10 @@
                     <div class="input-group text-area">
                         <label for="message">Message:</label>
                         <textarea id="edit-message" cols="30" rows="15" style="resize:none; border-color:#eeeeee" required readonly></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="color">Color:</label>
+                        <input type="color" id="edit-color" disabled readonly>
                     </div>
                     <div id="edit-content" class="input-group" style="gap:1rem;align-self:center">
                         <button id="submit" class="edit-btn" onclick="editEvent(event)">Edit</button>

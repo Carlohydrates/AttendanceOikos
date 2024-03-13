@@ -129,79 +129,81 @@
             </div>
             <!-- Container for employee details -->
             <div class="employee-container show">
+                @foreach ($employee_data as $emp_details)
                 <h3 id=container-title>Employee Details</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='last-name' value="Lupin">
+                        <input type="text" class='input-field' id='last-name' value="{{$emp_details->lname}}" readonly>
                         <label for="last-name">Last Name</label>
                     </div>
                     <div class="input-group">
-                        <input type="text" class='input-field' id='first-name' value="Copernicus">
+                        <input type="text" class='input-field' id='first-name' value="{{$emp_details->fname}}" readonly>
                         <label for="first-name">First Name</label>
                     </div>
                     <div class="input-group">
-                        <input type="text" class='input-field' id='middle-name' value="Vincent">
+                        <input type="text" class='input-field' id='middle-name' value="{{$emp_details->minitial}}" readonly>
                         <label for="middle-name">Midde Name</label>
                     </div>
                     <div class="input-group">
-                        <input type="text" class='input-field' id='extension' value="III">
+                        <input type="text" class='input-field' id='extension' value="{{$emp_details->extension == "" ? "N/A" : "$emp_details->extension"}}" readonly>
                         <label for="extension">Extension</label>
                     </div>
                 </div>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="date" class='input-field' id='birthdate' value="August-20-2001">
+                        <input type="date" class='input-field' id='birthdate' value="{{$emp_details->bday}}" readonly>
                         <label for="birthdate">Birthdate</label>
                     </div>
-                    <div class="input-group-special">
-                        <input type="text" class='input-field' id='phone-number' value="09154054370">
+                    <div class="input-group">
+                        <input type="text" class='input-field' id='phone-number' value="{{$emp_details->phone_number}}" readonly>
                         <label for="phone-number">Phone Number</label>
                     </div>
                 </div>
                 <div class="field-group">
                     <div class="input-group-single">
-                        <input type="text" class='input-field' id='address' value="1 Riyal Street CBE Town Brgy Pasong Tamo Quezon City">
+                        <input type="text" class='input-field' id='address' value="{{$emp_details->address}}" readonly>
                         <label for="address">Address</label>
                     </div>
                 </div>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='city' value="Quezon City">
+                        <input type="text" class='input-field' id='city' value="{{$emp_details->city}}" readonly>
                         <label for="city">City</label>
                     </div>
                     <div class="input-group-special">
-                        <input type="text" class='input-field' id='region' value="NCR">
+                        <input type="text" class='input-field' id='region' value="{{$emp_details->region}}" readonly>
                         <label for="region">Region</label>
                     </div>
                     <div class="input-group">
-                        <input type="text" class='input-field' id='postal' value="1101">
+                        <input type="text" class='input-field' id='postal' value="{{$emp_details->postal_code}}" readonly>
                         <label for="postal">Postal Code</label>
                     </div>
                 </div>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='country' value="Philppines">
+                        <input type="text" class='input-field' id='country' value="{{$emp_details->country}}" readonly>
                         <label for="country">Country</label>
                     </div>
                     <div class="input-group-special">
-                        <input type="text" class='input-field' id='nationality' value="Russian">
+                        <input type="text" class='input-field' id='nationality' value="{{$emp_details->nationality}}" readonly>
                         <label for="nationality">Nationality</label>
                     </div>
                     <div class="input-group">
-                        <input type="text" class='input-field' id='sex' value="Male">
+                        <input type="text" class='input-field' id='sex' value="{{$emp_details->sex}}" readonly>
                         <label for="sex">Sex</label>
                     </div>
                 </div>
                 <div class="field-group">
                     <div class="input-group-special">
-                        <input type="text" class='input-field' id='email' value="lupinIII@gmail.com">
+                        <input type="text" class='input-field' id='email' value="{{$emp_details->email}}" readonly>
                         <label for="email">Email</label>
                     </div>
                     <div class="input-group-special">
-                        <input type="text" class='input-field' id='telephone' value="N/A">
+                        <input type="text" class='input-field' id='telephone' value="{{$emp_details->telephone_number}}" readonly>
                         <label for="telephone">Telephone Number</label>
                     </div>
                 </div>
+                @endforeach
             </div>
             <!-- container for family backgroud-->
             <div class="family-container ">
