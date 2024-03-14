@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Employees;
+use App\Models\User;
 
 class EmployeeSeeder extends Seeder
 {
@@ -14,10 +15,11 @@ class EmployeeSeeder extends Seeder
     public function run(): void
     {
         date_default_timezone_set('Asia/Manila');
+        $email=date('Y').rand(100,999).'@employees.oikostech.ph';
         $employees=[
             'qr'=>'T'.rand(1000,9999),
             'employee_id'=>date('Y').rand(100,999),
-            'email'=>date('Y').rand(100,999).'@employees.oikostech.ph',
+            'email'=>$email,
             'fname'=>'Eric',
             'lname'=>'Andre',
             'minitial'=>'Cedric',
@@ -37,6 +39,12 @@ class EmployeeSeeder extends Seeder
             'position'=>'T',
             'status'=>'Inactive',
         ];
+        $user_employees=[
+            'email'=>$email,
+            'password'=>bcrypt('2001-20-08'),
+            'role'=>2,
+        ]; 
         Employees::create($employees);
+        User::create($user_employees);
     }
 }
