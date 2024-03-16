@@ -56,7 +56,7 @@
         </li>
         
         <li>
-            <a href = "/students/logout">
+            <a onclick = "logout()">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span class="nav-item">Logout</span>
             </a>
