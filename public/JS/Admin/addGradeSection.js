@@ -1,3 +1,4 @@
+const csrf = document.querySelector("meta[name = 'csrf-token']")
 
 function addGradeLevel (event) {
     event.preventDefault();
@@ -85,6 +86,7 @@ function getSections(gradeLevelID, sectionID) {
 
 getGradeLevels('grade-level');
 getGradeLevels('remove-grade-level');
+getGradeLevels('gradeFilter');
 
 function removeGradeLevelAndSection() {
     const gradeLevel = document.getElementById('remove-grade-level').value;

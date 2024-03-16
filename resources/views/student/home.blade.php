@@ -94,6 +94,6 @@
     </div>
         <!--Student Information-->
     <script src= "/JS/Student/studentHome.js"> </script>
-    
+    <script src="/JS/logout.js"></script>
 </body>
 </html>

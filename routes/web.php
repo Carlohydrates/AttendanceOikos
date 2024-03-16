@@ -78,9 +78,9 @@ Route::post('/role_update-employee',[EmployeeMasterListController::class,'role']
 Route::post('/delete-employee',[EmployeeMasterListController::class,'delete']);
 
 Route::post('/add-event',[CalendarController::class,'create']);
-Route::post('/delete-event',[CalendarController::class,'delete']);
-Route::post('/update-event',[CalendarController::class,'update']);
-Route::get('/retrieve-calendar-date/{date}',[CalendarController::class,'retrieve']);
+Route::post('/delete-event/{id}',[CalendarController::class,'delete']);
+Route::post('/update-event/{id}',[CalendarController::class,'update']);
+Route::get('/retrieve-calendar-date/{date}/{color}',[CalendarController::class,'retrieve']);
 
 
 Route::get('/reset', [Pages::class,'resetpassword']);

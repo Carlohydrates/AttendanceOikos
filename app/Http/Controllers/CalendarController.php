@@ -23,21 +23,26 @@ class CalendarController extends Controller
         ]);
         return response()->json(["success"=>true]);
     }
-    public function retrieve($date){
+    public function retrieve($date,$color){
         $user_email=Auth::guard('users')->user()->email;
-        $data=Calendar::where('calendar_created',$date)->where('email',$user_email)->get();
+        $data=Calendar::where('calendar_created',$date)
+        ->where('color','#'.$color)
+        ->where('email',$user_email)
+        ->get();
         return response()->json(["success"=>true,"content"=>$data]);
     }
-    public function delete(Request $request){
+    public function delete(Request $request,$id){
         $user_email=Auth::guard('users')->user()->email;
         Calendar::where('calendar_created',$request->input('date'))
+        ->where('id',$id)
         ->where('email',$user_email)
         ->delete();
         return response()->json(["success"=>true]);
     }
-    public function update(Request $request){
+    public function update(Request $request,$id){
         $user_email=Auth::guard('users')->user()->email;
         Calendar::where('calendar_created',$request->input('date'))
+        ->where('id',$id)
         ->where('email',$user_email)
         ->update([
             "title"=>$request->input('title'),

@@ -117,7 +117,7 @@
             sidebar.classList.toggle('active');
         }
     </script>
-
+    <script src="/JS/logout.js"></script>
 
 </body>
 </html>
