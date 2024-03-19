@@ -614,3 +614,31 @@
                     console.log('Error! Role did not update', error);
                 })
             }
+
+            function uploadMultipleStudents (event) {
+                
+                event.preventDefault();
+                const fileInput = document.getElementById('upload-file');
+        
+                if (fileInput.files.length === 0) {
+                    console.log('Please select a file');
+                    return;
+                }
+        
+                const formData= new FormData();
+                formData.append('file', fileInput.files[0]);
+        
+                fetch('/upload-multiple-students', {
+                    method: 'POST',
+                    headers: {'X-CSRF-Token': csrf.content},
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Document Request added successfully:', data);
+                    location.reload();
+                })
+                .catch(error => {
+                    console.log('Error adding document request', error);
+                });
+            }
