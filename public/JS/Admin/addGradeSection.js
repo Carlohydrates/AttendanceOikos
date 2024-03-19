@@ -1,4 +1,3 @@
-const csrf = document.querySelector("meta[name = 'csrf-token']")
 
 function addGradeLevel (event) {
     event.preventDefault();
