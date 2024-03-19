@@ -158,10 +158,13 @@
         <div class="popup-content">
             <span class="close-popup" id="close-popup">&times;</span>
             <h2>Post an Announcement</h2>  
-                <div class = "Recepient">
-                    <label for="add-recepient" id="add-recepient">TO:</label> 
-                    <textarea id="add-recepient" placeholder="Add Recepient"></textarea>
-                </div>
+            <div class="Recepient">
+                <label for="add-recepient" id="add-recepient">TO:</label> 
+                <select id="add-recepient">
+                    <option value="student">Student</option>
+                    <option value="employee">Employee</option>
+                </select>
+            </div>
             <label for="Title" id="Title">Title:</label>
             <input type="text" id="announcement-title" placeholder="Welcome">
             <label for="Subject" id="Subject">Subject:</label>
@@ -179,28 +182,29 @@
             let closePopupBtn = document.getElementById('close-popup');
             let confirmAddAnnouncementBtn = document.getElementById('confirm-add-announcement');
             let btnAddAnnouncement = document.querySelector('#add-announcement-btn');
-        
+    
             btnAddAnnouncement.addEventListener('click', function () {
                 overlay.style.display = 'block';
                 customPopup.style.display = 'block';
                 customPopup.classList.add('fade-in');
             });
-        
+    
             closePopupBtn.addEventListener('click', function () {
                 overlay.style.display = 'none';
                 customPopup.style.display = 'none';
             });
-        
+    
             confirmAddAnnouncementBtn.addEventListener('click', function () {
                 const title = document.getElementById('announcement-title').value;
                 const subject = document.getElementById('announcement-subject').value;
                 const body = document.getElementById('announcement-body').value;
-        
+                const recepient = document.getElementById('add-recepient').value;
+    
                 if (!title || !subject || !body) {
                     alert('Please fill in all fields');
                     return;
                 }
-        
+    
                 fetch('/admin/Announcement/Add', {
                     method: 'POST',
                     headers: {
@@ -211,13 +215,12 @@
                         title: title,
                         subject: subject,
                         body: body,
+                        recepient: recepient,
                     }),
                 })
                 .then(response => response.json())
                 .then(data => {
-                    // Handle the response as needed
                     console.log('Announcement added:', data);
-                    // Close the popup
                     overlay.style.display = 'none';
                     customPopup.style.display = 'none';
                     window.location.reload();
@@ -225,7 +228,7 @@
                 .catch(error => console.error('Error:', error));
             });
         });
-        </script>
+    </script>
         
     <script src="/JS/navevent.js"></script>
 </body>

@@ -88,15 +88,15 @@ Route::get('/reset', [Pages::class,'resetpassword']);
 //Routes for students
 Route::get('/students/Home', [Pages::class,'s_home']);
 Route::get('/students/Calendar', [Pages::class,'s_calendar']);
-Route::get('/students/Announcement', [Pages::class,'s_announcement']);
+Route::get('/students/Announcement', [AAnnouncementsController::class,'s_announcement']);
 Route::get('/students/User-Info', [Pages::class,'s_userInfo']);
 Route::get('/students/Time-Logs', [Pages::class,'s_timerecord']);
-Route::get('/students/Announcement/View', [Pages::class,'s_view_announcement']);
+Route::get('/students/Announcement/View{id}', [AAnnouncementsController::class, 's_view_announcement']);
 Route::get('/students/logout',[LoginController::class,'logoutStudent']);
 
 //Routes for employees
 Route::get('/employees/User-Info',[Pages::class,'e_userInfo']);
-Route::get('/employees/Announcement',[Pages::class,'e_announcement']);
+Route::get('/employees/Announcement', [AAnnouncementsController::class,'e_announcement']);
 Route::get('/employees/Calendar',[Pages::class,'e_calendar']);
 Route::get('/employees/Document-Request',[Pages::class,'e_document_request']);
 Route::get('/employees/Document-Request/Approval/{id}',[Pages::class,'e_approvalpage']);
@@ -104,7 +104,7 @@ Route::get('/employees/Document-Request/Approval/{id}',[Pages::class,'e_approval
 Route::post('/add-document-request', [DocuRequestController::class, 'addDocuRequest']);
 Route::get('/employees/Time-Record',[Pages::class,'e_time_record']);
 Route::get('/employees/Home',[Pages::class,'e_home']);
-Route::get('/employees/Announcement/View', [Pages::class,'e_view_announcement']);
+Route::get('/employees/Announcement/View{id}', [AAnnouncementsController::class,'e_view_announcement']);
 Route::get('/employees/logout',[LoginController::class,'logoutEmployee']);
 
 Route::get('/scanner',[Pages::class,'scanner']);

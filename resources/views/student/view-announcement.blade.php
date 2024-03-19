@@ -11,10 +11,77 @@
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Student: Announcement</title>
-
+    <style>
+        .ann-header,
+        .ann-title {
+            display: inline;
+        }
+        .header-container{
+            background-color: #323468;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding: 10px;
+        }
+        .ann-container{
+            display: flex;
+            flex-direction: column;
+            width: 95%;
+            margin: 25px;
+            background-color: white;
+        }
+        .ann-container i{
+            font-size: 3em;
+        }
+        #container-title{
+            width: 100%;
+            align-self: center;
+        }
+        #container-subject{
+            font-weight: 400;
+            width: 100%;
+            align-self: center;
+            margin-top: 0.5em;
+        }
+        .poster-info{
+            display: flex;
+            background-color: white;
+            align-items: center;
+            padding: 1em;
+        }
+        textarea{
+            resize:none;
+            background-color: white;
+            font-family:sans-serif;
+            font-size:1rem;
+            padding:.5rem;
+            border: none;
+            width: 100%;
+            align-self: center;
+            text-align: justify;
+            white-space: pre-line;
+        }
+    </style>
 </head>
 <body>
-        @include('component.student.sidenav')
+    @include('component.student.sidenav')
+    <div class="main-content">
+        <div class="container">
+            <div class="header-container">
+                <h2 id="container-title">{{ $announcement->title }}</h2>
+                <h3 id="container-subject">{{ $announcement->subject }}</h3>
+            </div>
+            <div class="poster-info">
+                <i class="fas fa-user-circle"></i>
+                <h3 style="margin-left: 1em;">{{ $announcement->viewpagesender }}</h3>
+                <h4 style="margin-left: 72em; font-weight: 400;">{{ $announcement->created_at }}</h4>
+            </div>
+            <textarea cols="30" rows="30" readonly>{{ $announcement->content }}</textarea>
+        </div>
+    </div>
+        <!--
         <div class="main-content">
             <h1 class="ann-header"><a href = "/students/Announcement"  style = "color: rgba(100, 100, 100, 0.700); text-decoration: none;">Announcements ></a> </h1>
             <h1 class="ann-title" style = "margin-left: 0.3em;">Post</h1>
@@ -51,7 +118,7 @@
                     Jonel Rubio [CEO] [Oikos Technologies]
                     </textarea>
             </div>
-        </div>
+        </div>-->
 
     <script src="/JS/Student/studentAnnouncement.js"> </script>
     <script src="/JS/logout.js"></script>

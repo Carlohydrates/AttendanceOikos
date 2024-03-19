@@ -55,7 +55,9 @@ class Pages extends Controller
     }
 
     public function s_announcement () {
-        return view("student.announcement");
+        //return view("student.announcement");
+        $announcements = AAnnouncements::all(); 
+        return view('student.announcement', ['announcements' => $announcements]);
     }
 
     public function s_view_announcement () {
@@ -71,10 +73,13 @@ class Pages extends Controller
     }
     
     public function e_announcement(){
-        return view("employees.announcement");
+        //return view("employees.announcement");
+        $announcements = AAnnouncements::all(); 
+        return view('employees.announcement', ['announcements' => $announcements]);
     }
+    
     public function e_view_announcement () {
-        return view("employees.view-announcement");
+        return view("employees.view-announcement");        
     }
     public function e_calendar(){
         return view("employees.calendar");
