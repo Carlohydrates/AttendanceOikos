@@ -57,6 +57,7 @@ Route::get('/admin/Time_Record/DepEd',[Pages::class,'a_tr_deped']);
 
 Route::post('/add-student', [StudentMasterlistController::class, 'addStudent']);
 Route::get('/retrieve-student/{student_id}', [StudentMasterlistController::class, 'retrieveData']);
+Route::get('/upload-multiple-students', [StudentMasterlistController::class, 'uploadMultipleStudents']);
 Route::post('/update-student', [StudentMasterlistController::class, 'updateStudent']);
 Route::post('/status-update-student', [StudentMasterlistController::class, 'updateStatus']);
 Route::post('/grade-update-student', [StudentMasterlistController::class, 'updateGradeAndSection']);
