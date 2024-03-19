@@ -383,12 +383,17 @@
                 console.log('Error! Employee data did not submit.',error);
             })
         }
-
+        function formatDate(date){
+            let arrayedDate=date.split('-');
+            console.log(arrayedDate);
+            return [arrayedDate[0],arrayedDate[2],arrayedDate[1]].join('-');
+        }
         function showStudentData (user_instance) {
             let roleButton = document.querySelector('.role-btn');
             let infoButton = document.querySelector('.info-btn');
             let emlSelection = document.querySelector('.eml-selection');
             let statusButton = document.querySelector('.status-btn');
+            let formattedBday = formatDate(user_instance.bday);
             fetchStudentName(student_id);
 
             emlSelection.innerHTML = `
@@ -463,7 +468,7 @@
                             <div class="input-column">
                                 <div class="input-group">
                                     <label for="birthday">Birthdate</label>
-                                    <input type="date" id='studBirthday' value = "${user_instance.bday}" required>
+                                    <input type="date" id='studBirthday' value = "${formattedBday}" required>
                                 </div>
                                 <div class="input-group">
                                     <label for="age">Age</label>
