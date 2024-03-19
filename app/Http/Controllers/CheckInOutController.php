@@ -76,7 +76,7 @@ class CheckInOutController extends Controller
         date_default_timezone_set('Asia/Manila');
         $time_cooldown=time()+5*60;
         $employee_log_cooldown=EmployeeLogs::select('time_cooldown')
-        ->where('student_id',$e_i->employee_id)
+        ->where('employee_id',$e_i->employee_id)
         ->where('date_created',('Y-d-m'))
         ->first();
         $employee_log=EmployeeLogs::where('employee_id',$e_i->employee_id)
