@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+{{--
+    This head section sets up the basic structure and functionality of the webpage:
+    - It specifies the character encoding and viewport for responsive design.
+    - Links to custom CSS for styling and Font Awesome for icons.
+    - Includes SweetAlert2 for interactive alerts and jQuery for DOM manipulation and AJAX functionality.
+    - Lastly, it sets the title of the webpage.
+--}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Employee: Document Request</title>
+    {{-- Added internal CSS --}}
     <style>
         .container{
             margin-top:.5em;
@@ -191,6 +199,7 @@
     </style>
 </head>
 <body>
+    {{-- Include side navigation component --}}
     @include('component.employee.sidenav')
     <div class="main-content">
         <h1>Document Request</h1>
@@ -199,6 +208,7 @@
             <input type="text" placeholder="Search...">
             <button class="search-btn">&#128269;</button>
         </div>
+    {{-- Add document request modal mask --}}
     <div class="modal-mask hidden">
         <div class="form-container">
             <div class="form-header">
@@ -271,7 +281,7 @@
                 $id = Auth::guard('users')->user()->id;
                 $docuRequests = \App\Models\DocuRequest::where('employee_id', $id)->get();
             @endphp
-
+            {{-- Foreach loop to retrieve all document requests from database --}}
             @foreach ($docuRequests as $docuRequest)
                 <tr>
                     <td>{{$docuRequest->request_code}}</td>
@@ -314,6 +324,7 @@
         </div>
     </div>
 
+    {{-- Javascript for modal mask --}}
     <script>
         let btn = document.querySelector('#btn');
         let sidebar = document.querySelector('.sidebar');
@@ -334,7 +345,9 @@
             textArea.value="";
         }
     </script>
+    {{-- Javascript for document request --}}
     <script src = "/JS/Employee/DocuRequest.js"></script>
+    {{-- Include javascript for logout function --}}
     <script src="/JS/logout.js"></script>
 </body>
 </html>
