@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "icon" href = "/assets/Oikos Logo.png">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href = "/CSS/employee.css">
+    <link rel="stylesheet" href = "/CSS/employee_user_info.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -55,7 +57,7 @@
             transition: opacity 400ms ease-in-out;
         }
         .field-group{
-            margin-top:2em;
+            margin-top:1em;
             display:flex;
         }
         #container-title{
@@ -155,7 +157,7 @@
                         <label for="birthdate">Birthdate</label>
                     </div>
                     <div class="input-group">
-                        <input type="text" class='input-field' id='phone-number' value="{{$emp_details->phone_number}}" readonly>
+                        <input type="text" class='input-field' id='phoneNumber' value="{{$emp_details->phone_number}}" readonly>
                         <label for="phone-number">Phone Number</label>
                     </div>
                 </div>
@@ -204,7 +206,94 @@
                     </div>
                 </div>
                 @endforeach
+                <button class="edit" id="personal" onclick="personalinfo()"> edit</button>
+                
             </div>
+            <div class= "emp-details">
+                <form>
+                    <h2>Edit Personal Information</h2>
+                    <button  onclick="closeForms()" id="close" class="close">x</button>
+                        <div class="field-group">
+                            <div class="input-group">
+                                <label for="first-name"><h3>First Name</h3></label>
+                                <input type ="text" id='firstName' name="firstName" value="{{$emp_details->fname}}">
+                            </div>
+                            <div class="input-group">
+                                <label for="last-name"><h3>Last Name</h3></label>
+                                <input type ="text" id='lastName' name="lastName" value="{{$emp_details->lname}}">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="middle-name"><h3>Middle Name</h3></label>
+                                <input type ="text" id='middleName' name="middleName" value="{{$emp_details->minitial}}">
+                            </div>
+                            
+                                <div class = "input-group">
+                                    <label for="Extension"><h3>Extension</h3></label>
+                                    <input type ="text" id='extension' name="extension" value="{{$emp_details->extension == "" ? "N/A" : "$emp_details->extension"}}">
+                                </div>
+                            </div>
+
+                        <div class="field-group">
+                            <div class="input-group">
+                                <label for="birthdate"><h3>Birthdate</h3></label>
+                                <input type ="date" id='birthdate' name="birthdate" value="{{$emp_details->bday}}">
+                            </div>
+                            <div class="input-group">
+                                <label for="phone-number"><h3>Phone Number</h3></label>
+                                <input type ="text" id='phoneNumber' name="phoneNumber" value="{{$emp_details->phone_number}}">
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <div class="input-group" style="width:100%;">
+                            <label for="address">Address</label>
+                            <input type = "text"  id="address" value="{{$emp_details->address}}" >
+                        </div>
+                        <div class="input-group" style="width:100%;">
+                            <label for="email">Email</label>
+                            <input type = "text"  id="email" value="{{$emp_details->email}}" >
+                        </div>
+                        
+                        </div>
+                        <div class="field-group">
+                        <div class="input-group">
+                            <label for="City">City</label>
+                            <input type = "text"  id="City" value="{{$emp_details->city}}" >
+                        </div>
+                        <div class="input-group">
+                            <label for ="region">region</label>
+                            <input type="text" id="region" value= "{{$emp_details ->region}}">
+                        </div>
+                        <div class="input-group">
+                        <label for = "postal">Postal Code</label>
+                        <input type = "text" id="postal" value="{{$emp_details -> postal_code}}">
+                        </div>
+                        <div class="input-group">
+                            <label for = "country">Country</label>
+                            <input type = "text" id="country" value="{{$emp_details -> country}}">
+                        </div>
+                        </div>
+
+                        <div class = "field-group">
+                            <div class= "input-group">
+                            <label for="nationality">Nationality</label>
+                            <input type="text" id="nationality" value="{{$emp_details -> nationality}}">
+                            </div>
+
+                            <div class= "input-group">
+                                <label for="sex">Sex</label>
+                                <input type="sex" id="sex" value="{{$emp_details -> sex}}">
+                                </div>
+
+                                <div class= "input-group">
+                                    <label for="telephone-number">Telephone Number</label>
+                                    <input type="text" id="telephone" value="{{$emp_details -> telephone_number}}">
+                                    </div>
+                        </div><br>
+                        <button type="button" class="sbmt" onclick="emp_details(event)">Submit</button>
+                </form>
+            </div>
+    
             <!-- container for family backgroud-->
             <div class="family-container ">
                 <h3 id=container-title>Father's Name</h3>
@@ -286,7 +375,155 @@
                         <label for="telephone">Telephone No. ie:(02)00-0000</label>
                     </div>
                 </div>
+                <button class="edit" id="family" onclick="addfamily()"> Create</button>
+                <button class="edit" id="family" onclick="family()"> edit</button>
             </div>
+
+
+            <div class="add-fam-details">
+                <form>
+                    <form id="add-family_details">
+                        <h2>Family Background</h2>
+                            <button  onclick="closeForms()" id="close" class="close">x</button>
+                            <br>
+                        <h3 class="indent">Father's Information</h3>    <br>
+                        <hr>
+                        <div class="field-group">
+                        <div class="input-group">
+                            <label for ="f-firstName">First Name</label>
+                            <input type="text" id="f_firstName" value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="f-middleName">Middle Name</label>
+                            <input type="text" id="f_middleName"value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="f-lastName">Last Name</label>
+                            <input type="text" id="f_lastName"value="">
+                        </div>
+    
+                        <div class="input-group">
+                            <label for ="f-extension">Extension</label>
+                            <input type="text" id="f_extension"value="">
+                        </div>
+                        </div><br><br>
+                        <h3 class="indent">Mother's Information</h3>    <br>
+                        <hr>
+                        <div class="field-group">
+                        <div class="input-group">
+                            <label for ="M-firstName">First Name</label>
+                            <input type="text" id="m_firstName"value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="M-middleName">Middle Name</label>
+                            <input type="text" id="m_middleName"value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="M-lastName">Last Name</label>
+                            <input type="text" id="m_lastName"value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="M-extension">Extension</label>
+                            <input type="text" id="m_extension"value="">
+                        </div>
+                        </div>
+                        <br><br>
+                        <h3 class="indent">Spouse's Information</h3>    <br>
+                        <hr>
+                        <div class="field-group">
+                        <div class="input-group">
+                            <label for ="sp-firstName">First Name</label>
+                            <input type="text" id="sp_firstName"value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="sp-middleName">Middle Name</label>
+                            <input type="text" id="sp_middleName"value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="sp-lastName">Last Name</label>
+                            <input type="text" id="sp_lastName"value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="sp-extension">Extension</label>
+                            <input type="text" id="sp_extension"value="">
+                        </div>
+                        </div><br>
+                        <button type="button" class="sbmt" onclick="add_fam_details(event)">Submit</button>
+                </form>
+            </div>
+
+            <div class="fam-details">
+                <form id="family_details">
+                    <h2>Family Background</h2>
+                        <button  onclick="closeForms()" id="close" class="close">x</button>
+                        <br>
+                    <h3 class="indent">Father's Information</h3>    <br>
+                    <hr>
+                    <div class="field-group">
+                    <div class="input-group">
+                        <label for ="f-firstName">First Name</label>
+                        <input type="text" id="f_firstName" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="f-middleName">Middle Name</label>
+                        <input type="text" id="f_middleName"value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="f-lastName">Last Name</label>
+                        <input type="text" id="f_lastName"value="">
+                    </div>
+
+                    <div class="input-group">
+                        <label for ="f-extension">Extension</label>
+                        <input type="text" id="f_extension"value="">
+                    </div>
+                    </div><br><br>
+                    <h3 class="indent">Mother's Information</h3>    <br>
+                    <hr>
+                    <div class="field-group">
+                    <div class="input-group">
+                        <label for ="M-firstName">First Name</label>
+                        <input type="text" id="m_firstName"value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="M-middleName">Middle Name</label>
+                        <input type="text" id="m_middleName"value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="M-lastName">Last Name</label>
+                        <input type="text" id="m_lastName"value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="M-extension">Extension</label>
+                        <input type="text" id="m_extension"value="">
+                    </div>
+                    </div>
+                    <br><br>
+                    <h3 class="indent">Spouse's Information</h3>    <br>
+                    <hr>
+                    <div class="field-group">
+                    <div class="input-group">
+                        <label for ="sp-firstName">First Name</label>
+                        <input type="text" id="sp_firstName"value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="sp-middleName">Middle Name</label>
+                        <input type="text" id="sp_middleName"value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="sp-lastName">Last Name</label>
+                        <input type="text" id="sp_lastName"value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="sp-extension">Extension</label>
+                        <input type="text" id="sp_extension"value="">
+                    </div>
+                    </div><br>
+                    <button type="button" class="sbmt" onclick="fam_details(event)">Submit</button>
+                </form>
+                
+            </div>
+
             <!-- EDUCATION BACKG-->
                             <!--1st education-->
             <div class="education-container ">
@@ -372,8 +609,192 @@
                         <input type="text" class='input-field' id='school_three_address' value="1 Riyal Street CBE Town Brgy Pasong Tamo Quezon City">
                         <label for="address">Address</label>
                     </div>
+                    
+                </div>
+                <button class="edit" id="education" onclick="addfamily()"> Create</button>
+                <button class="edit" id="education" onclick="education()"> edit</button>
+            </div>
+            
+            <!--Adding A Education Backround-->
+            <div class="add-edu-details">
+                <form>
+                <h2>Education</h2>
+                    <button  onclick="closeForms()" id="close" class="close">x</button>
+                    <br>
+                <h3 class="indent">Junior High</h3>    <br>
+                <hr>
+                <div class="field-group">
+                <div class="input-group">
+                    <label for ="J-school">School</label>
+                    <input type="text" id="J-school" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="J-Year">Year</label>
+                    <input type="text" id="J-year" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="Contact">Contact</label>
+                    <input type="text" id="J-contact" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="J-Phone-Number">Phone Number</label>
+                    <input type="text" id="J-phone-Number" value="">
                 </div>
             </div>
+            <div class="field-group">
+                <div class="input-group-single">
+                    <label for="J-Address">Address</label>
+                    <input type="text" id="J-address"value="">
+            </div>
+        </div>
+        <br>
+        <h3 class="indent">Senior High</h3>    <br><hr>
+        <div class="field-group">
+            <div class="input-group">
+                <label for ="S-school">School</label>
+                <input type="text" id="S-school" value="">
+            </div>
+            <div class="input-group">
+                <label for ="S-Year">Year</label>
+                <input type="text" id="S-year" value="">
+            </div>
+            <div class="input-group">
+                <label for ="Contact">Contact</label>
+                <input type="text" id="S-contact" value="">
+            </div>
+            <div class="input-group">
+                <label for ="S-Phone-Number">Phone Number</label>
+                <input type="text" id="S-phone-Number" value="">
+            </div>
+        </div>
+        <div class="field-group">
+            <div class="input-group-single">
+                <label for="S-Address">Address</label>
+                <input type="text" id="S-address"value="">
+        </div>
+    </div>
+    <br>
+        <h3 class="indent">College</h3>    <br><hr>
+        <div class="field-group">
+            <div class="input-group">
+                <label for ="C-school">School</label>
+                <input type="text" id="C-school" value="">
+            </div>
+            <div class="input-group">
+                <label for ="C-Year">Year</label>
+                <input type="text" id="C-year" value="">
+            </div>
+            <div class="input-group">
+                <label for ="Contact">Contact</label>
+                <input type="text" id="C-contact" value="">
+            </div>
+            <div class="input-group">
+                <label for ="C-Phone-Number">Phone Number</label>
+                <input type="text" id="C-phone-Number" value="">
+            </div>
+        </div>
+        <div class="field-group">
+            <div class="input-group-single">
+                <label for="C-Address">Address</label>
+                <input type="text" id="C-address"value="">
+        </div>
+    </div><br>
+    <button type="button" class="sbmt" onclick="add_edu_details(event)">Submit</button>
+    </form>
+    
+    </div>
+
+
+                <div class="edu-details">
+                    <form>
+                    <h2>Education</h2>
+                        <button  onclick="closeForms()" id="close" class="close">x</button>
+                        <br>
+                    <h3 class="indent">Junior High</h3>    <br>
+                    <hr>
+                    <div class="field-group">
+                    <div class="input-group">
+                        <label for ="J-school">School</label>
+                        <input type="text" id="J-school" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="J-Year">Year</label>
+                        <input type="text" id="J-year" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="Contact">Contact</label>
+                        <input type="text" id="J-contact" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="J-Phone-Number">Phone Number</label>
+                        <input type="text" id="J-phone-Number" value="">
+                    </div>
+                </div>
+                <div class="field-group">
+                    <div class="input-group-single">
+                        <label for="J-Address">Address</label>
+                        <input type="text" id="J-address"value="">
+                </div>
+            </div>
+            <br>
+            <h3 class="indent">Senior High</h3>    <br><hr>
+            <div class="field-group">
+                <div class="input-group">
+                    <label for ="S-school">School</label>
+                    <input type="text" id="S-school" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="S-Year">Year</label>
+                    <input type="text" id="S-year" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="Contact">Contact</label>
+                    <input type="text" id="S-contact" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="S-Phone-Number">Phone Number</label>
+                    <input type="text" id="S-phone-Number" value="">
+                </div>
+            </div>
+            <div class="field-group">
+                <div class="input-group-single">
+                    <label for="S-Address">Address</label>
+                    <input type="text" id="S-address"value="">
+            </div>
+        </div>
+        <br>
+            <h3 class="indent">College</h3>    <br><hr>
+            <div class="field-group">
+                <div class="input-group">
+                    <label for ="C-school">School</label>
+                    <input type="text" id="C-school" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="C-Year">Year</label>
+                    <input type="text" id="C-year" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="Contact">Contact</label>
+                    <input type="text" id="C-contact" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="C-Phone-Number">Phone Number</label>
+                    <input type="text" id="C-phone-Number" value="">
+                </div>
+            </div>
+            <div class="field-group">
+                <div class="input-group-single">
+                    <label for="C-Address">Address</label>
+                    <input type="text" id="C-address"value="">
+            </div>
+        </div><br>
+        <button type="button" class="sbmt" onclick="edu_details(event)">Submit</button>
+        </form>
+        
+        </div>
+   
+
+
             <!--Work Experience-->
             <!--Company 1-->
             <div class="experience-container ">
@@ -489,10 +910,244 @@
                         <label for="address">address</label>
                     </div>
                 </div>
+                <button class="edit" id="experience" onclick="addexperience()">Create</button>
+                <button class="edit" id="experience" onclick="experience()"> edit</button>
             </div>
 
+            <div class="add-exp-details">
+                <form>
+                <h2>Work Experience</h2>
+                    <button  onclick="closeForms()" id="close" class="close">x</button>
+                    <br>
+                <h3 class="indent">1st Company</h3>    <br>
+                <hr>
+                <div class="field-group">
+                <div class="input-group">
+                    <label for ="company-name-one">Company Name</label>
+                    <input type="text" id="company-name-one" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="Company-title-one">Title/position</label>
+                    <input type="text" id="company-title-one" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="Company-contact-one">Contact Person</label>
+                    <input type="text" id="company-contact-one" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="Company-description-one">Description</label>
+                    <input type="text" id="company-description-one" value="">
+                </div>
+                </div>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="Company-duration-one">Duration</label>
+                        <input type="text" id="company-duration-one" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="Company-number-one">Phone Number</label>
+                        <input type="text" id="company-number-one" value="">
+                    </div>
+                </div>
+                <div class="field-group">
+                <div class="input-group-single">
+                    <label for ="Company-address-one">Address</label>
+                    <input type="text" id="company-address-one" value="">
+                </div>
+                </div>
+                <br>
+                <h3 class="indent">2nd Company</h3>    <br><hr>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="company-name-two">Company Name</label>
+                        <input type="text" id="company-name-two" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="Company-title-two">Title/position</label>
+                        <input type="text" id="company-title-two" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="Company-contact-two">Contact Person</label>
+                        <input type="text" id="company-contact-two" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="Company-description-two">Description</label>
+                        <input type="text" id="company-description-two" value="">
+                    </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="input-group">
+                            <label for ="Company-duration-two">Duration</label>
+                            <input type="text" id="company-duration-two" value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="Company-number-two">Phone Number</label>
+                            <input type="text" id="company-number-two" value="">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                    <div class="input-group-single">
+                        <label for ="Company-address-two">Address</label>
+                        <input type="text" id="company-address-two" value="">
+                    </div>
+                    </div>
+                    <br>
+                    <h3 class="indent">3rd Company</h3>    <br><hr>
+                    <div class="field-group">
+                        <div class="input-group">
+                            <label for ="company-name-three">Company Name</label>
+                            <input type="text" id="company-name-three" value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="Company-title-three">Title/position</label>
+                            <input type="text" id="company-title-three" value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="Company-contact-three">Contact Person</label>
+                            <input type="text" id="company-contact-three" value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="Company-description-three">Description</label>
+                            <input type="text" id="company-description-three" value="">
+                        </div>
+                        </div>
+                        <div class="field-group">
+                            <div class="input-group">
+                                <label for ="Company-duration-three">Duration</label>
+                                <input type="text" id="company-duration-three" value="">
+                            </div>
+                            <div class="input-group">
+                                <label for ="Company-number-three">Phone Number</label>
+                                <input type="text" id="company-number-three" value="">
+                            </div>
+                        </div>
+                        <div class="field-group">
+                        <div class="input-group-single">
+                            <label for ="Company-address-three">Address</label>
+                            <input type="text" id="company-address-three" value="">
+                        </div>
+                        </div><br>
+                        <button type="button" class="sbmt" onclick="add_exp_details(event)">Submit</button>
+                </form>
+            </div>
 
-            
+            <div class="exp-details">
+                <form>
+                <h2>Work Experience</h2>
+                    <button  onclick="closeForms()" id="close" class="close">x</button>
+                    <br>
+                <h3 class="indent">1st Company</h3>    <br>
+                <hr>
+                <div class="field-group">
+                <div class="input-group">
+                    <label for ="company-name-one">Company Name</label>
+                    <input type="text" id="company-name-one" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="Company-title-one">Title/position</label>
+                    <input type="text" id="company-title-one" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="Company-contact-one">Contact Person</label>
+                    <input type="text" id="company-contact-one" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="Company-description-one">Description</label>
+                    <input type="text" id="company-description-one" value="">
+                </div>
+                </div>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="Company-duration-one">Duration</label>
+                        <input type="text" id="company-duration-one" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="Company-number-one">Phone Number</label>
+                        <input type="text" id="company-number-one" value="">
+                    </div>
+                </div>
+                <div class="field-group">
+                <div class="input-group-single">
+                    <label for ="Company-address-one">Address</label>
+                    <input type="text" id="company-address-one" value="">
+                </div>
+                </div>
+                <br>
+                <h3 class="indent">2nd Company</h3>    <br><hr>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="company-name-two">Company Name</label>
+                        <input type="text" id="company-name-two" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="Company-title-two">Title/position</label>
+                        <input type="text" id="company-title-two" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="Company-contact-two">Contact Person</label>
+                        <input type="text" id="company-contact-two" value="">
+                    </div>
+                    <div class="input-group">
+                        <label for ="Company-description-two">Description</label>
+                        <input type="text" id="company-description-two" value="">
+                    </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="input-group">
+                            <label for ="Company-duration-two">Duration</label>
+                            <input type="text" id="company-duration-two" value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="Company-number-two">Phone Number</label>
+                            <input type="text" id="company-number-two" value="">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                    <div class="input-group-single">
+                        <label for ="Company-address-two">Address</label>
+                        <input type="text" id="company-address-two" value="">
+                    </div>
+                    </div>
+                    <br>
+                    <h3 class="indent">3rd Company</h3>    <br><hr>
+                    <div class="field-group">
+                        <div class="input-group">
+                            <label for ="company-name-three">Company Name</label>
+                            <input type="text" id="company-name-three" value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="Company-title-three">Title/position</label>
+                            <input type="text" id="company-title-three" value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="Company-contact-three">Contact Person</label>
+                            <input type="text" id="company-contact-three" value="">
+                        </div>
+                        <div class="input-group">
+                            <label for ="Company-description-three">Description</label>
+                            <input type="text" id="company-description-three" value="">
+                        </div>
+                        </div>
+                        <div class="field-group">
+                            <div class="input-group">
+                                <label for ="Company-duration-three">Duration</label>
+                                <input type="text" id="company-duration-three" value="">
+                            </div>
+                            <div class="input-group">
+                                <label for ="Company-number-three">Phone Number</label>
+                                <input type="text" id="company-number-three" value="">
+                            </div>
+                        </div>
+                        <div class="field-group">
+                        <div class="input-group-single">
+                            <label for ="Company-address-three">Address</label>
+                            <input type="text" id="company-address-three" value="">
+                        </div>
+                        </div><br>
+                        <button type="button" class="sbmt" onclick="exp_details(event)">Submit</button>
+                </form>
+            </div>
+
 
             <!--REFERENCE-->
             <!--Reference 1-->
@@ -581,9 +1236,192 @@
                     </div>
                 
                 </div>
-                
-                
+                <button class="edit" id="reference" onclick="addreference()"> Createt</button>
+                <button class="edit" id="reference" onclick="reference()"> edit</button>
             </div>
+
+            <div class="add-ref-details">
+                <form>
+                <h2>Work Experience</h2>
+                    <button  onclick="closeForms()" id="close" class="close">x</button>
+                    <br>
+                <h3 class="indent">1st Company</h3>    <br>
+                <hr>
+                <div class="field-group">
+                <div class="input-group">
+                    <label for ="reference-one-name">Name</label>
+                    <input type="text" id="reference-one-name" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-one-company">Company name</label>
+                    <input type="text" id="reference-one-company" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-one-contact">Contact Number</label>
+                    <input type="text" id="reference-one-contact" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-one-relation">Relation </label>
+                    <input type="text" id="reference-one-relation" value="">
+                </div>
+                </div>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="reference-one-position">Position </label>
+                        <input type="text" id="reference-one-position" value="">
+                    </div>
+                </div>
+
+                <h3 class="indent">2nd Company</h3>    <br>
+                <hr>
+                <div class="field-group">
+                <div class="input-group">
+                    <label for ="reference-two-name">Name</label>
+                    <input type="text" id="reference-two-name" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-two-company">Company name</label>
+                    <input type="text" id="reference-two-company" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-two-contact">Contact Number</label>
+                    <input type="text" id="reference-two-contact" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-two-relation">Relation </label>
+                    <input type="text" id="reference-two-relation" value="">
+                </div>
+                </div>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="reference-two-position">Position </label>
+                        <input type="text" id="reference-two-position" value="">
+                    </div>
+                </div>
+
+                <h3 class="indent">3rd Company</h3>    <br>
+                <hr>
+                <div class="field-group">
+                <div class="input-group">
+                    <label for ="reference-three-name">Name</label>
+                    <input type="text" id="reference-three-name" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-three-company">Company name</label>
+                    <input type="text" id="reference-three-company" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-three-contact">Contact Number</label>
+                    <input type="text" id="reference-three-contact" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-three-relation">Relation </label>
+                    <input type="text" id="reference-three-relation" value="">
+                </div>
+                </div>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="reference-three-position">Position </label>
+                        <input type="text" id="reference-three-position" value="">
+                    </div>
+                </div>
+                <br>
+                <button type="button" class="sbmt" onclick="ref_details(event)">Submit</button>
+
+                </form>
+            </div>
+
+            <div class="ref-details">
+                <form>
+                <h2>Work Experience</h2>
+                    <button  onclick="closeForms()" id="close" class="close">x</button>
+                    <br>
+                <h3 class="indent">1st Company</h3>    <br>
+                <hr>
+                <div class="field-group">
+                <div class="input-group">
+                    <label for ="reference-one-name">Name</label>
+                    <input type="text" id="reference-one-name" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-one-company">Company name</label>
+                    <input type="text" id="reference-one-company" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-one-contact">Contact Number</label>
+                    <input type="text" id="reference-one-contact" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-one-relation">Relation </label>
+                    <input type="text" id="reference-one-relation" value="">
+                </div>
+                </div>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="reference-one-position">Position </label>
+                        <input type="text" id="reference-one-position" value="">
+                    </div>
+                </div>
+
+                <h3 class="indent">2nd Company</h3>    <br>
+                <hr>
+                <div class="field-group">
+                <div class="input-group">
+                    <label for ="reference-two-name">Name</label>
+                    <input type="text" id="reference-two-name" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-two-company">Company name</label>
+                    <input type="text" id="reference-two-company" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-two-contact">Contact Number</label>
+                    <input type="text" id="reference-two-contact" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-two-relation">Relation </label>
+                    <input type="text" id="reference-two-relation" value="">
+                </div>
+                </div>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="reference-two-position">Position </label>
+                        <input type="text" id="reference-two-position" value="">
+                    </div>
+                </div>
+
+                <h3 class="indent">3rd Company</h3>    <br>
+                <hr>
+                <div class="field-group">
+                <div class="input-group">
+                    <label for ="reference-three-name">Name</label>
+                    <input type="text" id="reference-three-name" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-three-company">Company name</label>
+                    <input type="text" id="reference-three-company" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-three-contact">Contact Number</label>
+                    <input type="text" id="reference-three-contact" value="">
+                </div>
+                <div class="input-group">
+                    <label for ="reference-three-relation">Relation </label>
+                    <input type="text" id="reference-three-relation" value="">
+                </div>
+                </div>
+                <div class="field-group">
+                    <div class="input-group">
+                        <label for ="reference-three-position">Position </label>
+                        <input type="text" id="reference-three-position" value="">
+                    </div>
+                </div>
+                <br>
+                <button type="button" class="sbmt" onclick="ref_details(event)">Submit</button>
+
+                </form>
+            </div>
+
 
 
         </div>
@@ -629,6 +1467,7 @@
             });
         });
     </script>
+    <script src="/JS/Employee/userinfo.js"></script>
     <script src="/JS/logout.js"></script>
 </body>
 </html>

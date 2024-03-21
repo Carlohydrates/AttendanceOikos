@@ -13,11 +13,13 @@
     <title>Oikos Student: Announcement</title>
 </head>
 <body>
-        @include('component.student.sidenav')
-        <div class="main-content">
+    @include('component.student.sidenav')
+    <div class="modal-mask">
+        
+    </div>
+    <div class="main-content">
         <h1>Announcements</h1>
         @include('component.student.announcement_component')
-        </div>
     </div>
     <script>
         let btn = document.querySelector('#btn');

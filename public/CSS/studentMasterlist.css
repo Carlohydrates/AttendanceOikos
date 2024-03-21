@@ -215,8 +215,8 @@ position: absolute;
 display: none;
 justify-content: center;
 align-items: center;
-height: 70vh;
-width: 70vh;
+height: 24%;
+width: 36.5%;
 background-color: #F2F3F5;
 margin: auto;
 top: 0;
@@ -231,18 +231,13 @@ right: 0;
 }
 .import-area{
 display: flex;
+flex-direction: column;
 justify-content: center;
 align-items: center;
 text-align: center;
-height: 67vh;
-width: 67vh;
 background-color: white;
 margin:2.5%;
-top: 0;
-bottom: 0;
-left: 0;
-right: 0;
-border:1px solid black;
+border:none;
 }
 .import-area h1{
     opacity:0.2;

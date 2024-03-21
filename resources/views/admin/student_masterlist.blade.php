@@ -240,9 +240,15 @@
             <div class="form-import" id="import">
                 <button class="close" onclick="excelclose(event)" style="float:right;"><i class="fa-solid fa-xmark"></i></button>
                 <div class="import-area">
-
-                    <h1>IMPORT EXCEL</h1>
-
+                    <h2>Upload Multiple Students</h2>
+                    <br>
+                    <input type="file" id="upload-file" name="Import file" accept=".xlsx, .xls, .cvs" required>
+                    <br>
+                    <button class="btn-import" id="upload-btn" onclick = "uploadMultipleStudents(event)"> Upload </button>
+                    <br>
+                </div>
+                <div class="import-area">
+                    
                 </div>
                 </div>
         </div>

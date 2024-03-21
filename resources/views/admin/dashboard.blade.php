@@ -213,12 +213,14 @@
                     <div class="left-hand">
                         <i class="fas fa-folder" style="background-color:#ffbd59; font-size:1.3rem; padding:1rem; color:white;border-radius:50%"></i>
                         <div class="labels">
-                            10 Documents
+                            {{$docu_request}} Documents
                             <a href="/admin/Document_Request">View Details</a>
                         </div>
                     </div>
                     <div class="right-hand">
-                        <p id="count">5</p>
+                        @if ($pending_docu>0)
+                        <p id="count">{{$pending_docu}}</p>
+                        @endif
                     </div>
                 </div>
             </div>
