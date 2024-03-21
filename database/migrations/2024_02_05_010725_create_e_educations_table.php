@@ -14,23 +14,23 @@ return new class extends Migration
         Schema::create('e_educations', function (Blueprint $table) {
             $table->id('employee_id');
              //Gradeschool
-            $table->string('gs_school');
-            $table->string('gs_address');
-            $table->string('gs_year');
-            $table->string('gs_contact_person');
-            $table->string('gs_phone_number');
+            $table->string('gs_school')->nullable();
+            $table->string('gs_address')->nullable();
+            $table->string('gs_year')->nullable();
+            $table->string('gs_contact_person')->nullable();
+            $table->string('gs_phone_number')->nullable();
             //Highschool
-            $table->string('hs_school');
-            $table->string('hs_address');
-            $table->string('hs_year');
-            $table->string('hs_contact_person');
-            $table->string('hs_phone_number');
+            $table->string('hs_school')->nullable();
+            $table->string('hs_address')->nullable();
+            $table->string('hs_year')->nullable();
+            $table->string('hs_contact_person')->nullable();
+            $table->string('hs_phone_number')->nullable();
             //College
-            $table->string('c_school');
-            $table->string('c_address');
-            $table->string('c_year');
-            $table->string('c_contact_person');
-            $table->string('c_phone_number');
+            $table->string('c_school')->nullable();
+            $table->string('c_address')->nullable();
+            $table->string('c_year')->nullable();
+            $table->string('c_contact_person')->nullable();
+            $table->string('c_phone_number')->nullable();
         });
     }
 
