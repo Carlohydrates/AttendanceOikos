@@ -55,7 +55,9 @@ class Pages extends Controller
     }
 
     public function s_announcement () {
-        return view("student.announcement");
+        //return view("student.announcement");
+        $announcements = AAnnouncements::all(); 
+        return view('student.announcement', ['announcements' => $announcements]);
     }
 
     public function s_view_announcement () {
@@ -71,10 +73,13 @@ class Pages extends Controller
     }
     
     public function e_announcement(){
-        return view("employees.announcement");
+        //return view("employees.announcement");
+        $announcements = AAnnouncements::all(); 
+        return view('employees.announcement', ['announcements' => $announcements]);
     }
+    
     public function e_view_announcement () {
-        return view("employees.view-announcement");
+        return view("employees.view-announcement");        
     }
     public function e_calendar(){
         return view("employees.calendar");
@@ -104,11 +109,15 @@ class Pages extends Controller
         date_default_timezone_set('Asia/Manila');
         $employee_logs=EmployeeLogs::where('date_created',date('Y-d-m'))->get();
         $employee_count=Employees::all();
+        $document_count=DocuRequest::all();
+        $pending_docu=DocuRequest::where('request_status', 'Pending')->get();
         $student_count=Students::all();
         $pending_students=Students::where('enroll_status','Pending')->get();
         $calendar=Calendar::where('email',Auth::guard('users')->user()->email)->get();
         return view("admin.dashboard",[
             "employee"=>count($employee_count),
+            "pending_docu"=>count($pending_docu),
+            "docu_request"=>count($document_count),
             "students"=>count($student_count),
             "pending_students"=>count($pending_students),
             "employee_logs"=>$employee_logs,

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request; 
 use App\Models\Students;
 use App\Models\User;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class StudentMasterlistController extends Controller
 {
@@ -115,6 +116,69 @@ class StudentMasterlistController extends Controller
         ->delete();
 
         return response()->json(["success"=>true]);
+    }
+
+    public function uploadMultipleStudents (Request $request) {
+        date_default_timezone_set('Asia/Manila');
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
+            $filePath = 'uploads/'.$fileName;
+            $file->move('uploads/', $fileName);
+
+            if ($file->getClientOriginalExtension() == '.csv') {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+            } else if ($file->getClientOriginalExtension() == 'xls') {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
+            } else {
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            }
+
+            $spreadsheet = $reader->load($filePath);
+
+            $sheetData = $spreadsheet->getActiveSheet()->toArray();
+
+            for ($i = 1; $i < count($sheetData); $i++) {
+                $date_enrolled=date('m/d/Y');
+                $year=date('Y');
+                $student_id = $year . rand(1000, 9999);
+                $email = $student_id . "@oikostech.edu.ph";
+                $password = $request->input('birthday');
+
+                Students::create([
+                    'qr'=>rand(1000,9999),
+                    'student_id'=>$student_id,
+                    'email'=>$email,
+                    'fname'=> $sheetData[$i][1],
+                    'mname'=> $sheetData[$i][3],
+                    'lname'=> $sheetData[$i][2],
+                    'extension'=> $sheetData[$i][4],
+                    'level'=> $sheetData[$i][6],
+                    'section'=> $sheetData[$i][7],
+                    'fetcher'=> $sheetData[$i][5],
+                    'enroll_status'=> $sheetData[$i][8],
+                    'bday'=> $sheetData[$i][9],
+                    'age'=>$sheetData[$i][10],
+                    'date_enrolled'=>$date_enrolled,
+                    'address'=> $sheetData[$i][11],
+                    'city'=> $sheetData[$i][12],
+                    'region'=> $sheetData[$i][13],
+                    'postal_code'=> $sheetData[$i][14],
+                    'country'=> $sheetData[$i][15],
+                    'nationality'=> $sheetData[$i][16],
+                    'sex'=> $sheetData[$i][17],
+                    'telephone_number'=> $sheetData[$i][18],
+                    'mobile_number'=> $sheetData[$i][19]
+                ]);
+                User::create([
+                    'id'=>$student_id,
+                    'email'=>$email,
+                    'password'=>bcrypt($password),
+                    'role'=>3
+                ]);
+            }
+        }
     }
 }
 

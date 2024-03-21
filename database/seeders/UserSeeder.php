@@ -25,17 +25,7 @@ class UserSeeder extends Seeder
                 'email'=>'kafelnikovdelarosa@yahoo.com',
                 'password'=>bcrypt('peanus22'),
                 'role'=>1
-            ],
-            [
-                'email'=>'carlo@gmail.com',
-                'password'=>bcrypt('peanus22'),
-                'role'=>2
-            ],
-            [
-                'email'=>'rio@gmail.com',
-                'password'=>bcrypt('peanus22'),
-                'role'=>3
-            ]
+            ], 
         ];
         foreach($users as $user){
             User::create($user);

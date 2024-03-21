@@ -1467,7 +1467,7 @@
             });
         });
     </script>
-        <script src="/JS/Employee/userinfo.js"></script>
-
+    <script src="/JS/Employee/userinfo.js"></script>
+    <script src="/JS/logout.js"></script>
 </body>
 </html>

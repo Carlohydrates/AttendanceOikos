@@ -1,3 +1,5 @@
+var event_id=0;
+var marker_color="";
 var dateStr=" ";
 var dateInput=" ";
 var date_color=[]
@@ -12,26 +14,37 @@ dates.forEach(date=>{
 })
 const csrf = document.querySelector("meta[name='csrf-token']")
 const editContent=document.querySelector('.chosen-edit');
+const addAnotherContent=document.querySelector('.chosen-add-another');
 const addContent=document.querySelector('.chosen-add');
 const addBtn=document.querySelector('.add-btn');
 const delBtn=document.querySelector('.del-btn');
 const editBtn=document.querySelector('.edit-btn');
+
 var calendarEl = document.querySelector('.calendar');
 var calendar = new FullCalendar.Calendar(calendarEl, {
     timeZone:'local',
     initialView: 'dayGridMonth',
     selectable:true,
     events:date_color,
-    /*events:[
-        {
-            start:'2024-02-27',
-            color:'red',
-        },
-        {
-            start:'2024-02-27',
-            color:'blue'
+    eventClick:function(arg){
+        let hasInstance=false;
+        marker_color=arg.event._def.ui.backgroundColor.replace("#",'');
+        let seperatedDate=String(arg.event._instance.range.start)
+        let d=new Date(seperatedDate);
+        dateStr=seperatedDate;
+        dateInput=d.toLocaleDateString('sv-SE');
+        for(i=0;i<date_color.length;i++){
+            if(date_color[i].start==dateInput){
+                hasInstance=true;
+                break;
+            }
         }
-    ],*/
+        if(hasInstance){
+            showEditContent();
+            return;
+        }
+        showAddContent();
+    },
     dateClick:function(arg){
         let hasInstance=false;
         dateStr=arg.date;
@@ -50,6 +63,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     },
 });
 calendar.render();
+
 function showAddContent(){
     const dateHeader=addContent.querySelector('h1');
     const dateSubHeader=addContent.querySelector('h2');
@@ -57,7 +71,6 @@ function showAddContent(){
     const dateString=String(dateStr);
     const date=dateString.split(" ");
     prevContents.forEach(content=>{
-        console.log(content);
         content.classList.remove('show');
         content.classList.toggle('hidden');
     })
@@ -70,6 +83,7 @@ function showAddContent(){
         ${date[1]}-${date[2]}-${date[3]} 
     `;
 }
+
 function updateEvent(event){
     event.preventDefault();
     const eventInfo={
@@ -82,7 +96,7 @@ function updateEvent(event){
         message:document.getElementById('edit-message').value,
         color:document.getElementById('edit-color').value
     };
-    fetch('/update-event',{
+    fetch(`/update-event/${event_id}`,{
         method:'POST',
         headers:{
             'Content-Type':'application/json',
@@ -100,6 +114,7 @@ function updateEvent(event){
         console.log("Error updating event data",error);
     })
 }
+
 function cancelEvent(event){
     event.preventDefault();
     const editBtn=document.querySelector('.edit-btn');
@@ -110,6 +125,7 @@ function cancelEvent(event){
     delBtn.classList.remove('hidden');
     updateBtn.classList.toggle('hidden');
     cancelBtn.classList.toggle('hidden');
+    addBtn.classList.remove('hidden');
     document.getElementById('edit-title').readOnly=true;
     document.getElementById('edit-subject').readOnly=true;
     document.getElementById('edit-duration').readOnly=true;
@@ -118,6 +134,7 @@ function cancelEvent(event){
     document.getElementById('edit-message').readOnly=true;
     document.getElementById('edit-color').disabled=true;
 }
+
 function deleteEvent(event){
     event.preventDefault();
     Swal.fire({
@@ -129,7 +146,7 @@ function deleteEvent(event){
         showConfirmButton: true,
     }).then((result) => {
         if (result.isConfirmed) {
-            fetch('/delete-event',{
+            fetch(`/delete-event/${event_id}`,{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json',
@@ -149,6 +166,7 @@ function deleteEvent(event){
             }
     });
 }
+
 function showEditContent(){
     const dateHeader=editContent.querySelector('h1');
     const dateSubHeader=editContent.querySelector('h2');
@@ -167,7 +185,7 @@ function showEditContent(){
     dateSubHeader.innerHTML=`
         ${date[1]}-${date[2]}-${date[3]} 
     `;
-    fetch(`/retrieve-calendar-date/${dateInput}`,{
+    fetch(`/retrieve-calendar-date/${dateInput}/${marker_color}`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json',
@@ -178,6 +196,7 @@ function showEditContent(){
     .then(data=>{
         if(data.success){
             let date_data=data.content[0];
+            event_id=date_data.id;
             document.getElementById('edit-title').value=date_data.title;
             document.getElementById('edit-subject').value=date_data.subject;
             document.getElementById('edit-duration').value=date_data.duration;
@@ -191,10 +210,12 @@ function showEditContent(){
         console.log("Error retrieving edit data ",error);
     })
 }
+
 function editEvent(event){
     event.preventDefault();
     removeReadonly();
 }
+
 function removeReadonly(){
     const editBtn=document.querySelector('.edit-btn');
     const delBtn=document.querySelector('.delete-btn');
@@ -204,6 +225,7 @@ function removeReadonly(){
     delBtn.classList.toggle('hidden');
     updateBtn.classList.remove('hidden');
     cancelBtn.classList.remove('hidden');
+    addBtn.classList.toggle('hidden');
     document.getElementById('edit-title').readOnly=false;
     document.getElementById('edit-subject').readOnly=false;
     document.getElementById('edit-duration').readOnly=false;
@@ -212,6 +234,7 @@ function removeReadonly(){
     document.getElementById('edit-message').readOnly=false;
     document.getElementById('edit-color').disabled=false;
 }
+
 function addEvent(event){
     if(!dateInput || dateInput.trim()===""){
         console.error("Invalid date input Please select a date");
@@ -246,4 +269,62 @@ function addEvent(event){
     .catch(error=>{
         console.log("Error storing event data",error);
     })
+}
+
+function addAnotherEvent(event){
+    event.preventDefault();
+    let headerContent=addAnotherContent.querySelector('h1');
+    let headerSub=addAnotherContent.querySelector('h2');
+    let prevContents=document.querySelectorAll('.show');
+    const dateString=String(dateStr);
+    const date=dateString.split(" ");
+    prevContents.forEach(content=>{
+        content.classList.remove('show');
+        content.classList.toggle('hidden');
+    })
+    addAnotherContent.classList.remove('hidden');
+    addAnotherContent.classList.toggle('show');
+    headerContent.innerHTML=`
+        ${date[0]}
+    `;
+    headerSub.innerHTML=`
+        ${date[1]}-${date[2]}-${date[3]} 
+    `;
+
+}
+
+function insertEvent(event){
+    event.preventDefault();
+    const eventInfo={
+        date:dateInput,
+        title:document.getElementById('another-title').value,
+        subject:document.getElementById('another-subject').value,
+        duration:document.getElementById('another-duration').value,
+        venue:document.getElementById('another-venue').value,
+        theme:document.getElementById('another-theme').value,
+        color:document.getElementById('another-color').value,
+        message:document.getElementById('another-message').value
+    };
+    event.preventDefault();
+    fetch('/add-event',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRF-Token':csrf.content,
+        },
+        body:JSON.stringify(eventInfo)
+    })
+    .then(response=>response.json())
+    .then(data=>{
+        if(data.success){
+            location.reload();
+        }
+    })
+    .catch(error=>{
+        console.log("Error storing event data",error);
+    })
+}
+
+function cancelAddEvent(event){
+    showEditContent();
 }

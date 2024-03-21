@@ -85,6 +85,7 @@ function getSections(gradeLevelID, sectionID) {
 
 getGradeLevels('grade-level');
 getGradeLevels('remove-grade-level');
+getGradeLevels('gradeFilter');
 
 function removeGradeLevelAndSection() {
     const gradeLevel = document.getElementById('remove-grade-level').value;
