@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Students;
 use App\Models\User;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-
 class StudentMasterlistController extends Controller
 {
     public function addStudent(Request $request) {

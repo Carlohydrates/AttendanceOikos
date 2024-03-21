@@ -22,10 +22,6 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        Employees::factory()->create();
-        EBackg::factory()->create();
-        EExperience::factory()->create();
-        EEducation::factory()->create();
 
         $this->call([
             UserSeeder::class,

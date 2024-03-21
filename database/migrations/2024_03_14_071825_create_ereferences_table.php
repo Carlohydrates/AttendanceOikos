@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('ereferences', function (Blueprint $table) {
             $table->id("employee_id");
-            
             //1st
             $table->string("name_one")->nullable();
             $table->string("company_one")-> nullable();
