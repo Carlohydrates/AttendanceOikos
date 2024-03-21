@@ -10,6 +10,7 @@ class Ereference extends Model
     use HasFactory;
 
     protected $fillable=[
+        'employee_id',
         'name_one',
         'company_one',
         'contact_one',

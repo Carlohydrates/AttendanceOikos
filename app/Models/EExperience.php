@@ -9,7 +9,7 @@ class EExperience extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'employee_id',
+         'employee_id',
         //1st
          'company',
          'company_address',

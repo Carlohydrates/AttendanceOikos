@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employees;
 use App\Models\User;
+use App\Models\Ebackg;
+use App\Models\EEducation;
+use App\Models\EExperience;
+use App\Models\Ereference;
 use Illuminate\Http\Request;
 
 class EmployeeMasterListController extends Controller
@@ -45,8 +49,25 @@ class EmployeeMasterListController extends Controller
             'password'=>bcrypt($password),
             'role'=>2
         ]);
+        $this->initiateEmployeeInfo($employee_id);
         return response()->json(["success"=>true]);
     }
+
+    public function initiateEmployeeInfo($id){
+        Ebackg::create([
+            'id'=>$id
+        ]);
+        EEducation::create([
+            'id'=>$id
+        ]);
+        EExperience::create([
+            'id'=>$id
+        ]);
+        Ereference::create([
+            'id'=>$id
+        ]);
+    }
+
     public function show(Request $request){
         $employee = Employees::where('employee_id',$request -> input('user_id'))
         -> get();
@@ -73,41 +94,39 @@ class EmployeeMasterListController extends Controller
             "sex" => $request->input('sex'),
         ]);
         return response()->json(["success"=>true]);
-        }   
+    }   
 
-        public function status(Request $request){
-            Employees::where("employee_id",$request->input('id')) ->update([ 
-                "status" =>$request->input('select-status'), 
-            ]);
+    public function status(Request $request){
+        Employees::where("employee_id",$request->input('id')) ->update([ 
+            "status" =>$request->input('select-status'), 
+        ]);
+        return response()->json(["success"=>true]);
+    }
+
+    public function role(Request $request){
+        Employees::where("employee_id",$request->input('id')) ->update([ 
+            "position" =>$request->input('select-role'),
+        ]);
             return response()->json(["success"=>true]);
-            }
-
-        public function role(Request $request){
-            Employees::where("employee_id",$request->input('id')) ->update([ 
-                "position" =>$request->input('select-role'),
-                   
-            ]);
-                return response()->json(["success"=>true]);
-            } 
+    } 
 
 
             
-            public function delete(Request $request){
-                Employees::where('employee_id',$request->input('id'))
-                ->delete();
-                User::where('id', $request->input('id'))
-                ->delete();
+    public function delete(Request $request){
+        Employees::where('employee_id',$request->input('id'))
+        ->delete();
+        User::where('id', $request->input('id'))
+        ->delete();
 
-                return response()->json(["success"=>true]);
-            }
-
-
-            public function retrieveData($employee_id){
-                $employee = Employees::where('employee_id',$employee_id) -> get();
-                return response()-> json(["success"=> true,'user_data'=>$employee]);
-            }
+        return response()->json(["success"=>true]);
+    }
 
 
-          
+    public function retrieveData($employee_id){
+        $employee = Employees::where('employee_id',$employee_id) -> get();
+        return response()-> json(["success"=> true,'user_data'=>$employee]);
+    }
+
+
 }
 

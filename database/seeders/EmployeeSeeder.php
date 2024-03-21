@@ -5,6 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Employees;
+use App\Models\Ebackg;
+use App\Models\EExperience;
+use App\Models\EEducation;
+use App\Models\Ereference;
 use App\Models\User;
 
 class EmployeeSeeder extends Seeder
@@ -15,10 +19,11 @@ class EmployeeSeeder extends Seeder
     public function run(): void
     {
         date_default_timezone_set('Asia/Manila');
-        $email=date('Y').rand(100,999).'@employees.oikostech.ph';
+        $employee_id=date('Y').rand(100,999);
+        $email=$employee_id.'@employees.oikostech.ph';
         $employees=[
             'qr'=>'T'.rand(1000,9999),
-            'employee_id'=>date('Y').rand(100,999),
+            'employee_id'=>$employee_id,
             'email'=>$email,
             'fname'=>'Eric',
             'lname'=>'Andre',
@@ -43,8 +48,15 @@ class EmployeeSeeder extends Seeder
             'email'=>$email,
             'password'=>bcrypt('2001-20-08'),
             'role'=>2,
-        ]; 
+        ];
+        $info_instance=[
+            'employee_id'=>$employee_id
+        ];
         Employees::create($employees);
         User::create($user_employees);
+        Ebackg::create($info_instance);
+        EExperience::create($info_instance);
+        EEducation::create($info_instance);
+        Ereference::create($info_instance);
     }
 }
