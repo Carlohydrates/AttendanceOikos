@@ -324,7 +324,6 @@ body {
     padding-left:.5em;
     height:2.3em;
     font-size:1.1rem;
-    color:gray;
     border:1px solid #dddddd;
     border-radius:10px;
 }
@@ -508,7 +507,7 @@ body {
 }
 label{
     margin-top:.5em;
-    color:#c4c4c4;
+    color:black;
 }
 
 

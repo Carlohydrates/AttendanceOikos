@@ -57,7 +57,7 @@
             align-items: center;
             border-radius:10px;
         }
-        .left-side .chosen-add,.left-side .chosen-edit{
+        .chosen-add,.chosen-edit,.chosen-add-another{
             padding:1rem;
             background-color:white;
             height:100%;
@@ -101,6 +101,7 @@
         .fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start{
             width:12px;
             height: 12px;
+            cursor: pointer;
             border-radius:50%;
         }
         #add-event{
@@ -129,6 +130,12 @@
         }
         .input-group input:focus{
             outline:none;
+        }
+        #color,#edit-color{
+            border:none;
+            background-color:#e2e1e1;
+            border-radius:5px;
+            padding:2px 4px;
         }
         .input-group label{
             font-size:1.3rem;
@@ -205,7 +212,47 @@
                         <label for="message">Message:</label>
                         <textarea id="message" cols="30" rows="15" style="resize:none; border-color:#eeeeee" required></textarea>
                     </div>
+                    <div class="input-group">
+                        <label for="color">Color:</label>
+                        <input type="color" id="color" required>
+                    </div>
                     <button id="submit" onclick="addEvent(event)">Submit</button>
+                </form>
+            </div>
+            <div class="chosen-add-another hidden">
+                <h1 style="align-self:center"></h1>
+                <h2 style="align-self:center"></h2>
+                <form id="add-event">
+                    <div class="input-group">
+                        <label for="title">Title:</label>
+                        <input type="text" id="another-title" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="subject">Subject:</label>
+                        <input type="text" id="another-subject" required>
+                    </div>
+                    <div class="input-group special">
+                        <label for="duration">Duration:</label>
+                        <input type="text" id="another-duration" required>
+                        <label for="venue">Venue:</label>
+                        <input type="text" id="another-venue" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="theme">Theme:</label>
+                        <input type="text" id="another-theme" required>
+                    </div>
+                    <div class="input-group text-area">
+                        <label for="message">Message:</label>
+                        <textarea id="another-message" cols="30" rows="15" style="resize:none; border-color:#eeeeee" required></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="color">Color:</label>
+                        <input type="color" id="another-color" required>
+                    </div>
+                    <div class="input-group" style="gap:1rem;align-self:center">
+                        <button id="submit" onclick="insertEvent(event)">Submit</button>
+                        <button id="submit" onclick="cancelAddEvent(event)">Cancel</button>
+                    </div>
                 </form>
             </div>
             <div class="chosen-edit hidden">
@@ -234,7 +281,12 @@
                         <label for="message">Message:</label>
                         <textarea id="edit-message" cols="30" rows="15" style="resize:none; border-color:#eeeeee" required readonly></textarea>
                     </div>
+                    <div class="input-group">
+                        <label for="color">Color:</label>
+                        <input type="color" id="edit-color" disabled readonly>
+                    </div>
                     <div id="edit-content" class="input-group" style="gap:1rem;align-self:center">
+                        <button id="submit" class="add-btn" onclick="addAnotherEvent(event)">Add</button>
                         <button id="submit" class="edit-btn" onclick="editEvent(event)">Edit</button>
                         <button id="submit" class="delete-btn" onclick="deleteEvent(event)">Delete</button>
                         <button id="submit" class="update-btn hidden" onclick="updateEvent(event)">Update</button>
@@ -249,7 +301,7 @@
                 <h3>Upcoming Events</h3>
                 <ul>
                     @foreach($schedules as $schedule)
-                        <li style="color:{{$schedule->color}}; font-size:1.4rem;">
+                        <li style="color:{{$schedule->color}}; font-size:1.6rem;">
                             <small style="color:black; font-size:1.1rem;">{{$schedule->calendar_created}}</small>
                             <small style="color:black; font-size:1.1rem; margin-left:4rem;">{{$schedule->title}}</small>
                         </li>
@@ -263,7 +315,6 @@
     </script>
     <script src="/JS/adminCalendar.js"></script>
     <script src="/JS/navevent.js"></script>
-    <script src="/JS/logout.js"></script>
 
 </body>
 </html>

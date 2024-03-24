@@ -40,8 +40,8 @@
                         </tr>
                         <tr>
                             <th>Student Name</th>
-                            <th>Role</th>
                             <th>Date</th>
+                            <th>Section</th>
                             <th>In</th>
                             <th>Out</th>
                             <th>In</th>
@@ -51,28 +51,19 @@
                         </tr>
                     </thead>
                     <tbody id="logTableBody">
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Student</td>
-                            <td>2024-01-30</td>
-                            <td>09:00 AM</td>
-                            <td>01:00 PM</td>
-                            <td>06:00 PM</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>John Doe</td>
-                            <td>Student</td>
-                            <td>2024-02-29</td>
-                            <td>09:00 AM</td>
-                            <td>01:00 PM</td>
-                            <td>06:00 PM</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        @foreach($student_logs as $logs)
+                            <tr>
+                                <td>{{$logs->name}}</td>
+                                <td>{{$logs->date_created}}</td>
+                                <td>{{$logs->section}}</td>
+                                <td>{{((int)substr($logs->checked_in,0,2)<12&&$logs->checked_in!==null)?$logs->checked_in." AM":''}}</td>
+                                <td>{{((int)substr($logs->checked_out,0,2)<12&&$logs->checked_out!==null)?$logs->checked_out." AM":''}}</td>
+                                <td>{{((int)substr($logs->checked_in,0,2)>=12 && (int)substr($logs->checked_in,0,2)<18 && $logs->checked_out!==null)?$logs->checked_in." PM":''}}</td>
+                                <td>{{((int)substr($logs->checked_out,0,2)>=12&& (int)substr($logs->checked_in,0,2)<18 && $logs->checked_out!==null)?$logs->checked_out." PM":''}}</td>
+                                <td>{{((int)substr($logs->checked_in,0,2)>=18&&$logs->checked_in!==null)?$logs->checked_in." PM":''}}</td>
+                                <td>{{((int)substr($logs->checked_out,0,2)>=18&&$logs->checked_out!==null)?$logs->checked_out." PM":''}}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

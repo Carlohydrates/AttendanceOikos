@@ -94,6 +94,7 @@ Route::get('/students/User-Info', [Pages::class,'s_userInfo']);
 Route::get('/students/Time-Logs', [Pages::class,'s_timerecord']);
 Route::get('/students/Announcement/View{id}', [AAnnouncementsController::class, 's_view_announcement']);
 Route::get('/students/logout',[LoginController::class,'logoutStudent']);
+Route::post('/update-student-backg',[Pages::class,'s_update_parentinfo']);
 
 //Routes for employees
 Route::get('/employees/User-Info',[Pages::class,'e_userInfo']);
