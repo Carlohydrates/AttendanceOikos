@@ -116,18 +116,18 @@
             margin-bottom: 1%; 
         }
 
-        label[for="add-recepient"] {
+        label[for="recipient"] {
             font-size: 16px;
             font-weight: bold;
             color: #333;
         }
 
-        .Recepient{
+        .recipient{
             margin-left: 50%;
             margin-top: -8%;
         }
 
-        #add-recepient{
+        #recipient{
             width: 50%;
             height: 2vh;
             border-radius: 24px;
@@ -158,9 +158,9 @@
         <div class="popup-content">
             <span class="close-popup" id="close-popup">&times;</span>
             <h2>Post an Announcement</h2>  
-            <div class="Recepient">
-                <label for="add-recepient" id="add-recepient">TO:</label> 
-                <select id="add-recepient">
+            <div class="Recipient">
+                <label for="recipient">Recipient:</label> 
+                <select id="recipient" name="recipient">
                     <option value="student">Student</option>
                     <option value="employee">Employee</option>
                 </select>
@@ -198,7 +198,7 @@
                 const title = document.getElementById('announcement-title').value;
                 const subject = document.getElementById('announcement-subject').value;
                 const body = document.getElementById('announcement-body').value;
-                const recepient = document.getElementById('add-recepient').value;
+                const recipient = document.getElementById('recipient').value;
     
                 if (!title || !subject || !body) {
                     alert('Please fill in all fields');
@@ -215,20 +215,29 @@
                         title: title,
                         subject: subject,
                         body: body,
-                        recepient: recepient,
+                        recipient: recipient,
                     }),
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to add announcement');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     console.log('Announcement added:', data);
                     overlay.style.display = 'none';
                     customPopup.style.display = 'none';
-                    window.location.reload();
+                    location.reload();
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Failed to add announcement. Please try again.');
+                });
             });
         });
     </script>
+    
         
     <script src="/JS/navevent.js"></script>
 </body>

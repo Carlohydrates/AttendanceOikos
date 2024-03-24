@@ -14,6 +14,7 @@ class AAnnouncements extends Model
         'subject',
         'content',
         'viewpagesender', 
+        'recipient',
     ];
 
     protected $table = 'a_announcements';

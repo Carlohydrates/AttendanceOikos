@@ -10,12 +10,13 @@ class AAnnouncementsController extends Controller
 {
     public function addAnnouncement(Request $request) {
         try {
-            AAnnouncements::create([
+            $announcement = AAnnouncements::create([
                 'title' => $request->input('title'),
                 'subject' => $request->input('subject'),
                 'content' => $request->input('body'),
+                'recipient' => $request->input('recipient'), 
             ]);
-
+    
             return response()->json(['success' => true], 201);
         } catch (Exception $e) {
             Log::error($e->getMessage());
@@ -30,10 +31,10 @@ class AAnnouncementsController extends Controller
     }
 
     public function e_announcement () {
-        $announcements = AAnnouncements::all(); 
+        $announcements = AAnnouncements::where('recipient', 'employee')->get(); 
         return view('employees.announcement', ['announcements' => $announcements]);
     }
-
+    
     public function e_view_announcement ($id) {
         try {
             $announcement = AAnnouncements::findOrFail($id);
@@ -44,7 +45,7 @@ class AAnnouncementsController extends Controller
     }
 
     public function s_announcement () {
-        $announcements = AAnnouncements::all(); 
+        $announcements = AAnnouncements::where('recipient', 'student')->get(); 
         return view('student.announcement', ['announcements' => $announcements]);
     }
 
@@ -65,5 +66,10 @@ class AAnnouncementsController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'Announcement not found'], 404);
         }
+    }
+
+    public function store(Request $request)
+    {
+        $recipient = $request->input('recipient');
     }
 }
