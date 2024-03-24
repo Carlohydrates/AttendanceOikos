@@ -621,7 +621,7 @@
             }
 
             function uploadMultipleStudents (event) {
-                
+
                 event.preventDefault();
                 const fileInput = document.getElementById('upload-file');
         
