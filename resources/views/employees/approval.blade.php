@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+{{--
+    This head section sets up the basic structure and functionality of the webpage:
+    - It specifies the character encoding and viewport for responsive design.
+    - Links to custom CSS for styling and Font Awesome for icons.
+    - Includes SweetAlert2 for interactive alerts and jQuery for DOM manipulation and AJAX functionality.
+    - Lastly, it sets the title of the webpage.
+--}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Employee: Approval</title>
+    {{-- Added internal CSS --}}
     <style>
         .container-main{
             margin-top: 2em;
@@ -154,12 +162,14 @@
     </style>
 </head>
 <body>
+    {{-- Include employee side navigation component --}}
     @include('component.employee.sidenav')
     <div class="main-content">
         <div class="header-content">
             <h1 class="document-request"><a href = "/employees/Document-Request"  style = "color: rgba(100, 100, 100, 0.700); text-decoration: none;">Document Request ></a> </h1>
             <h1 class="approval" style = "margin-left: 0.3em;">Approval</h1>
         </div>
+    {{-- Foreach loop to retrieve all documents from the database --}}
     @foreach ($document as $documents)
         <div class="container-main">
             <h3 id=container-title>REQUEST SUMMARY</h3>
@@ -248,6 +258,7 @@
     </div>
     @endforeach
 
+    {{-- Javascript code for sidenav --}}
     <script>
         let btn = document.querySelector('#btn');
         let sidebar = document.querySelector('.sidebar');
@@ -256,7 +267,10 @@
             sidebar.classList.toggle('active');
         }
     </script>
+    
+    {{-- Include javascript for document request --}}
     <script src = "/JS/Employee/DocuRequest.js"></script>
+    {{-- Include javascript for logout function --}}
     <script src="/JS/logout.js"></script>
 
 </body>

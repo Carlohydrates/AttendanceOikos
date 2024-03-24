@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+{{--
+    This head section sets up the basic structure and functionality of the webpage:
+    - It specifies the character encoding and viewport for responsive design.
+    - Links to custom CSS for styling and Font Awesome for icons.
+    - Includes SweetAlert2 for interactive alerts and jQuery for DOM manipulation and AJAX functionality.
+    - Lastly, it sets the title of the webpage.
+--}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "icon" href = "/assets/Oikos Logo.png">
     <link rel="stylesheet" href = "/CSS/employee.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- Added internal CSS --}}
     <style>
         .log-body{
             background-color: #f2f2f2;
@@ -84,6 +90,7 @@
     <title>Oikos Student: Time Record</title>
 </head>
 <body>
+    {{-- Include side navigation component and export component --}}
     @include('component.employee.sidenav')
     @include('component.employee.export_toaster')
     <div class="main-content">
@@ -121,6 +128,7 @@
                         </tr>
                     </thead>
                     <tbody id="logTableBody">
+                        {{-- Foreach loop to retreive all employee time logs from database --}}
                         @foreach ($employee_logs as $logs)
                         @php
                             $check_in_time = strtotime($logs->checked_in);
@@ -164,7 +172,9 @@
                     </tbody>
                 </table>
             </div>
-        </div> 
+        </div>
+
+    {{-- Javascript code --}}
     <script>
         let btn = document.querySelector('#btn');
         let sidebar = document.querySelector('.sidebar');
@@ -173,52 +183,52 @@
             sidebar.classList.toggle('active');
         }
         function applyFilter() {
-        // Get start and end dates from the input fields
-        var startDate = document.getElementById('startDate').value;
-        var endDate = document.getElementById('endDate').value;
+            // Get start and end dates from the input fields
+            var startDate = document.getElementById('startDate').value;
+            var endDate = document.getElementById('endDate').value;
 
-        // Get the table body
-        var tableBody = document.getElementById('logTableBody');
+            // Get the table body
+            var tableBody = document.getElementById('logTableBody');
 
-        // Get all rows in the table
-        var rows = tableBody.getElementsByTagName('tr');
+            // Get all rows in the table
+            var rows = tableBody.getElementsByTagName('tr');
 
-        // Loop through each row and hide/show based on the date range
-        for (var i = 0; i < rows.length; i++) {
-            var dateCell = rows[i].getElementsByTagName('td')[2]; // Assuming date is in the third column
+            // Loop through each row and hide/show based on the date range
+            for (var i = 0; i < rows.length; i++) {
+                var dateCell = rows[i].getElementsByTagName('td')[2]; // Assuming date is in the third column
 
-            if (dateCell) {
-                var currentDate = dateCell.textContent || dateCell.innerText;
+                if (dateCell) {
+                    var currentDate = dateCell.textContent || dateCell.innerText;
 
-                // Check if the date is within the specified range
-                if (currentDate >= startDate && currentDate <= endDate) {
-                    rows[i].style.display = ''; // Show the row
-                } else {
-                    rows[i].style.display = 'none'; // Hide the row
+                    // Check if the date is within the specified range
+                    if (currentDate >= startDate && currentDate <= endDate) {
+                        rows[i].style.display = ''; // Show the row
+                    } else {
+                        rows[i].style.display = 'none'; // Hide the row
+                    }
                 }
             }
         }
-    }
-    function clearFilter() {
-        // Get the start and end date input fields
-        var startDateInput = document.getElementById('startDate');
-        var endDateInput = document.getElementById('endDate');
+        function clearFilter() {
+            // Get the start and end date input fields
+            var startDateInput = document.getElementById('startDate');
+            var endDateInput = document.getElementById('endDate');
 
-        // Set their values to empty strings to clear the filter
-        startDateInput.value = '';
-        endDateInput.value = '';
+            // Set their values to empty strings to clear the filter
+            startDateInput.value = '';
+            endDateInput.value = '';
 
-        // Get the table body
-        var tableBody = document.getElementById('logTableBody');
+            // Get the table body
+            var tableBody = document.getElementById('logTableBody');
 
-        // Get all rows in the table
-        var rows = tableBody.getElementsByTagName('tr');
+            // Get all rows in the table
+            var rows = tableBody.getElementsByTagName('tr');
 
-        // Loop through each row and show it
-        for (var i = 0; i < rows.length; i++) {
-            rows[i].style.display = '';
+            // Loop through each row and show it
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].style.display = '';
+            }
         }
-    }
     </script>
     <script src="/JS/logout.js"></script>
 </body>
