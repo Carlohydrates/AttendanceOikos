@@ -9,6 +9,7 @@ use App\Models\Students;
 use App\Models\StudentLogs;
 use App\Models\Calendar;
 use App\Models\DocuRequest;
+use App\Models\Sbackg;
 use App\Models\EmployeeLogs;
 
 
@@ -33,15 +34,44 @@ class Pages extends Controller
     //Student navigation
 
     public function s_timerecord () {
-        return view("student.time_record");
+        $email = Auth::guard('users')->user()->email;
+        $student_no=Students::select('student_id')
+            ->where('email',$email)
+            ->first();
+        $student_logs=StudentLogs::where('student_id',$student_no->student_id)
+            ->get();
+        return view("student.time_record",[
+            'student_logs'=>$student_logs
+        ]);
     }
 
     public function s_home () {
         $email = Auth::guard('users')->user()->email;
-        $student_data = Students::where('email', $email)->get();
-        return view("student.home", ['student_info'=>$student_data]);
+        $student_no=Students::select('student_id')
+            ->where('email',$email)
+            ->first();
+        $student_data = Students::where('student_id',$student_no->student_id)->get();
+        $parent_data=Sbackg::where('student_id',$student_no->student_id)->get();
+        return view("student.home", [
+            'student_info'=>$student_data,
+            'parent_info'=>$parent_data,
+        ]);
     }
 
+    public function s_update_parentinfo(Request $request){
+        $email = Auth::guard('users')->user()->email;
+        $student_no=Students::select('student_id')
+            ->where('email',$email)
+            ->first();
+        Sbackg::where('student_id',$student_no->student_id)
+            ->update([
+                'parent_name'=>$request->input('parent_name'),
+                'mobile_number'=>$request->input('phone_number'),
+                'telephone_number'=>$request->input('telephone_number'),
+            ]);
+        return response()->json(['success'=>true]);
+    }
+    
     public function s_userInfo () {
         $email = Auth::guard('users')->user()->email;
         $student_data = Students::where('email', $email)->get();

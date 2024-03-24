@@ -3,6 +3,13 @@
         window.location.href='/';
     </script>
 @endif
+@php
+    use App\Models\Employees;
+    $email=Auth::guard('users')->user()->email;
+    $employee_name=Employees::select('fname','lname')
+        ->where('email',$email)
+        ->first();
+@endphp
 <div class="sidebar">
     <div class="top">
         <div class="logo">
@@ -14,7 +21,7 @@
     <div class="user">
         <img src ="" alt="secret-user" class = "user-img">
         <div class="">
-            <p class = "bold">Kafelnikov Dela Rosa</p>
+            <p class = "bold">{{$employee_name->fname." ".$employee_name->lname}}</p>
             <p>(Student)</p>
         </div>
     </div>

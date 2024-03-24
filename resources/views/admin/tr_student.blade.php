@@ -432,7 +432,7 @@
     }
 }
 
-
+const csrf = document.querySelector("meta[name='csrf-token']")
 </script>
 
 <script src="/JS/Admin/addGradeSection.js"></script>

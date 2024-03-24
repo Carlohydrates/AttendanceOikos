@@ -21,25 +21,25 @@
                 <h3 id=container-title>Student Details</h3>
                 @foreach($student_data as $data)
                     <div class="field-group">
-                        <div class="input-group">
+                        <div class="input-group-special">
                             <input type="text" class='input-field' id='last-name' value="{{$data->lname}}" readonly>
                             <label for="last-name">Last Name</label>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group-special">
                             <input type="text" class='input-field' id='first-name' value="{{$data->fname}}" readonly >
                             <label for="first-name">First Name</label>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group-special">
                             <input type="text" class='input-field' id='middle-name' value="{{$data->mname}}" readonly >
                             <label for="middle-name">Midde Name</label>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group-special">
                             <input type="text" class='input-field' id='extension' value="{{$data->extension}}" readonly >
                             <label for="extension">Extension</label>
                         </div>
                     </div>
                     <div class="field-group">
-                        <div class="input-group">
+                        <div class="input-group-special">
                             <input type="date" class='input-field' id='birthdate' value="{{$data->bday}}" readonly >
                             <label for="birthdate">Birthdate</label>
                         </div>
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <div class="field-group">
-                        <div class="input-group">
+                        <div class="input-group-special">
                             <input type="text" class='input-field' id='city' value="{{$data->city}}" readonly >
                             <label for="city">City</label>
                         </div>
@@ -63,13 +63,13 @@
                             <input type="text" class='input-field' id='region' value="{{$data->region}}" readonly >
                             <label for="region">Region</label>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group-special">
                             <input type="text" class='input-field' id='postal' value="{{$data->postal_code}}" readonly >
                             <label for="postal">Postal Code</label>
                         </div>
                     </div>
                     <div class="field-group">
-                        <div class="input-group">
+                        <div class="input-group-special">
                             <input type="text" class='input-field' id='country' value="{{$data->country}}" readonly >
                             <label for="country">Country</label>
                         </div>
@@ -77,7 +77,7 @@
                             <input type="text" class='input-field' id='nationality' value="{{$data->nationality}}" readonly >
                             <label for="nationality">Nationality</label>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group-special">
                             <input type="text" class='input-field' id='sex' value="{{$data->sex==1?'Male':'Female'}}" readonly >
                             <label for="sex">Sex</label>
                         </div>

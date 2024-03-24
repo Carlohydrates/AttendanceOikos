@@ -2,6 +2,7 @@ let email_field=document.getElementById('EI');
 let pass_field=document.getElementById('PI');
 let error=document.getElementById('user-error');
 let csrf=document.querySelector("meta[name='csrf-token']")
+
 function submitForm(email_data,pass_data){
     fetch('/login-user', {
         method:'POST', 
@@ -27,7 +28,7 @@ function submitForm(email_data,pass_data){
         console.error('Error Loging In', error)
     })
 } 
-//This is the handleForm button event when clicked
+
 function handleForm(){
     let email = email_field.value;
     let password = pass_field.value;

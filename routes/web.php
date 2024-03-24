@@ -57,7 +57,7 @@ Route::get('/admin/Time_Record/DepEd',[Pages::class,'a_tr_deped']);
 
 Route::post('/add-student', [StudentMasterlistController::class, 'addStudent']);
 Route::get('/retrieve-student/{student_id}', [StudentMasterlistController::class, 'retrieveData']);
-Route::get('/upload-multiple-students', [StudentMasterlistController::class, 'uploadMultipleStudents']);
+Route::post('/upload-multiple-students', [StudentMasterlistController::class, 'uploadMultipleStudents']);
 Route::post('/update-student', [StudentMasterlistController::class, 'updateStudent']);
 Route::post('/status-update-student', [StudentMasterlistController::class, 'updateStatus']);
 Route::post('/grade-update-student', [StudentMasterlistController::class, 'updateGradeAndSection']);
@@ -94,6 +94,7 @@ Route::get('/students/User-Info', [Pages::class,'s_userInfo']);
 Route::get('/students/Time-Logs', [Pages::class,'s_timerecord']);
 Route::get('/students/Announcement/View{id}', [AAnnouncementsController::class, 's_view_announcement']);
 Route::get('/students/logout',[LoginController::class,'logoutStudent']);
+Route::post('/update-student-backg',[Pages::class,'s_update_parentinfo']);
 
 //Routes for employees
 Route::get('/employees/User-Info',[Pages::class,'e_userInfo']);

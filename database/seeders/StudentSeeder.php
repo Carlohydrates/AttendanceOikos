@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Students;
+use App\Models\Sbackg;
 use App\Models\User;
 class StudentSeeder extends Seeder
 {
@@ -14,9 +15,10 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         date_default_timezone_set('Asia/Manila');
-        $email=date('Y').rand(1000,9999).'@oikostech.edu.ph';
+        $student_id=date('Y').rand(1000,9999);
+        $email=$student_id.'@oikostech.edu.ph';
         $students=[
-            'student_id'=>date('Y').rand(1000,9999),
+            'student_id'=>$student_id,
             'email'=>$email,
             'qr'=>rand(1000,9999),
             'fname'=>'Adrian',
@@ -47,5 +49,8 @@ class StudentSeeder extends Seeder
         ];
         Students::create($students);
         User::create($user_students);
+        Sbackg::create([
+            'student_id'=>$student_id
+        ]);
     }
 }

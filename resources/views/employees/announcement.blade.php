@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+{{--
+    This head section sets up the basic structure and functionality of the webpage:
+    - It specifies the character encoding and viewport for responsive design.
+    - Links to custom CSS for styling and Font Awesome for icons.
+    - Includes SweetAlert2 for interactive alerts and jQuery for DOM manipulation and AJAX functionality.
+    - Lastly, it sets the title of the webpage.
+--}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +18,16 @@
     <title>Oikos Employee: Announcement</title>
 </head>
 <body>
+    {{-- Include employee side navigation component --}}
     @include('component.employee.sidenav')
-    <div class="modal-mask">
-        
-    </div>
+
+    {{-- Announcements --}}
     <div class="main-content">
         <h1>Announcements</h1>
-        @include('component.employee.annoucement_component')
+        @include('component.employee.annoucement_component') {{-- Include employee announcement component --}}
     </div>
 
-
+    {{-- Javascript code for sidenav --}}
     <script>
         let btn = document.querySelector('#btn');
         let sidebar = document.querySelector('.sidebar');
@@ -29,6 +36,7 @@
             sidebar.classList.toggle('active');
         }
     </script>
+    {{-- Link javascript for logout function --}}
     <script src="/JS/logout.js"></script>
 
 </body>

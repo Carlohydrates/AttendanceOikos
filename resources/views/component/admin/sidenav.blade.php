@@ -3,6 +3,13 @@
         window.location.href='/';
     </script>
 @endif
+@php
+    use App\Models\Admin;
+    $email=Auth::guard('users')->user()->email;
+    $employee_name=Employees::select('fname','lname')
+        ->where('email',$email)
+        ->first();
+@endphp
 <div class="sidebar">
     <div class="top">
         <div class="logo">

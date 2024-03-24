@@ -70,7 +70,7 @@
     <div class="main-content">
         <div class="container">
             <div class="header-container">
-                <h2 id="container-title">{{ $announcement->title }}</h2>
+                <h2 id="container-title">{{ $announcement->title }}</h2> 
                 <h3 id="container-subject">{{ $announcement->subject }}</h3>
             </div>
             <div class="poster-info">

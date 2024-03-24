@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+{{--
+    This head section sets up the basic structure and functionality of the webpage:
+    - It specifies the character encoding and viewport for responsive design.
+    - Links to custom CSS for styling and Font Awesome for icons.
+    - Includes SweetAlert2 for interactive alerts and jQuery for DOM manipulation and AJAX functionality.
+    - Lastly, it sets the title of the webpage.
+--}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Employee: Home</title>
+    {{-- Added internal CSS --}}
     <style> 
         .card{
             display:flex;
@@ -97,10 +105,12 @@
     </style>
 </head>
 <body>
+    {{-- Include side navigation component --}}
     @include('component.employee.sidenav')
     <div class="main-content">
         <h1>Home</h1>
         <div class="container">
+            {{-- Foreach loop to retrieve all of employee's info --}}
             @foreach ($employee_info as $info)
             <div class="card">
                 <div class="card-sidenav">
@@ -174,13 +184,9 @@
         </div>
         @endforeach
     </div>
-        
-        
 
-
-
+    {{-- Javascript code --}}
     <script>
-        // Logout
         function logout() {
             Swal.fire({
                 title: "Are you sure you want to logout??",

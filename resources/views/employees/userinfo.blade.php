@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+{{--
+    This head section sets up the basic structure and functionality of the webpage:
+    - It specifies the character encoding and viewport for responsive design.
+    - Links to custom CSS for styling and Font Awesome for icons.
+    - Includes SweetAlert2 for interactive alerts and jQuery for DOM manipulation and AJAX functionality.
+    - Lastly, it sets the title of the webpage.
+--}}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +18,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Oikos Employee: User Info</title>
+    {{-- Added internal CSS --}}
     <style>
         .container{
             margin-top:1em;
@@ -100,6 +108,7 @@
     </style>
 </head>
 <body>
+    {{-- Include side navigation component and export component --}}
     @include('component.employee.sidenav')  
     @include('component.employee.export_toaster')
     <div class="main-content">
@@ -524,14 +533,16 @@
                 
             </div>
 
+
             <!-- EDUCATION BACKG-->
-                            <!--1st education-->
+
+            <!--1st education-->
             <div class="education-container ">
                 <h3 id=container-title>Educational Background</h3><br>
                 <h3 style=" margin-top:1rem; margin-bottom:-1rem; text-align:center; font-weight:100;">JUNIOR HIGH</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='school_one_name' value="Siena College"
+                        <input type="text" class='input-field' id='school_one_name' value="Siena College">
                         <label for="school_one_name">School</label>
                     </div>
                     
@@ -559,7 +570,7 @@
                 <h3 style=" margin-top:1rem; margin-bottom:-1rem; text-align:center; font-weight:100;">SENIOR HIGH</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='school_two_name' value="Siena College"
+                        <input type="text" class='input-field' id='school_two_name' value="Siena College">
                         <label for="school_two_name">School</label>
                     </div>
                     <div class="input-group">
@@ -587,7 +598,7 @@
                 <h3 style=" margin-top:1rem; margin-bottom:-1rem; text-align:center; font-weight:100;">COLLEGE</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='school_three_name' value="Siena College"
+                        <input type="text" class='input-field' id='school_three_name' value="Siena College">
                         <label for="school_three_name">School</label>
                     </div>
                     <div class="input-group">
@@ -802,7 +813,7 @@
                 <h3 style=" margin-top:1rem; margin-bottom:-1rem; text-align:center; font-weight:100;">COMPANY 1</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='exp_one_company' value="Umbrella corp."
+                        <input type="text" class='input-field' id='exp_one_company' value="Umbrella corp.">
                         <label for="Company Name">Company name</label>
                     </div>
                     <div class="input-group">
@@ -840,7 +851,7 @@
                 <h3 style=" margin-top:1rem; margin-bottom:-1rem; text-align:center; font-weight:100;">COMPANY 2</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='exp_two_company' value="Oikos"
+                        <input type="text" class='input-field' id='exp_two_company' value="Oikos">
                         <label for="Company Name">Company name</label>
                     </div>
                     <div class="input-group">
@@ -878,7 +889,7 @@
                 <h3 style=" margin-top:1rem; margin-bottom:-1rem; text-align:center; font-weight:100;">Company 3</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='exp_three_company' value="marine"
+                        <input type="text" class='input-field' id='exp_three_company' value="marine">
                         <label for="Company Name">Company name</label>
                     </div>
                     <div class="input-group">
@@ -1156,7 +1167,7 @@
                 <h3 style=" margin-top:1rem; margin-bottom:-1rem; text-align:center; font-weight:100;">REFERENCE 1</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='reference-one-name' value="Lupin"
+                        <input type="text" class='input-field' id='reference-one-name' value="Lupin">
                         <label for="name"> Name</label>
                     </div>
                     <div class="input-group">
@@ -1183,7 +1194,7 @@
                 <h3 style=" margin-top:1rem; margin-bottom:-1rem; text-align:center; font-weight:100;">REFERENCE 2</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='reference-twp-name' value="amanda"
+                        <input type="text" class='input-field' id='reference-twp-name' value="amanda">
                         <label for="name"> Name</label>
                     </div>
                     <div class="input-group">
@@ -1213,7 +1224,7 @@
                 <h3 style=" margin-top:1rem; margin-bottom:-1rem; text-align:center; font-weight:100;">REFERENCE 3</h3>
                 <div class="field-group">
                     <div class="input-group">
-                        <input type="text" class='input-field' id='reference-three-name' value="Lupin"
+                        <input type="text" class='input-field' id='reference-three-name' value="Lupin">
                         <label for="name"> Name</label>
                     </div>
                     <div class="input-group">
@@ -1298,6 +1309,9 @@
                         <input type="text" id="reference-two-position" value="">
                     </div>
                 </div>
+                </div>
+                
+            </div>
 
                 <h3 class="indent">3rd Company</h3>    <br>
                 <hr>
@@ -1427,7 +1441,7 @@
         </div>
     </div>
 
-
+    {{-- Javascript code --}}
     <script>
         let btn = document.querySelector('#btn');
         let sidebar = document.querySelector('.sidebar');
