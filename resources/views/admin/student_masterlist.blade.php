@@ -250,7 +250,7 @@
                 <div class="import-area">
                     
                 </div>
-                </div>
+            </div>
         </div>
     </div>
 
