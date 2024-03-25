@@ -4,7 +4,7 @@
     </script>
 @endif
 @php
-    use App\Models\Admin;
+    use App\Models\Employees;
     $email=Auth::guard('users')->user()->email;
     $employee_name=Employees::select('fname','lname')
         ->where('email',$email)

@@ -640,8 +640,10 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    if (data.success) {
                     console.log('Document Request added successfully:', data);
                     location.reload();
+                    }
                 })
                 .catch(error => {
                     console.log('Error adding document request', error);
