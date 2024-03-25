@@ -29,9 +29,9 @@ class StudentSeeder extends Seeder
             'level'=>1,
             'section'=>'Ruby',
             'enroll_status'=>'Pending',
-            'bday'=>'2019-20-08',
+            'bday'=>'2019-08-20',
             'age'=>6,
-            'date_enrolled'=>date('Y-d-m'),
+            'date_enrolled'=>date('m/d/Y'),
             'address'=>'bldg 40 veterans village pasong tamo Quezon City',
             'city'=>'Quezon City',
             'region'=>'NCR',
@@ -44,7 +44,7 @@ class StudentSeeder extends Seeder
         ];
         $user_students=[
             'email'=>$email,
-            'password'=>bcrypt('2019-20-08'),
+            'password'=>bcrypt('2019-08-20'),
             'role'=>3
         ];
         Students::create($students);
