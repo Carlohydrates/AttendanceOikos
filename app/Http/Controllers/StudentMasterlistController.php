@@ -177,6 +177,7 @@ class StudentMasterlistController extends Controller
                     'role'=>3
                 ]);
             }
+            return response()->json(["success"=>true]);
         }
     }
 }

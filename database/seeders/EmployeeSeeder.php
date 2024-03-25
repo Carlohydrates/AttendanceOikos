@@ -29,12 +29,12 @@ class EmployeeSeeder extends Seeder
             'lname'=>'Andre',
             'minitial'=>'Cedric',
             'extension'=>'IV',
-            'bday'=>'2001-20-08',
+            'bday'=>'2001-08-20',
             'address'=>'1 Riyal Street CBE Town Quezon City',
             'phone_number'=>'09154054370',
             'telephone_number'=>'1231414',
             'age'=>24,
-            'date_employed'=>date('Y-d-m'),
+            'date_employed'=>date('m/d/Y'),
             'sex'=>"Male",
             'city'=>"Quezon City",
             'region'=>"NCR",
@@ -46,7 +46,7 @@ class EmployeeSeeder extends Seeder
         ];
         $user_employees=[
             'email'=>$email,
-            'password'=>bcrypt('2001-20-08'),
+            'password'=>bcrypt('2001-08-20'),
             'role'=>2,
         ];
         $info_instance=[
